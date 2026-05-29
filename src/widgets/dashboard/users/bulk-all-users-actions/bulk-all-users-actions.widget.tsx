@@ -1,7 +1,6 @@
 import { TbCalendarUp, TbPencil, TbRefresh, TbTrash, TbUsers, TbUsersMinus } from 'react-icons/tb'
-import { Button, em, NumberInput, Stack } from '@mantine/core'
+import { Button, NumberInput, Stack } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
-import { useMediaQuery } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
 
 import { DeleteAllUsersByStatusFeature } from '@features/ui/dashboard/users/delete-all-users-by-status'
@@ -11,9 +10,14 @@ import { ActionCardShared } from '@shared/ui'
 
 import { BulkAllUsersUpdateWidget } from './bulk-all-users-update.widget'
 
-export const BulkAllUsersActionsWidget = () => {
+interface IProps {
+    isMobile: boolean
+}
+
+export const BulkAllUsersActionsWidget = (props: IProps) => {
+    const { isMobile } = props
+
     const { t } = useTranslation()
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const { mutate: resetTraffic, isPending: isResetTrafficPending } = useBulkAllResetTrafficUsers({
         mutationFns: {}
@@ -23,22 +27,6 @@ export const BulkAllUsersActionsWidget = () => {
         useBulkAllExtendUsersExpirationDate({
             mutationFns: {}
         })
-
-    const handleResetTraffic = () => {
-        modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            centered: true,
-            children: t('common.confirm-action-description'),
-            labels: {
-                confirm: t('bulk-all-user-actions-tabs.actions.tab.feature.reset'),
-                cancel: t('common.cancel')
-            },
-            confirmProps: { color: 'red' },
-            onConfirm: () => {
-                resetTraffic({})
-            }
-        })
-    }
 
     const handleExtendExpirationDate = () => {
         let userInput = 1
@@ -138,9 +126,10 @@ export const BulkAllUsersActionsWidget = () => {
                 icon={<TbRefresh size={20} />}
                 iconColor="blue"
                 isLoading={isResetTrafficPending}
-                onClick={handleResetTraffic}
+                onClick={() => resetTraffic({})}
                 title={t('bulk-all-user-actions-tabs.actions.tab.feature.reset-traffic')}
                 variant="soft"
+                withConfirmation
             />
             <ActionCardShared
                 description={t(
@@ -161,7 +150,7 @@ export const BulkAllUsersActionsWidget = () => {
                             />
                         ),
                         centered: true,
-                        children: <DeleteAllUsersByStatusFeature cleanUpDrawer={() => {}} />
+                        children: <DeleteAllUsersByStatusFeature />
                     })
                 }}
                 title={t('bulk-all-user-actions-tabs.danger.tab.feature.delete-users-by-status')}

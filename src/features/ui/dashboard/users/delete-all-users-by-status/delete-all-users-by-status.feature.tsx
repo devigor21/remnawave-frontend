@@ -10,10 +10,7 @@ import { useState } from 'react'
 import { userStatusValues } from '@shared/constants/forms/user-status.constants'
 import { useBulkDeleteUsersByStatus } from '@shared/api/hooks'
 
-import { IProps } from './interfaces/props.interface'
-
-export const DeleteAllUsersByStatusFeature = (props: IProps) => {
-    const { cleanUpDrawer } = props
+export const DeleteAllUsersByStatusFeature = () => {
     const { t } = useTranslation()
 
     const [selectedStatus, setSelectedStatus] = useState<null | TUsersStatus>(null)
@@ -30,7 +27,6 @@ export const DeleteAllUsersByStatusFeature = (props: IProps) => {
                 })
 
                 modals.closeAll()
-                cleanUpDrawer()
 
                 return { notificationId }
             },

@@ -8,6 +8,8 @@ import { TbDots } from 'react-icons/tb'
 import { BulkUsersActionsWidget } from '@widgets/dashboard/users/bulk-users-actions/bulk-users-actions.widget'
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { queryClient } from '@shared/api/query-client'
+import { QueryKeys } from '@shared/api/hooks'
 
 import { IProps } from './interfaces/props.interface'
 
@@ -27,6 +29,13 @@ export const UsersTableSelectionFeature = (props: IProps) => {
 
     if (usersToUpdate === 0) {
         return null
+    }
+
+    const handleCloseModal = async () => {
+        resetRowSelection()
+        bulkUsersActionsStoreActions.resetState()
+        await queryClient.refetchQueries({ queryKey: QueryKeys.users.getAllUsers._def })
+        await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
     }
 
     return (
@@ -64,9 +73,7 @@ export const UsersTableSelectionFeature = (props: IProps) => {
                             size: 'lg',
                             fullScreen: isMobile,
                             centered: true,
-                            onClose: () => {
-                                resetRowSelection()
-                            },
+                            onClose: handleCloseModal,
                             children: <BulkUsersActionsWidget isMobile={isMobile} />
                         })
                     }

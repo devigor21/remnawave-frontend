@@ -18,25 +18,30 @@ import {
     ActionIcon,
     ActionIconGroup,
     Drawer,
+    em,
     Group,
     Stack,
     Table,
     Text,
     Tooltip
 } from '@mantine/core'
+import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { useDisclosure } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
 
 import { BulkAllUsersActionsWidget } from '@widgets/dashboard/users/bulk-all-users-actions/bulk-all-users-actions.widget'
 import { useUserCreationModalStoreActions } from '@entities/dashboard/user-creation-modal-store'
 import { useUsersTableStoreActions } from '@entities/dashboard/users/users-table-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { queryClient } from '@shared/api/query-client'
+import { QueryKeys } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 
 export const UserActionGroupFeature = (props: IProps) => {
     const { t } = useTranslation()
+
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
 
     const [isHelpDrawerOpen, helpDrawerHandlers] = useDisclosure(false)
 
@@ -78,6 +83,11 @@ export const UserActionGroupFeature = (props: IProps) => {
             table.resetColumnFilters(true)
             table.resetGlobalFilter(true)
         }
+    }
+
+    const handleCloseModal = async () => {
+        await queryClient.refetchQueries({ queryKey: QueryKeys.users.getAllUsers._def })
+        await queryClient.refetchQueries({ queryKey: QueryKeys.system._def })
     }
 
     if (!table || !refetch) {
@@ -142,8 +152,11 @@ export const UserActionGroupFeature = (props: IProps) => {
                                             titleOrder={5}
                                         />
                                     ),
+                                    onClose: handleCloseModal,
                                     centered: true,
-                                    children: <BulkAllUsersActionsWidget />
+                                    size: 'lg',
+                                    fullScreen: isMobile,
+                                    children: <BulkAllUsersActionsWidget isMobile={isMobile} />
                                 })
                             }
                             size="input-md"

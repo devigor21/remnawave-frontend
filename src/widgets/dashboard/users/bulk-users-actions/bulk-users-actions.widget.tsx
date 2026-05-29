@@ -37,6 +37,7 @@ export const BulkUsersActionsWidget = (props: IProps) => {
     const { t } = useTranslation()
 
     const [searchQuery, setSearchQuery] = useState('')
+
     const actions = useBulkUsersActionsStoreActions()
 
     const { data: internalSquads } = useGetInternalSquads()
@@ -59,60 +60,6 @@ export const BulkUsersActionsWidget = (props: IProps) => {
             activeInternalSquads: []
         }
     })
-
-    const handleDeleteUsers = () => {
-        modals.openConfirmModal({
-            title: t('common.confirm-action'),
-            centered: true,
-            children: t('common.confirm-action-description'),
-            labels: {
-                confirm: t('common.delete'),
-                cancel: t('common.cancel')
-            },
-            confirmProps: { color: 'red', variant: 'soft' },
-            onConfirm: () => {
-                deleteUsers({
-                    variables: { uuids }
-                })
-            }
-        })
-    }
-
-    const handleRevokeSubscription = () => {
-        modals.openConfirmModal({
-            title: t('bulk-user-actions.actions.tab.feature.revoke-subscription'),
-            centered: true,
-            children: t('common.confirm-action-description'),
-            labels: {
-                confirm: t('bulk-user-actions.actions.tab.feature.revoke'),
-                cancel: t('common.cancel')
-            },
-            confirmProps: { color: 'orange', variant: 'soft' },
-            onConfirm: () => {
-                revokeUsersSubscription({
-                    variables: { uuids }
-                })
-            }
-        })
-    }
-
-    const handleResetTraffic = () => {
-        modals.openConfirmModal({
-            title: t('bulk-user-actions.actions.tab.feature.reset-traffic'),
-            centered: true,
-            children: t('common.confirm-action-description'),
-            labels: {
-                confirm: t('bulk-user-actions.actions.tab.feature.reset'),
-                cancel: t('common.cancel')
-            },
-            confirmProps: { color: 'blue', variant: 'soft' },
-            onConfirm: () => {
-                resetTraffic({
-                    variables: { uuids }
-                })
-            }
-        })
-    }
 
     const handleExtendExpirationDate = () => {
         let userInput = 1
@@ -223,9 +170,14 @@ export const BulkUsersActionsWidget = (props: IProps) => {
                 icon={<TbRefresh size={20} />}
                 iconColor="blue"
                 isLoading={isResetPending}
-                onClick={handleResetTraffic}
+                onClick={() =>
+                    resetTraffic({
+                        variables: { uuids }
+                    })
+                }
                 title={t('bulk-all-user-actions-tabs.actions.tab.feature.reset-traffic')}
                 variant="soft"
+                withConfirmation
             />
             <ActionCardShared
                 description={t(
@@ -234,9 +186,14 @@ export const BulkUsersActionsWidget = (props: IProps) => {
                 icon={<TbRefreshAlert size={20} />}
                 iconColor="orange"
                 isLoading={isRevokePending}
-                onClick={handleRevokeSubscription}
+                onClick={() =>
+                    revokeUsersSubscription({
+                        variables: { uuids }
+                    })
+                }
                 title={t('bulk-user-actions.actions.tab.feature.revoke-subscription')}
                 variant="soft"
+                withConfirmation
             />
             <ActionCardShared
                 description={t(
@@ -245,9 +202,14 @@ export const BulkUsersActionsWidget = (props: IProps) => {
                 icon={<TbUsersMinus size={20} />}
                 iconColor="red"
                 isLoading={isDeletePending}
-                onClick={handleDeleteUsers}
+                onClick={() =>
+                    deleteUsers({
+                        variables: { uuids }
+                    })
+                }
                 title={t('bulk-user-actions.danger.tab.feature.delete-users')}
                 variant="soft"
+                withConfirmation
             />
             <Paper
                 bg="rgba(255, 255, 255, 0.02)"
