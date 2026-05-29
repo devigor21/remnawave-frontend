@@ -14,9 +14,9 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-ki
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { GetAllHostsCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
-import { useListState, useMediaQuery } from '@mantine/hooks'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
-import { Box, Container, em, Stack } from '@mantine/core'
+import { Box, Container, Stack } from '@mantine/core'
+import { useListState } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 
 import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
@@ -24,6 +24,7 @@ import { HostsFiltersFeature } from '@features/dashboard/hosts/hosts-filters'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
 import { useGetNodes, useReorderHosts } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
+import { useIsMobile } from '@shared/hooks'
 
 import { IProps } from './interfaces'
 
@@ -39,7 +40,7 @@ export const HostsTableWidget = memo((props: IProps) => {
     const [highlightedHost, setHighlightedHost] = useState<null | string>(null)
     const [scrollMargin, setScrollMargin] = useState(0)
     const listRef = useRef<HTMLDivElement | null>(null)
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
+    const isMobile = useIsMobile()
 
     const { data: nodes } = useGetNodes()
     const { mutate: reorderHosts } = useReorderHosts()

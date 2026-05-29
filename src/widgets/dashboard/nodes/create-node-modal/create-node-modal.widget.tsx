@@ -1,8 +1,7 @@
-import { em, Group, Modal, Progress, Stack, Transition } from '@mantine/core'
+import { Group, Modal, Progress, Stack, Transition } from '@mantine/core'
 import { CreateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { useTranslation } from 'react-i18next'
-import { useMediaQuery } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
 import { useForm } from '@mantine/form'
 import { TbCpu } from 'react-icons/tb'
@@ -11,6 +10,7 @@ import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/
 import { configProfilesQueryKeys, useCreateNode, useGetPubKey } from '@shared/api/hooks'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { gibToBytesUtil } from '@shared/utils/bytes'
+import { useIsMobile } from '@shared/hooks'
 import { queryClient } from '@shared/api'
 
 import { CreateNodeStep2ConfigProfiles } from './create-node-steps/create-node-step-2-config-profiles'
@@ -25,7 +25,7 @@ export const CreateNodeModalWidget = () => {
 
     const { data: pubKey } = useGetPubKey()
 
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
+    const isMobile = useIsMobile()
 
     const [activeStep, setActiveStep] = useState(0)
     const [createdNodeUuid, setCreatedNodeUuid] = useState<string>()

@@ -29,6 +29,7 @@ import { Suspense, useEffect } from 'react'
 import dayjs from 'dayjs'
 
 // import { StrictMode } from 'react'
+import { IsMobileProvider } from '@shared/hocs/is-mobile-provider'
 import { AuthProvider } from '@shared/hocs/auth-provider'
 import { LoadingScreen } from '@shared/ui'
 import { theme } from '@shared/constants'
@@ -64,27 +65,29 @@ export function App() {
             <QueryClientProvider client={queryClient}>
                 {isDev && <ReactQueryDevtools initialIsOpen={false} />}
                 <AuthProvider>
-                    <DirectionProvider>
-                        <MantineProvider
-                            cssVariablesResolver={v8CssVariablesResolver}
-                            defaultColorScheme="dark"
-                            theme={theme}
-                        >
-                            <ModalsProvider>
-                                <Notifications position={mq ? 'top-right' : 'bottom-right'} />
-                                <NavigationProgress />
-                                <Suspense
-                                    fallback={
-                                        <Center h="100%">
-                                            <LoadingScreen height="60vh" />
-                                        </Center>
-                                    }
-                                >
-                                    <Router />
-                                </Suspense>
-                            </ModalsProvider>
-                        </MantineProvider>
-                    </DirectionProvider>
+                    <IsMobileProvider>
+                        <DirectionProvider>
+                            <MantineProvider
+                                cssVariablesResolver={v8CssVariablesResolver}
+                                defaultColorScheme="dark"
+                                theme={theme}
+                            >
+                                <ModalsProvider>
+                                    <Notifications position={mq ? 'top-right' : 'bottom-right'} />
+                                    <NavigationProgress />
+                                    <Suspense
+                                        fallback={
+                                            <Center h="100%">
+                                                <LoadingScreen height="60vh" />
+                                            </Center>
+                                        }
+                                    >
+                                        <Router />
+                                    </Suspense>
+                                </ModalsProvider>
+                            </MantineProvider>
+                        </DirectionProvider>
+                    </IsMobileProvider>
                 </AuthProvider>
             </QueryClientProvider>
         </I18nextProvider>

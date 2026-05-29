@@ -1,8 +1,7 @@
-import { Button, em, Group, Menu, px, Stack } from '@mantine/core'
 import { UpdateUserCommand } from '@remnawave/backend-contract'
+import { Button, Group, Menu, px, Stack } from '@mantine/core'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { PiFloppyDiskDuotone } from 'react-icons/pi'
-import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { TbDots } from 'react-icons/tb'
 import { useForm } from '@mantine/form'
@@ -35,6 +34,7 @@ import { bytesToGibUtil, gibToBytesUtil } from '@shared/utils/bytes'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { handleFormErrors } from '@shared/utils/misc'
 import { ModalFooter } from '@shared/ui/modal-footer'
+import { useIsMobile } from '@shared/hooks'
 import { queryClient } from '@shared/api'
 
 const MotionWrapper = motion.div
@@ -69,7 +69,7 @@ export const ViewUserModalContent = (props: IProps) => {
 
     const actions = useUserModalStoreActions()
 
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
+    const isMobile = useIsMobile()
 
     const { data: internalSquads } = useGetInternalSquads()
     const { data: externalSquads } = useGetExternalSquads()

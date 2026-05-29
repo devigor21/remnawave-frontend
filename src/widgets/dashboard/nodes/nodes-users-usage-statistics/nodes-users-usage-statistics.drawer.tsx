@@ -1,10 +1,10 @@
-import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { TbChartArcs3 } from 'react-icons/tb'
-import { em, Modal } from '@mantine/core'
+import { Modal } from '@mantine/core'
 
 import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { useIsMobile } from '@shared/hooks'
 
 import { NodesUsersUsageStatisticsContent } from './nodes-users-usage-statistics.content'
 
@@ -15,7 +15,7 @@ export const NodesUsersUsageStatisticsDrawer = () => {
     )
     const { t } = useTranslation()
 
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
+    const isMobile = useIsMobile()
 
     return (
         <Modal

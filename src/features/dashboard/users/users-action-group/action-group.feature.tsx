@@ -18,14 +18,13 @@ import {
     ActionIcon,
     ActionIconGroup,
     Drawer,
-    em,
     Group,
     Stack,
     Table,
     Text,
     Tooltip
 } from '@mantine/core'
-import { useDisclosure, useMediaQuery } from '@mantine/hooks'
+import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 
@@ -35,13 +34,14 @@ import { useUsersTableStoreActions } from '@entities/dashboard/users/users-table
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { queryClient } from '@shared/api/query-client'
 import { QueryKeys } from '@shared/api/hooks'
+import { useIsMobile } from '@shared/hooks'
 
 import { IProps } from './interfaces'
 
 export const UserActionGroupFeature = (props: IProps) => {
     const { t } = useTranslation()
 
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
+    const isMobile = useIsMobile()
 
     const [isHelpDrawerOpen, helpDrawerHandlers] = useDisclosure(false)
 

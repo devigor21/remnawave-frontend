@@ -1,6 +1,5 @@
 import { Split } from '@gfazioli/mantine-split-pane'
 import { useTranslation } from 'react-i18next'
-import { useMediaQuery } from '@mantine/hooks'
 import { useLayoutEffect } from 'react'
 import { Stack } from '@mantine/core'
 import { motion } from 'motion/react'
@@ -20,11 +19,12 @@ import { UpdateBillingDateModalWidget } from '@widgets/dashboard/infra-billing/u
 import { StatsWidget } from '@widgets/dashboard/infra-billing/stats-widget/stats.widget'
 import { MobileInfraBillingWidget } from '@widgets/dashboard/infra-billing/mobile'
 import { preventBackScrollTables } from '@shared/utils/misc'
+import { useIsMobile } from '@shared/hooks'
 import { Page } from '@shared/ui/page'
 
 export const InfraBillingPageComponent = () => {
     const { t } = useTranslation()
-    const isMobile = useMediaQuery('(max-width: 48em)')
+    const isMobile = useIsMobile()
 
     useLayoutEffect(() => {
         if (isMobile) {

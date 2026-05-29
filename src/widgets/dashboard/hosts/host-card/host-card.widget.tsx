@@ -24,7 +24,6 @@ import { PiLock, PiNetwork, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { CSSProperties, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useSortable } from '@dnd-kit/sortable'
-import { useMediaQuery } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { RiDraggable } from 'react-icons/ri'
 import { CSS } from '@dnd-kit/utilities'
@@ -36,6 +35,7 @@ import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { useHostsStoreFilters } from '@entities/dashboard'
 import { XrayLogo } from '@shared/ui/logos'
+import { useIsMobile } from '@shared/hooks'
 
 import classes from './HostCard.module.css'
 import { IProps } from './interfaces'
@@ -60,7 +60,7 @@ export function HostCardWidget(props: IProps) {
     const openModalWithData = useModalsStoreOpenWithData()
 
     const [isHovered, setIsHovered] = useState(false)
-    const isMobile = useMediaQuery('(max-width: 48em)')
+    const isMobile = useIsMobile()
 
     const configProfile = configProfiles?.find(
         (configProfile) => configProfile.uuid === item.inbound.configProfileUuid

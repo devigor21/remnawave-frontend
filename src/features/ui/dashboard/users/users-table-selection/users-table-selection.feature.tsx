@@ -1,7 +1,6 @@
-import { Button, em, Group, Text } from '@mantine/core'
+import { Button, Group, Text } from '@mantine/core'
 import { PiClockClockwise } from 'react-icons/pi'
 import { useTranslation } from 'react-i18next'
-import { useMediaQuery } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
 import { TbDots } from 'react-icons/tb'
 
@@ -10,13 +9,14 @@ import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { queryClient } from '@shared/api/query-client'
 import { QueryKeys } from '@shared/api/hooks'
+import { useIsMobile } from '@shared/hooks'
 
 import { IProps } from './interfaces/props.interface'
 
 export const UsersTableSelectionFeature = (props: IProps) => {
     const { resetRowSelection, toggleAllPageRowsSelected } = props
     const { t } = useTranslation()
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`)
+    const isMobile = useIsMobile()
 
     const bulkUsersActionsStoreActions = useBulkUsersActionsStoreActions()
 
