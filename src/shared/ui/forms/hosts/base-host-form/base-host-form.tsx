@@ -1054,6 +1054,12 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                 {...form.getInputProps('pinnedPeerCertSha256')}
                                             />
 
+                                            <TextInput
+                                                key={form.key('verifyPeerCertByName')}
+                                                label="Verify Peer Cert By Name"
+                                                {...form.getInputProps('verifyPeerCertByName')}
+                                            />
+
                                             <Group gap="xs" justify="space-between">
                                                 <Group gap={4}>
                                                     <Text fw={600} size="sm">
