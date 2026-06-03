@@ -11,8 +11,13 @@ import { Button, Group } from '@mantine/core'
 import { TbRestore } from 'react-icons/tb'
 import get from 'lodash/get'
 
+import {
+    useGetHosts,
+    useGetInternalSquads,
+    useGetNodes,
+    useGetSubscriptionTemplates
+} from '@shared/api/hooks'
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { useGetHosts, useGetInternalSquads, useGetNodes } from '@shared/api/hooks'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { sToMs } from '@shared/utils/time-utils'
 import { LoadingScreen } from '@shared/ui'
@@ -45,7 +50,7 @@ interface IProps {
 
 const PAGE_SIZE = 50
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100, 150, 200]
-const HOSTS_CACHE_KEY = 'hosts-datatable-hosts-v4'
+const HOSTS_CACHE_KEY = 'hosts-datatable-hosts-v5'
 const DEFAULT_SORT_STATUS: DataTableSortStatus<HostType> = {
     columnAccessor: 'viewPosition',
     direction: 'asc'
@@ -77,6 +82,7 @@ export const HostsDataTableWidget = memo((props: IProps) => {
 
     const { data: nodes } = useGetNodes()
     const { data: internalSquads } = useGetInternalSquads()
+    const { data: subscriptionTemplates } = useGetSubscriptionTemplates()
 
     const openModalWithData = useModalsStoreOpenWithData()
 
@@ -114,6 +120,7 @@ export const HostsDataTableWidget = memo((props: IProps) => {
         const inboundTagByUuid = new Map<string, string>()
         const nodeNameByUuid = new Map<string, string>()
         const internalSquadNameByUuid = new Map<string, string>()
+        const xrayTemplateNameByUuid = new Map<string, string>()
         for (const profile of configProfiles ?? []) {
             configProfileNameByUuid.set(profile.uuid, profile.name)
             for (const inbound of profile.inbounds ?? []) {
@@ -126,13 +133,17 @@ export const HostsDataTableWidget = memo((props: IProps) => {
         for (const squad of internalSquads?.internalSquads ?? []) {
             internalSquadNameByUuid.set(squad.uuid, squad.name)
         }
+        for (const template of subscriptionTemplates?.templates ?? []) {
+            xrayTemplateNameByUuid.set(template.uuid, template.name)
+        }
         return {
             configProfileNameByUuid,
             inboundTagByUuid,
             internalSquadNameByUuid,
-            nodeNameByUuid
+            nodeNameByUuid,
+            xrayTemplateNameByUuid
         }
-    }, [configProfiles, nodes, internalSquads])
+    }, [configProfiles, nodes, internalSquads, subscriptionTemplates])
 
     const selectOptions = useMemo(() => {
         const result: Record<string, { label: string; value: string }[]> = {}
