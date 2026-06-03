@@ -16,60 +16,32 @@ import { GetAllHostsCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Box, Container, Stack } from '@mantine/core'
-import { useSearchParams } from 'react-router-dom'
-import { useListState } from '@mantine/hooks'
 import { motion } from 'framer-motion'
 
-import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { HostsFiltersFeature } from '@features/dashboard/hosts/hosts-filters'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
-import { useGetNodes, useReorderHosts } from '@shared/api/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
-import { SEARCH_PARAMS } from '@shared/constants/search-params'
+import { useGetNodes } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
 
 import { IProps } from './interfaces'
 
 export const HostsTableWidget = memo((props: IProps) => {
-    const { configProfiles, hosts, hostTags, selectedHosts, setSelectedHosts } = props
-    const [state, handlers] = useListState(hosts || [])
+    const { configProfiles, handlers, hosts, selectedHosts, setSelectedHosts, state } = props
     const [draggedHost, setDraggedHost] = useState<
         GetAllHostsCommand.Response['response'][number] | null
     >(null)
-    const [searchValue, setSearchValue] = useState<null | string>(null)
-    const [searchAddressValue, setSearchAddressValue] = useState<null | string>(null)
 
-    const openModalWithData = useModalsStoreOpenWithData()
-
-    const [highlightedHost, setHighlightedHost] = useState<null | string>(null)
     const [scrollMargin, setScrollMargin] = useState(0)
     const listRef = useRef<HTMLDivElement | null>(null)
     const isMobile = useIsMobile()
-    const [searchParams, setSearchParams] = useSearchParams()
 
     const { data: nodes } = useGetNodes()
-    const { mutate: reorderHosts } = useReorderHosts()
 
     useEffect(() => {
         if (listRef.current) {
             setScrollMargin(listRef.current.offsetTop)
         }
     }, [])
-
-    useEffect(() => {
-        if (!searchParams.get(SEARCH_PARAMS.HOST)) return
-        const hostUuid = searchParams.get(SEARCH_PARAMS.HOST)
-        if (!hostUuid) return
-
-        const host = state.find((host) => host.uuid === hostUuid)
-        if (!host) return
-
-        openModalWithData(MODALS.EDIT_HOST_MODAL, host)
-
-        searchParams.delete(SEARCH_PARAMS.HOST)
-        setSearchParams(searchParams)
-    }, [searchParams])
 
     const virtualizer = useWindowVirtualizer({
         count: state.length,
@@ -100,94 +72,6 @@ export const HostsTableWidget = memo((props: IProps) => {
         }),
         useSensor(KeyboardSensor, {})
     )
-
-    const searchOptions = (hosts || []).map((host) => ({
-        value: host.uuid,
-        label: host.remark
-    }))
-
-    const searchAddressOptions = (hosts || []).map((host) => ({
-        value: host.uuid,
-        label: host.address
-    }))
-
-    const handleSearchSelect = useCallback(
-        (value: null | string) => {
-            if (!value) {
-                setSearchValue(null)
-                return
-            }
-
-            const hostIndex = state.findIndex((host) => host.uuid === value)
-            if (hostIndex !== -1) {
-                virtualizer.scrollToIndex(hostIndex, {
-                    align: 'center',
-                    behavior: 'smooth'
-                })
-                setSearchValue(value)
-                setHighlightedHost(value)
-            }
-        },
-
-        [state, virtualizer]
-    )
-
-    const handleSearchAddressSelect = useCallback(
-        (value: null | string) => {
-            if (!value) {
-                setSearchAddressValue(null)
-                return
-            }
-
-            const hostIndex = state.findIndex((host) => host.uuid === value)
-            if (hostIndex !== -1) {
-                virtualizer.scrollToIndex(hostIndex, {
-                    align: 'center',
-                    behavior: 'smooth'
-                })
-                setSearchAddressValue(value)
-                setHighlightedHost(value)
-            }
-        },
-
-        [state, virtualizer]
-    )
-
-    useEffect(() => {
-        if (highlightedHost) {
-            const timeout = setTimeout(() => setHighlightedHost(null), 2000)
-            return () => clearTimeout(timeout)
-        }
-
-        return undefined
-    }, [highlightedHost])
-
-    useEffect(() => {
-        ;(async () => {
-            if (!hosts || !state) {
-                return
-            }
-
-            const hostsToReorder = hosts
-
-            const updatedHosts = hostsToReorder.map((host) => ({
-                uuid: host.uuid,
-                viewPosition: state.findIndex((stateItem) => stateItem.uuid === host.uuid)
-            }))
-
-            const hasOrderChanged = hostsToReorder?.some(
-                (host, index) => host.uuid !== state[index].uuid
-            )
-
-            if (hasOrderChanged) {
-                reorderHosts({ variables: { hosts: updatedHosts } })
-            }
-        })()
-    }, [state])
-
-    useEffect(() => {
-        handlers.setState(hosts || [])
-    }, [hosts])
 
     const handleDragStart = useCallback(
         (event: DragStartEvent) => {
@@ -232,55 +116,12 @@ export const HostsTableWidget = memo((props: IProps) => {
         [setSelectedHosts]
     )
 
-    const moveSelected = useCallback(
-        (mode: 'bottom' | 'down' | 'top' | 'up') => {
-            if (selectedHosts.length === 0) return
-            const selected = new Set(selectedHosts)
-
-            handlers.setState((current) => {
-                if (mode === 'top' || mode === 'bottom') {
-                    const sel = current.filter((host) => selected.has(host.uuid))
-                    const rest = current.filter((host) => !selected.has(host.uuid))
-                    return mode === 'top' ? [...sel, ...rest] : [...rest, ...sel]
-                }
-
-                const next = [...current]
-                const offset = mode === 'up' ? -1 : 1
-                const start = mode === 'up' ? 1 : next.length - 2
-                const end = mode === 'up' ? next.length : -1
-                const step = mode === 'up' ? 1 : -1
-
-                for (let i = start; i !== end; i += step) {
-                    const j = i + offset
-                    if (selected.has(next[i].uuid) && !selected.has(next[j].uuid)) {
-                        ;[next[i], next[j]] = [next[j], next[i]]
-                    }
-                }
-                return next
-            })
-        },
-        [selectedHosts, handlers]
-    )
-
     if (!hosts || !configProfiles) {
         return null
     }
 
     return (
         <Stack gap="md">
-            <HostsFiltersFeature
-                configProfiles={configProfiles}
-                handleSearchAddressSelect={handleSearchAddressSelect}
-                handleSearchSelect={handleSearchSelect}
-                hostTags={hostTags}
-                searchAddressData={searchAddressOptions}
-                searchAddressValue={searchAddressValue}
-                searchOptions={searchOptions}
-                searchValue={searchValue}
-                setSearchAddressValue={setSearchAddressValue}
-                setSearchValue={setSearchValue}
-            />
-
             {hosts.length === 0 && <EmptyPageLayout />}
 
             {hosts.length > 0 && (
@@ -332,9 +173,6 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                     >
                                                         <HostCardWidget
                                                             configProfiles={configProfiles}
-                                                            isHighlighted={
-                                                                highlightedHost === item.uuid
-                                                            }
                                                             isSelected={selectedHosts.includes(
                                                                 item.uuid
                                                             )}
@@ -370,14 +208,6 @@ export const HostsTableWidget = memo((props: IProps) => {
                     </DragOverlay>
                 </DndContext>
             )}
-
-            <MultiSelectHostsFeature
-                configProfiles={configProfiles}
-                hosts={hosts}
-                moveSelected={moveSelected}
-                selectedHosts={selectedHosts}
-                setSelectedHosts={setSelectedHosts}
-            />
         </Stack>
     )
 })

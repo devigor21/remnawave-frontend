@@ -1,11 +1,18 @@
 import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 import { create } from 'zustand'
 
-import { CONFIG_PROFILES_VIEW_MODE, IActions, IState, NODES_VIEW_MODE } from './interfaces'
+import {
+    CONFIG_PROFILES_VIEW_MODE,
+    HOSTS_VIEW_MODE,
+    IActions,
+    IState,
+    NODES_VIEW_MODE
+} from './interfaces'
 
 const initialState: IState = {
     nodesViewMode: NODES_VIEW_MODE.CARDS,
-    configProfilesViewMode: CONFIG_PROFILES_VIEW_MODE.PROFILES
+    configProfilesViewMode: CONFIG_PROFILES_VIEW_MODE.PROFILES,
+    hostsViewMode: HOSTS_VIEW_MODE.CARDS
 }
 
 export const useViewPreferencesStore = create<IActions & IState>()(
@@ -16,6 +23,7 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                 actions: {
                     setNodesViewMode: (mode) => set({ nodesViewMode: mode }),
                     setConfigProfilesViewMode: (mode) => set({ configProfilesViewMode: mode }),
+                    setHostsViewMode: (mode) => set({ hostsViewMode: mode }),
                     resetState: () => set({ ...initialState })
                 }
             }),
@@ -27,7 +35,8 @@ export const useViewPreferencesStore = create<IActions & IState>()(
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 nodesViewMode: state.nodesViewMode,
-                configProfilesViewMode: state.configProfilesViewMode
+                configProfilesViewMode: state.configProfilesViewMode,
+                hostsViewMode: state.hostsViewMode
             }),
             migrate: () => initialState
         }
@@ -39,3 +48,4 @@ export const useConfigProfilesViewMode = () =>
     useViewPreferencesStore((state) => state.configProfilesViewMode)
 export const useViewPreferencesStoreActions = () =>
     useViewPreferencesStore((state) => state.actions)
+export const useHostsViewMode = () => useViewPreferencesStore((state) => state.hostsViewMode)

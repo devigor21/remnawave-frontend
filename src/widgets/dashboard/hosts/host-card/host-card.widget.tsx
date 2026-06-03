@@ -25,7 +25,7 @@ import {
     GetAllNodesCommand,
     GetConfigProfilesCommand
 } from '@remnawave/backend-contract'
-import { PiLock, PiNetwork, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
+import { PiNetwork, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { CSSProperties, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
@@ -39,7 +39,6 @@ import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-st
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
 import { openOrNavigate } from '@shared/utils/open-or-navigate'
-import { useHostsStoreFilters } from '@entities/dashboard'
 import { XrayLogo } from '@shared/ui/logos'
 import { useIsMobile } from '@shared/hooks'
 import { ROUTES } from '@shared/constants'
@@ -49,7 +48,6 @@ import classes from './HostCard.module.css'
 export interface IProps {
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined
     isDragOverlay?: boolean
-    isHighlighted?: boolean
     isSelected?: boolean
     item: GetAllHostsCommand.Response['response'][number]
     nodesByUuid: Map<string, GetAllNodesCommand.Response['response'][number]>
@@ -66,15 +64,12 @@ export function HostCardWidget(props: IProps) {
         isSelected,
         onSelect,
         isDragOverlay = false,
-        isHighlighted = false,
         viewOnly = false,
         openExternal = false
     } = props
 
     const { t } = useTranslation()
     const navigate = useNavigate()
-
-    const filters = useHostsStoreFilters()
 
     const openModalWithData = useModalsStoreOpenWithData()
 
@@ -89,14 +84,9 @@ export function HostCardWidget(props: IProps) {
         (inbound) => inbound.uuid === item.inbound.configProfileInboundUuid
     )?.tag
 
-    const isFiltered =
-        (!!filters.configProfileUuid && configProfile?.uuid !== filters.configProfileUuid) ||
-        (!!filters.inboundUuid && item.inbound.configProfileInboundUuid !== filters.inboundUuid) ||
-        (!!filters.hostTag && item.tag !== filters.hostTag)
-
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
         id: item.uuid,
-        disabled: isDragOverlay || isFiltered
+        disabled: isDragOverlay
     })
 
     const style: CSSProperties = {
@@ -149,9 +139,7 @@ export function HostCardWidget(props: IProps) {
         return (
             <Box
                 className={cx(classes.item, classes.mobileItem, {
-                    [classes.highlightedItem]: isHighlighted,
                     [classes.itemDragging]: isDragging || isHovered,
-                    [classes.filteredItem]: isFiltered,
                     [classes.selectedItem]: isSelected,
                     [classes.danglingItem]: !configProfile?.uuid
                 })}
@@ -180,13 +168,7 @@ export function HostCardWidget(props: IProps) {
                                     className={classes.mobileDragHandle}
                                     onClick={(e) => e.stopPropagation()}
                                 >
-                                    {!isFiltered && <RiDraggable size={px('1.2rem')} />}
-                                    {isFiltered && (
-                                        <PiLock
-                                            className={classes.lockedIcon}
-                                            size={px('1.2rem')}
-                                        />
-                                    )}
+                                    <RiDraggable size={px('1.2rem')} />
                                 </Box>
                             </Group>
                         )}
@@ -298,10 +280,8 @@ export function HostCardWidget(props: IProps) {
         <Box
             className={cx(classes.item, {
                 [classes.itemDragging]: isDragging || isHovered,
-                [classes.filteredItem]: isFiltered,
                 [classes.selectedItem]: isSelected,
-                [classes.danglingItem]: !configProfile?.uuid,
-                [classes.highlightedItem]: isHighlighted
+                [classes.danglingItem]: !configProfile?.uuid
             })}
             data-dnd-overlay={isDragOverlay}
             ref={isDragOverlay ? undefined : setNodeRef}
@@ -316,10 +296,7 @@ export function HostCardWidget(props: IProps) {
                             {...(isDragOverlay ? {} : listeners)}
                             className={classes.dragHandle}
                         >
-                            {!isFiltered && <RiDraggable color="white" size="24px" />}
-                            {isFiltered && (
-                                <PiLock className={classes.lockedIcon} color="white" size="24px" />
-                            )}
+                            <RiDraggable color="white" size="24px" />
                         </Box>
                     </Group>
                 )}
