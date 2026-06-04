@@ -12,6 +12,7 @@ import {
     QueryKeys,
     useCreateHost,
     useGetConfigProfiles,
+    useGetHostTags,
     useGetInternalSquads,
     useGetNodes,
     useGetSubscriptionTemplates,
@@ -35,6 +36,7 @@ export const EditHostModalWidget = memo(() => {
     const { data: nodes } = useGetNodes()
     const { data: templates } = useGetSubscriptionTemplates()
     const { data: internalSquads } = useGetInternalSquads()
+    const { data: hostTags } = useGetHostTags()
 
     const form = useForm<UpdateHostCommand.Request>({
         name: 'edit-host-form',
@@ -133,7 +135,7 @@ export const EditHostModalWidget = memo(() => {
                 muxParams: muxParamsParsed,
                 sockoptParams: sockoptParamsParsed,
                 finalMask: finalMaskParsed,
-                tag: host.tag ?? undefined,
+                tags: host.tags ?? undefined,
                 isHidden: host.isHidden,
                 overrideSniFromAddress: host.overrideSniFromAddress,
                 keepSniBlank: host.keepSniBlank,
@@ -234,8 +236,7 @@ export const EditHostModalWidget = memo(() => {
                 xHttpExtraParams,
                 muxParams,
                 sockoptParams,
-                finalMask,
-                tag: values.tag === '' ? null : values.tag
+                finalMask
             }
         })
     })
@@ -276,7 +277,7 @@ export const EditHostModalWidget = memo(() => {
                 },
                 serverDescription: host.serverDescription ?? undefined,
                 sockoptParams: host.sockoptParams ?? undefined,
-                tag: host.tag ?? undefined,
+                tags: host.tags ?? undefined,
                 overrideSniFromAddress: host.overrideSniFromAddress,
                 keepSniBlank: host.keepSniBlank,
                 vlessRouteId: host.vlessRouteId ?? undefined,
@@ -317,6 +318,7 @@ export const EditHostModalWidget = memo(() => {
                     form={form}
                     handleCloneHost={handleCloneHost}
                     handleSubmit={handleSubmit}
+                    hostTags={hostTags?.tags ?? []}
                     internalSquads={internalSquads?.internalSquads ?? []}
                     isSubmitting={isUpdateHostPending}
                     nodes={nodes!}

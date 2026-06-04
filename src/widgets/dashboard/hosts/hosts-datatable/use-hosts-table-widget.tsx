@@ -156,9 +156,9 @@ export const HOST_SELECT_FIELDS: HostSelectFieldConfig[] = [
         valueLabel: (value, context) => context.inboundTagByUuid.get(value) ?? value
     },
     {
-        accessor: 'tag',
-        getValues: (host) => (host.tag ? [host.tag] : []),
-        key: 'tag',
+        accessor: 'tags',
+        getValues: (host) => (host.tags && host.tags.length > 0 ? host.tags : []),
+        key: 'tags',
         label: (t) => t('use-nodes-table-widget.tags'),
         sortable: true
     },

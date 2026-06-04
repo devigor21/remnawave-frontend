@@ -14,6 +14,7 @@ import {
     Stack,
     Switch,
     Tabs,
+    TagsInput,
     Text,
     TextInput,
     ThemeIcon,
@@ -47,7 +48,8 @@ import {
     TbEye,
     TbFileDescription,
     TbMask,
-    TbServer2
+    TbServer2,
+    TbStar
 } from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
 import { useDisclosure } from '@mantine/hooks'
@@ -62,7 +64,6 @@ import {
     PASTE_BASIC_XHTTP_EXTRA_PARAMS
 } from '@shared/constants'
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
-import { HostTagsInputWidget } from '@widgets/dashboard/hosts/host-tags-input/host-tags-input'
 import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
 import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
@@ -117,7 +118,8 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
         handleCloneHost,
         nodes,
         internalSquads,
-        subscriptionTemplates
+        subscriptionTemplates,
+        hostTags
     } = props
 
     const { t } = useTranslation()
@@ -462,10 +464,25 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                             />
                                         </Group>
 
-                                        <HostTagsInputWidget
-                                            key={form.key('tag')}
-                                            {...form.getInputProps('tag')}
-                                            value={form.getValues().tag}
+                                        <TagsInput
+                                            clearable
+                                            data={hostTags ?? []}
+                                            description={t(
+                                                'host-tags-input.tags-are-not-visible-to-end-users-tag-will-be-sent-with-raw-subscription-only'
+                                            )}
+                                            key={form.key('tags')}
+                                            label={t('use-nodes-table-widget.tags')}
+                                            leftSection={<TbStar size="16px" />}
+                                            maxTags={10}
+                                            placeholder="Enter tags (comma, space, semicolon)"
+                                            splitChars={[',', ' ', ';']}
+                                            {...form.getInputProps('tags')}
+                                            error={
+                                                Object.keys(form.errors)
+                                                    .filter((key) => key.startsWith('tags.'))
+                                                    .map((key) => form.errors[key])
+                                                    .join(', ') || form.getInputProps('tags').error
+                                            }
                                         />
 
                                         <MultiSelect

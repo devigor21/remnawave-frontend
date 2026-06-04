@@ -1,5 +1,6 @@
 import {
     CreateHostCommand,
+    GetAllHostTagsCommand,
     GetAllNodesCommand,
     GetConfigProfilesCommand,
     GetInternalSquadsCommand,
@@ -14,6 +15,7 @@ export interface IProps<T extends CreateHostCommand.Request | UpdateHostCommand.
     form: UseFormReturnType<T>
     handleCloneHost?: () => void
     handleSubmit: () => void
+    hostTags: GetAllHostTagsCommand.Response['response']['tags']
     internalSquads: GetInternalSquadsCommand.Response['response']['internalSquads']
     isSubmitting: boolean
     nodes: GetAllNodesCommand.Response['response']

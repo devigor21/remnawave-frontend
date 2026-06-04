@@ -25,8 +25,8 @@ import {
     GetAllNodesCommand,
     GetConfigProfilesCommand
 } from '@remnawave/backend-contract'
-import { PiNetwork, PiProhibit, PiPulse, PiTag } from 'react-icons/pi'
 import { createSearchParams, useNavigate } from 'react-router-dom'
+import { PiNetwork, PiProhibit, PiPulse } from 'react-icons/pi'
 import { CSSProperties, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { useTranslation } from 'react-i18next'
@@ -173,20 +173,6 @@ export function HostCardWidget(props: IProps) {
                             </Group>
                         )}
 
-                        <Group gap="xs">
-                            {item.tag && (
-                                <Badge
-                                    autoContrast
-                                    color={ch.hex(item.tag)}
-                                    leftSection={<TbStar size={12} />}
-                                    size="md"
-                                    variant="outline"
-                                >
-                                    {item.tag}
-                                </Badge>
-                            )}
-                        </Group>
-
                         {!isHostActive && (
                             <ActionIcon
                                 color="gray"
@@ -251,23 +237,70 @@ export function HostCardWidget(props: IProps) {
                                             <TbAlertCircle size={12} />
                                         )
                                     }
-                                    size="sm"
-                                    variant="light"
+                                    size="md"
+                                    style={{
+                                        paddingLeft: 0
+                                    }}
+                                    variant="transparent"
                                 >
                                     {configProfile?.name || 'DANGLING'}
+                                    {item.inbound.configProfileInboundUuid && (
+                                        <>
+                                            <span style={{ margin: '0 6px', opacity: 0.5 }}>›</span>
+                                            <span style={{ opacity: 0.75 }}>
+                                                {inboundTag || 'UNKNOWN'}
+                                            </span>
+                                        </>
+                                    )}
                                 </Badge>
 
-                                <Badge
-                                    autoContrast
-                                    color={ch.hex(
-                                        item.inbound.configProfileInboundUuid || 'dangling'
+                                <OverflowList
+                                    data={item.tags.sort((a, b) => a.localeCompare(b))}
+                                    gap={0}
+                                    maxRows={1}
+                                    maxVisibleItems={2}
+                                    renderItem={(tag) => (
+                                        <Badge
+                                            autoContrast
+                                            color={ch.hex(tag)}
+                                            key={tag}
+                                            leftSection={<TbStar size={12} />}
+                                            size="md"
+                                            style={{
+                                                paddingLeft: 0
+                                            }}
+                                            variant="transparent"
+                                        >
+                                            {tag}
+                                        </Badge>
                                     )}
-                                    leftSection={<PiTag size={12} />}
-                                    size="sm"
-                                    variant="outline"
-                                >
-                                    {inboundTag || 'UNKNOWN'}
-                                </Badge>
+                                    renderOverflow={(items) => (
+                                        <Tooltip
+                                            label={
+                                                <Stack gap="xs">
+                                                    {items.map((tag) => (
+                                                        <Badge
+                                                            color={ch.hex(tag)}
+                                                            fullWidth
+                                                            key={tag}
+                                                            leftSection={<TbStar size={12} />}
+                                                            size="md"
+                                                            variant="transparent"
+                                                        >
+                                                            {tag}
+                                                        </Badge>
+                                                    ))}
+                                                </Stack>
+                                            }
+                                            multiline
+                                            position="top"
+                                        >
+                                            <Badge color="gray" size="md" variant="transparent">
+                                                +{items.length}
+                                            </Badge>
+                                        </Tooltip>
+                                    )}
+                                />
                             </Stack>
                         </Stack>
                     </Box>
@@ -445,6 +478,9 @@ export function HostCardWidget(props: IProps) {
                                     )
                                 }
                                 size="md"
+                                style={{
+                                    paddingLeft: 0
+                                }}
                                 variant="transparent"
                             >
                                 {configProfile?.name || 'DANGLING'}
@@ -458,17 +494,50 @@ export function HostCardWidget(props: IProps) {
                                 )}
                             </Badge>
 
-                            {item.tag && (
-                                <Badge
-                                    autoContrast
-                                    color={ch.hex(item.tag)}
-                                    leftSection={<TbStar size={12} />}
-                                    size="md"
-                                    variant="transparent"
-                                >
-                                    {item.tag}
-                                </Badge>
-                            )}
+                            <OverflowList
+                                data={item.tags.sort((a, b) => a.localeCompare(b))}
+                                gap={0}
+                                maxRows={1}
+                                maxVisibleItems={2}
+                                renderItem={(tag) => (
+                                    <Badge
+                                        autoContrast
+                                        color={ch.hex(tag)}
+                                        key={tag}
+                                        leftSection={<TbStar size={12} />}
+                                        size="md"
+                                        variant="transparent"
+                                    >
+                                        {tag}
+                                    </Badge>
+                                )}
+                                renderOverflow={(items) => (
+                                    <Tooltip
+                                        label={
+                                            <Stack gap="xs">
+                                                {items.map((tag) => (
+                                                    <Badge
+                                                        color={ch.hex(tag)}
+                                                        fullWidth
+                                                        key={tag}
+                                                        leftSection={<TbStar size={12} />}
+                                                        size="md"
+                                                        variant="transparent"
+                                                    >
+                                                        {tag}
+                                                    </Badge>
+                                                ))}
+                                            </Stack>
+                                        }
+                                        multiline
+                                        position="top"
+                                    >
+                                        <Badge color="gray" size="md" variant="transparent">
+                                            +{items.length}
+                                        </Badge>
+                                    </Tooltip>
+                                )}
+                            />
 
                             {serverDescription && (
                                 <Badge

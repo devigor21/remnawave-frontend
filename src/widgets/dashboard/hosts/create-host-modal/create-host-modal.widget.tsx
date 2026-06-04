@@ -11,6 +11,7 @@ import {
     QueryKeys,
     useCreateHost,
     useGetConfigProfiles,
+    useGetHostTags,
     useGetInternalSquads,
     useGetNodes,
     useGetSubscriptionTemplates
@@ -30,6 +31,7 @@ export const CreateHostModalWidget = () => {
     const { data: nodes } = useGetNodes()
     const { data: internalSquads } = useGetInternalSquads()
     const { data: templates } = useGetSubscriptionTemplates()
+    const { data: hostTags } = useGetHostTags()
 
     const [advancedOpened, setAdvancedOpened] = useState(false)
 
@@ -194,6 +196,7 @@ export const CreateHostModalWidget = () => {
                 configProfiles={configProfiles?.configProfiles ?? []}
                 form={form}
                 handleSubmit={handleSubmit}
+                hostTags={hostTags?.tags ?? []}
                 internalSquads={internalSquads?.internalSquads ?? []}
                 isSubmitting={isCreateHostPending}
                 nodes={nodes!}
