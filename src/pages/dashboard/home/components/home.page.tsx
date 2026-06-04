@@ -8,6 +8,7 @@ import { modals } from '@mantine/modals'
 import { MetricCardShared, MetricCardWithTrendShared } from '@shared/ui/metrics/metric-card'
 import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { DisclaimerOverlay } from '@shared/ui/disclaimer-overlay'
 import { useIsMobile } from '@shared/hooks'
 import { LoadingScreen } from '@shared/ui'
 import { Page } from '@shared/ui/page'
@@ -237,6 +238,7 @@ export const HomePage = (props: IProps) => {
                     </div>
                 )}
             </Stack>
+            <DisclaimerOverlay />
         </Page>
     )
 }
