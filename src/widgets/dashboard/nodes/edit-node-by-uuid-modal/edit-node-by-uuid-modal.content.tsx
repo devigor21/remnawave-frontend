@@ -86,7 +86,8 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                 },
 
                 providerUuid: fetchedNode.providerUuid ?? undefined,
-                activePluginUuid: fetchedNode.activePluginUuid ?? undefined
+                activePluginUuid: fetchedNode.activePluginUuid ?? undefined,
+                note: fetchedNode.note ?? undefined
             })
         }
     }, [fetchedNode])

@@ -9,7 +9,8 @@ import {
     Select,
     Stack,
     TagsInput,
-    Text
+    Text,
+    Textarea
 } from '@mantine/core'
 import { BulkNodesUpdateCommand, GetAllNodesCommand } from '@remnawave/backend-contract'
 import { TbCheck, TbMapPin, TbMinus, TbPackage, TbPlus } from 'react-icons/tb'
@@ -62,7 +63,8 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                 countryCode: undefined,
                 consumptionMultiplier: undefined,
                 providerUuid: undefined,
-                activePluginUuid: undefined
+                activePluginUuid: undefined,
+                note: undefined
             }
         }
     })
@@ -150,7 +152,7 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                             clearable
                             data={tags?.tags || []}
                             key={form.key('fields.tags')}
-                            label="Tags"
+                            label={t('use-nodes-table-widget.tags')}
                             leftSection={<PiTagDuotone size="16px" />}
                             maxTags={10}
                             placeholder="Enter tags (comma, space, semicolon)"
@@ -162,6 +164,16 @@ export const BulkUpdateNodesModalContent = (props: IProps) => {
                                     .map((key) => form.errors[key])
                                     .join(', ') || form.getInputProps('fields.tags').error
                             }
+                        />
+
+                        <Textarea
+                            key={form.key('fields.note')}
+                            label={t('node-tracking-and-billing.card.note')}
+                            resize="vertical"
+                            {...form.getInputProps('fields.note')}
+                            styles={{
+                                label: { fontWeight: 500 }
+                            }}
                         />
                     </Stack>
                 </SectionCard.Section>

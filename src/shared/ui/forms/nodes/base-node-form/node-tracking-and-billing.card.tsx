@@ -1,4 +1,5 @@
 import {
+    Button,
     Collapse,
     Divider,
     Group,
@@ -6,11 +7,12 @@ import {
     Stack,
     Switch,
     TagsInput,
-    Text
+    Text,
+    Textarea
 } from '@mantine/core'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { TbChartBar, TbChartLine } from 'react-icons/tb'
+import { TbChartBar, TbChartLine, TbExternalLink } from 'react-icons/tb'
 import { UseFormReturnType } from '@mantine/form'
 import { useTranslation } from 'react-i18next'
 import { PiTagDuotone } from 'react-icons/pi'
@@ -20,6 +22,13 @@ import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'
 import { useGetNodesTags } from '@shared/api/hooks'
+
+const URL_REGEX = /https?:\/\/[^\s]+/i
+
+function extractFirstUrl(text: string): null | string {
+    const match = text.match(URL_REGEX)
+    return match ? match[0] : null
+}
 
 interface IProps<T extends CreateNodeCommand.Request | UpdateNodeCommand.Request> {
     cardVariants: Variants
@@ -37,9 +46,14 @@ export const NodeTrackingAndBillingCard = <
     const { cardVariants, form, motionWrapper } = props
 
     const [advancedOpened, setAdvancedOpened] = useState<boolean>(false)
+    const [firstNoteUrl, setFirstNoteUrl] = useState<null | string>(null)
 
     form.watch('isTrafficTrackingActive', ({ value }) => {
         setAdvancedOpened(value ?? false)
+    })
+
+    form.watch('note', ({ value }) => {
+        setFirstNoteUrl(extractFirstUrl(typeof value === 'string' ? value : ''))
     })
 
     const MotionWrapper = motionWrapper
@@ -176,7 +190,7 @@ export const NodeTrackingAndBillingCard = <
                             clearable
                             data={nodesTags?.tags || []}
                             key={form.key('tags')}
-                            label="Tags"
+                            label={t('use-nodes-table-widget.tags')}
                             leftSection={<PiTagDuotone size="16px" />}
                             maxTags={10}
                             placeholder="Enter tags (comma, space, semicolon)"
@@ -189,6 +203,33 @@ export const NodeTrackingAndBillingCard = <
                                     .join(', ') || form.getInputProps('tags').error
                             }
                         />
+
+                        <Stack gap={6}>
+                            <Textarea
+                                key={form.key('note')}
+                                label={t('node-tracking-and-billing.card.note')}
+                                resize="vertical"
+                                {...form.getInputProps('note')}
+                                styles={{
+                                    label: { fontWeight: 500 }
+                                }}
+                            />
+                            {firstNoteUrl && (
+                                <Button
+                                    component="a"
+                                    href={firstNoteUrl}
+                                    leftSection={<TbExternalLink size={14} />}
+                                    maw="100%"
+                                    rel="noopener noreferrer"
+                                    size="xs"
+                                    target="_blank"
+                                    variant="soft"
+                                    w="fit-content"
+                                >
+                                    {t('common.open')}
+                                </Button>
+                            )}
+                        </Stack>
                     </Stack>
                 </SectionCard.Section>
             </SectionCard.Root>

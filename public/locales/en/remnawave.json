@@ -60,7 +60,8 @@
         "nothing-found": "Nothing found",
         "name": "Name",
         "clone": "Clone",
-        "event-sent": "Event sent"
+        "event-sent": "Event sent",
+        "open": "Open"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
@@ -2169,5 +2170,10 @@
         "disabled": "Disabled",
         "enabled": "Enabled",
         "hidden": "Hidden"
+    },
+    "node-tracking-and-billing": {
+        "card": {
+            "note": "Note"
+        }
     }
 }
