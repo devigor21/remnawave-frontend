@@ -27,10 +27,10 @@ export function DisclaimerOverlay() {
             onClose={handleAccept}
             opened={!disclaimerAccepted}
             padding="xl"
-            size="md"
+            size="lg"
             withCloseButton={false}
         >
-            <Stack align="center" gap="lg" maw={460}>
+            <Stack align="center" gap="lg">
                 <ThemeIcon
                     color="yellow"
                     size={64}
