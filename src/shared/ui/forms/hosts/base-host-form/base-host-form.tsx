@@ -1,5 +1,6 @@
 import {
     ActionIcon,
+    Autocomplete,
     Badge,
     Button,
     Checkbox,
@@ -23,6 +24,7 @@ import {
 } from '@mantine/core'
 import {
     PiArrowUpDuotone,
+    PiCaretDown,
     PiCopyDuotone,
     PiFloppyDiskDuotone,
     PiGearSixDuotone,
@@ -822,19 +824,16 @@ export const BaseHostForm = <T extends CreateHostCommand.Request | UpdateHostCom
                                                     w="40%"
                                                 />
 
-                                                <Select
+                                                <Autocomplete
                                                     clearable
-                                                    data={Object.values(FINGERPRINTS).map(
-                                                        (fingerprint) => ({
-                                                            label: fingerprint,
-                                                            value: fingerprint
-                                                        })
-                                                    )}
+                                                    clearSectionMode="both"
+                                                    data={FINGERPRINTS}
                                                     key={form.key('fingerprint')}
                                                     label={t('base-host-form.fingerprint')}
                                                     placeholder={t(
                                                         'base-host-form.fingerprint-e-g-chrome'
                                                     )}
+                                                    rightSection={<PiCaretDown size={16} />}
                                                     {...form.getInputProps('fingerprint')}
                                                     w="55%"
                                                 />
