@@ -24,7 +24,6 @@ import { NavigationProgress } from '@mantine/nprogress'
 import { Notifications } from '@mantine/notifications'
 import { ModalsProvider } from '@mantine/modals'
 import { I18nextProvider } from 'react-i18next'
-import { useMediaQuery } from '@mantine/hooks'
 import { Suspense, useEffect } from 'react'
 import dayjs from 'dayjs'
 
@@ -43,7 +42,6 @@ dayjs.extend(customParseFormat)
 polyfillCountryFlagEmojis()
 
 export function App() {
-    const mq = useMediaQuery('(min-width: 40em)')
     const isDev = __NODE_ENV__ === 'development'
 
     useEffect(() => {
@@ -73,7 +71,7 @@ export function App() {
                                 theme={theme}
                             >
                                 <ModalsProvider>
-                                    <Notifications position={mq ? 'top-right' : 'bottom-right'} />
+                                    <Notifications position="top-right" />
                                     <NavigationProgress />
                                     <Suspense
                                         fallback={
