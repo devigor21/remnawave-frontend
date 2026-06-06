@@ -252,6 +252,12 @@ export function getNodesTableColumns(
                     .join(', ')
         },
         {
+            accessor: 'consumptionMultiplier',
+            sortable: false,
+            title: t('base-node-form.consumption-multiplier'),
+            render: ({ consumptionMultiplier }) => consumptionMultiplier.toFixed(1)
+        },
+        {
             accessor: 'versions.xray',
             sortable: true,
             title: t('use-nodes-table-widget.xray-v'),
