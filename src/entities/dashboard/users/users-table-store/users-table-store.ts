@@ -1,8 +1,5 @@
 /* eslint-disable camelcase */
-import {
-    MRT_ColumnSizingState,
-    MRT_VisibilityState
-} from '@kastov/mantine-react-table-open'
+import { MRT_ColumnSizingState, MRT_VisibilityState } from '@kastov/mantine-react-table-open'
 
 import { createMrtTableStore } from '@shared/lib/mrt-table-store'
 
@@ -17,7 +14,8 @@ const DEFAULT_VISIBILITY: MRT_VisibilityState = {
     externalSquadUuid: false,
     vlessUuid: false,
     trojanPassword: false,
-    hwidDeviceLimit: false
+    hwidDeviceLimit: false,
+    usedTrafficPercentage: false
 }
 
 const DEFAULT_COLUMN_SIZE: MRT_ColumnSizingState = {
@@ -30,7 +28,7 @@ const DEFAULT_COLUMN_SIZE: MRT_ColumnSizingState = {
 
 export const useUsersTableStore = createMrtTableStore({
     name: 'x-rmnw-users-table',
-    version: 9,
+    version: 10,
     defaults: {
         columnVisibility: DEFAULT_VISIBILITY,
         columnSize: DEFAULT_COLUMN_SIZE

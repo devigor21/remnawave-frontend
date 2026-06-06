@@ -124,6 +124,29 @@ export const useUserTableColumns = (
                 size: 300
             },
             {
+                accessorKey: 'usedTrafficPercentage',
+                header: t('use-table-columns.used-traffic'),
+                Cell: ({ cell }) => {
+                    const { usedTrafficBytes } = cell.row.original.userTraffic ?? {}
+                    const limit = cell.row.original.trafficLimitBytes ?? 0
+
+                    let percentage = 0
+                    if (limit > 0 && typeof usedTrafficBytes === 'number') {
+                        percentage = (usedTrafficBytes * 100) / limit
+                    }
+
+                    return <Text fw={600}>{percentage.toFixed(2)}%</Text>
+                },
+                mantineTableBodyCellProps: {
+                    align: 'center'
+                },
+                minSize: 80,
+                enableColumnFilterModes: false,
+                enableColumnFilter: false,
+                maxSize: 700,
+                size: 180
+            },
+            {
                 accessorKey: 'shortUuid',
                 header: t('use-table-columns.sub-link'),
                 accessorFn: (originalRow) => originalRow.shortUuid,
