@@ -57,6 +57,7 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
                 accessorKey: 'userAgent',
                 header: t('get-user-subscription-request-history.feature.user-agent'),
                 enableClickToCopy: true,
+                size: 400,
                 accessorFn: (row) => row.userAgent || '–'
             },
             {
