@@ -2,20 +2,16 @@ import {
     ActionIcon,
     Box,
     Card,
-    Drawer,
     Group,
+    Loader,
     Stack,
     Text,
-    TextInput,
     ThemeIcon,
-    Tooltip,
-    Transition
+    Tooltip
 } from '@mantine/core'
-import { TbDevices, TbRefresh, TbSearch, TbTrash } from 'react-icons/tb'
-import { useDebouncedValue } from '@mantine/hooks'
+import { TbDevices, TbRefresh, TbTrash } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { Virtuoso } from 'react-virtuoso'
-import { useMemo, useState } from 'react'
 import { modals } from '@mantine/modals'
 
 import {
@@ -24,34 +20,31 @@ import {
     useDeleteUserHwidDevice,
     useGetUserHwidDevices
 } from '@shared/api/hooks'
-import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { queryClient } from '@shared/api/query-client'
 
+import { UserHwidDevicesTable } from './user-hwid-devices.table'
 import { UserHwidDeviceItem } from './user-hwid-device-item'
 import classes from './user-hwid-devices.module.css'
 
-export const UserHwidDevicesDrawerWidget = () => {
-    const { t } = useTranslation()
+interface IProps {
+    mobile: boolean
+    userUuid: string
+}
 
-    const { isOpen, internalState } = useModalState(MODALS.USER_HWID_DEVICES_DRAWER)
-    const close = useModalClose(MODALS.USER_HWID_DEVICES_DRAWER)
-    const [searchQuery, setSearchQuery] = useState('')
-    const [debouncedQuery] = useDebouncedValue(searchQuery, 200)
+export const UserHwidDevicesContentWidget = (props: IProps) => {
+    const { userUuid, mobile } = props
+    const { t } = useTranslation()
 
     const {
         data: devices,
         isLoading,
-        isRefetching,
+        isFetching,
         refetch
     } = useGetUserHwidDevices({
         route: {
-            userUuid: internalState?.userUuid ?? ''
-        },
-        rQueryParams: {
-            enabled: isOpen
+            userUuid
         }
     })
 
@@ -60,7 +53,7 @@ export const UserHwidDevicesDrawerWidget = () => {
             onSuccess: (data) => {
                 queryClient.setQueryData(
                     QueryKeys['hwid-user-devices'].getUserHwidDevices({
-                        userUuid: internalState?.userUuid ?? ''
+                        userUuid
                     }).queryKey,
                     data
                 )
@@ -73,7 +66,7 @@ export const UserHwidDevicesDrawerWidget = () => {
             onSuccess: (data) => {
                 queryClient.setQueryData(
                     QueryKeys['hwid-user-devices'].getUserHwidDevices({
-                        userUuid: internalState?.userUuid ?? ''
+                        userUuid
                     }).queryKey,
                     data
                 )
@@ -82,8 +75,6 @@ export const UserHwidDevicesDrawerWidget = () => {
     })
 
     const handleDeleteDevice = (hwid: string) => {
-        if (!internalState || !internalState.userUuid) return
-
         modals.openConfirmModal({
             title: t('common.confirm-action'),
             children: t('common.confirm-action-description'),
@@ -97,7 +88,7 @@ export const UserHwidDevicesDrawerWidget = () => {
                 deleteDevice({
                     variables: {
                         hwid,
-                        userUuid: internalState.userUuid
+                        userUuid
                     }
                 })
             }
@@ -105,8 +96,6 @@ export const UserHwidDevicesDrawerWidget = () => {
     }
 
     const handleDeleteAllDevices = () => {
-        if (!internalState || !internalState.userUuid) return
-
         modals.openConfirmModal({
             title: t('common.confirm-action'),
             children: t('common.confirm-action-description'),
@@ -118,39 +107,18 @@ export const UserHwidDevicesDrawerWidget = () => {
             centered: true,
             onConfirm: () => {
                 deleteAllDevices({
-                    variables: { userUuid: internalState.userUuid }
+                    variables: { userUuid }
                 })
             }
         })
     }
 
-    const filteredDevices = useMemo(() => {
-        if (!devices || !devices.total || devices.devices.length === 0) return []
-        if (!debouncedQuery.trim()) return devices.devices
-
-        const query = debouncedQuery.toLowerCase()
-        return devices.devices.filter((device) => {
-            const searchableText = [
-                device.hwid,
-                device.platform,
-                device.osVersion,
-                device.deviceModel,
-                device.userAgent
-            ]
-                .filter(Boolean)
-                .join(' ')
-                .toLowerCase()
-
-            return searchableText.includes(query)
-        })
-    }, [devices, debouncedQuery])
-
     const renderListContent = () => {
-        if (!filteredDevices || filteredDevices.length === 0) return null
+        if (!devices || devices.devices.length === 0) return null
         return (
             <Box className={classes.listContainer}>
                 <Virtuoso
-                    data={filteredDevices}
+                    data={devices.devices}
                     itemContent={(index, device) => {
                         return (
                             <Box className={classes.itemWrapper}>
@@ -165,15 +133,15 @@ export const UserHwidDevicesDrawerWidget = () => {
                     style={{
                         height: '100%'
                     }}
-                    totalCount={filteredDevices.length}
+                    totalCount={devices.devices.length}
                     useWindowScroll={false}
                 />
             </Box>
         )
     }
 
-    const renderDrawerContent = () => {
-        return (
+    return (
+        <Box style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Stack className={classes.drawerContent}>
                 <Card withBorder>
                     <Stack gap="md">
@@ -183,9 +151,21 @@ export const UserHwidDevicesDrawerWidget = () => {
                                     <TbDevices size={24} />
                                 </ThemeIcon>
                                 <Stack gap={0}>
-                                    <Text c="white" fw={700} size="xl">
-                                        {filteredDevices.length}
-                                    </Text>
+                                    <Box
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            height: 'calc(var(--mantine-font-size-xl) * var(--mantine-line-height))'
+                                        }}
+                                    >
+                                        {isLoading ? (
+                                            <Loader color="cyan" size="sm" type="oval" />
+                                        ) : (
+                                            <Text c="white" fw={700} size="xl">
+                                                {devices?.devices.length ?? 0}
+                                            </Text>
+                                        )}
+                                    </Box>
                                     <Text c="dimmed" size="xs">
                                         {t('get-hwid-user-devices.feature.devices')}
                                     </Text>
@@ -195,7 +175,7 @@ export const UserHwidDevicesDrawerWidget = () => {
                                 <Tooltip label={t('common.refresh')}>
                                     <ActionIcon
                                         color="indigo"
-                                        loading={isRefetching}
+                                        loading={isFetching}
                                         onClick={() => refetch()}
                                         size="lg"
                                         variant="soft"
@@ -219,57 +199,22 @@ export const UserHwidDevicesDrawerWidget = () => {
                         </Group>
                     </Stack>
                 </Card>
-                <TextInput
-                    leftSection={<TbSearch size={20} />}
-                    onChange={(event) => setSearchQuery(event.currentTarget.value)}
-                    placeholder={t('user-hwid-devices.drawer.widget.enter-search-query')}
-                    radius="md"
-                    size="md"
-                    value={searchQuery}
-                />
 
-                {filteredDevices.length > 0 ? renderListContent() : <EmptyPageLayout />}
-            </Stack>
-        )
-    }
+                {mobile && !isLoading && devices?.devices.length === 0 && <EmptyPageLayout />}
 
-    return (
-        <Drawer
-            keepMounted={false}
-            onClose={close}
-            opened={isOpen}
-            position="right"
-            size="500px"
-            styles={{
-                body: {
-                    height: 'calc(100% - 60px)',
-                    display: 'flex',
-                    flexDirection: 'column'
-                }
-            }}
-            title={
-                <BaseOverlayHeader
-                    iconColor="violet"
-                    IconComponent={TbDevices}
-                    iconVariant="soft"
-                    title={t('get-hwid-user-devices.feature.hwid-devices')}
-                />
-            }
-        >
-            {isLoading && <LoaderModalShared h="80vh" text="Loading..." w="100%" />}
+                {mobile && isLoading && <LoaderModalShared h="80vh" text="Loading..." w="100%" />}
+                {mobile && !isLoading && renderListContent()}
 
-            <Transition
-                duration={300}
-                mounted={!isLoading}
-                timingFunction="ease-in-out"
-                transition="fade"
-            >
-                {(styles) => (
-                    <Box style={{ ...styles, flex: 1, display: 'flex', flexDirection: 'column' }}>
-                        {renderDrawerContent()}
+                {!mobile && (
+                    <Box className={classes.tableContainer}>
+                        <UserHwidDevicesTable
+                            devices={devices?.devices}
+                            isLoading={isLoading}
+                            onDelete={handleDeleteDevice}
+                        />
                     </Box>
                 )}
-            </Transition>
-        </Drawer>
+            </Stack>
+        </Box>
     )
 }

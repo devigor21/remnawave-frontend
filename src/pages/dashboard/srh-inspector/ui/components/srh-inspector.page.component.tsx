@@ -7,7 +7,6 @@ import { UserSubscriptionRequestsDrawerWidget } from '@widgets/dashboard/users/u
 import { UserTorrentBlockerReportsDrawerWidget } from '@widgets/dashboard/users/user-torrent-blocker-reports/user-torrent-blocker-reports.drawer.widget'
 import { UserAccessibleNodesModalWidget } from '@widgets/dashboard/users/user-accessible-nodes-modal/user-accessible-nodes.modal.widget'
 import { DetailedUserInfoDrawerWidget } from '@widgets/dashboard/users/detailed-user-info-drawer/detailed-user-info-drawer.widget'
-import { UserHwidDevicesDrawerWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
 import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { MobileWarningOverlay } from '@shared/ui/mobile-warning-overlay/mobile-warning-overlay'
 import { SrhInspectorTableWidget } from '@widgets/dashboard/srh-inspector/srh-inspector-table'
@@ -38,7 +37,6 @@ export default function SrhInspectorPageComponent() {
             <DetailedUserInfoDrawerWidget key="detailed-user-info-drawer" />
             <UserAccessibleNodesModalWidget key="user-accessible-nodes-modal" />
             <InternalSquadsDrawerWithStore key="internal-squads-drawer-with-store" />
-            <UserHwidDevicesDrawerWidget key="user-hwid-devices-drawer" />
             <UserTorrentBlockerReportsDrawerWidget key="user-torrent-blocker-reports-drawer" />
             <UserSubscriptionRequestsDrawerWidget key="user-subscription-requests-drawer" />
         </Page>
