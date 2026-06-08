@@ -4,7 +4,6 @@ import {
     TbBrandApple,
     TbBrandFinder,
     TbBrandWindows,
-    TbExternalLink,
     TbSearch,
     TbTrash
 } from 'react-icons/tb'
@@ -81,6 +80,7 @@ export const UserHwidDevicesTable = (props: IProps) => {
                     return (
                         <Anchor
                             c="cyan"
+                            ff="monospace"
                             href={`https://ipinfo.io/${ip}`}
                             rel="noopener noreferrer"
                             size="sm"
@@ -89,7 +89,6 @@ export const UserHwidDevicesTable = (props: IProps) => {
                             underline="never"
                         >
                             {ip}
-                            <TbExternalLink size={13} />
                         </Anchor>
                     )
                 }
@@ -184,6 +183,11 @@ export const UserHwidDevicesTable = (props: IProps) => {
             style: { minWidth: '350px' },
             variant: 'default',
             leftSection: <TbSearch size={16} />
+        },
+        mantineTopToolbarProps: {
+            style: {
+                '--mrt-base-background-color': 'rgba(255, 255, 255, 0.02)'
+            }
         },
         renderRowActions: ({ row }) => (
             <ActionIcon

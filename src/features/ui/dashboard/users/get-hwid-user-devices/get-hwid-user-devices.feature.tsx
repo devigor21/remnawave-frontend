@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { TbDevices } from 'react-icons/tb'
 import { modals } from '@mantine/modals'
 
-import { UserHwidDevicesContentWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.drawer.widget'
+import { UserHwidDevicesContentWidget } from '@widgets/dashboard/users/user-hwid-devices-drawer/user-hwid-devices.content.widget'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useIsMobile } from '@shared/hooks'
 
