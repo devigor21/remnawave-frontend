@@ -99,7 +99,7 @@ export const KeypairGeneratorWidget = () => {
                                         size="sm"
                                         variant="default"
                                     >
-                                        Generate
+                                        {t('keypair-generator.widget.generate')}
                                     </Button>
                                 </Group>
                             </Stack>
