@@ -36,6 +36,7 @@ import { queryClient } from '@shared/api/query-client'
 import { QueryKeys } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
 
+import { UsersTableTemplatesFeature } from '../users-table-templates/users-table-templates.feature'
 import { IProps } from './interfaces'
 
 export const UserActionGroupFeature = (props: IProps) => {
@@ -111,6 +112,8 @@ export const UserActionGroupFeature = (props: IProps) => {
                 </ActionIconGroup>
 
                 <ActionIconGroup>
+                    <UsersTableTemplatesFeature table={table} />
+
                     <Tooltip label={t('action-group.feature.clear-filters')} withArrow>
                         <ActionIcon
                             loading={isLoading}

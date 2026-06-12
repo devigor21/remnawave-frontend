@@ -124,6 +124,12 @@ export function UserTableWidget() {
             return new Map<string, number>()
         },
         columnFilterDisplayMode: 'subheader',
+        mantineFilterSelectProps: ({ column }) => {
+            const value = column.getFilterValue()
+            return {
+                clearable: value !== undefined && value !== null && value !== ''
+            }
+        },
         icons: {
             /* eslint-disable @typescript-eslint/no-explicit-any */
             IconFilter: (props: any) => <TbSearch size={24} {...props} />,

@@ -61,7 +61,8 @@
         "name": "Name",
         "clone": "Clone",
         "event-sent": "Event sent",
-        "open": "Open"
+        "open": "Open",
+        "color": "Color"
     },
     "bandwidth-metrics": {
         "current-year": "Current year",
