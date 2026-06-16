@@ -62,6 +62,8 @@ export const EditNodeByUuidModalContent = (props: IProps) => {
                 queryClient.refetchQueries({
                     queryKey: configProfilesQueryKeys.getConfigProfiles.queryKey
                 })
+
+                form.resetDirty()
             }
         }
     })

@@ -318,6 +318,19 @@ export const BaseHostForm = <
         )
     }
 
+    const tagsInputProps = form.getInputProps('tags')
+
+    const handleTagsChange = (value: string[]) => {
+        tagsInputProps.onChange?.(value)
+
+        form.setErrors((errors) =>
+            Object.fromEntries(
+                Object.entries(errors).filter(([key]) => key !== 'tags' && !key.startsWith('tags.'))
+            )
+        )
+        form.validateField('tags')
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <Group gap="xs" justify="space-between" mb="md" pl={4} pr={4}>
@@ -481,13 +494,14 @@ export const BaseHostForm = <
                                             maxTags={10}
                                             placeholder="Enter tags (comma, space, semicolon)"
                                             splitChars={[',', ' ', ';']}
-                                            {...form.getInputProps('tags')}
+                                            {...tagsInputProps}
                                             error={
                                                 Object.keys(form.errors)
                                                     .filter((key) => key.startsWith('tags.'))
                                                     .map((key) => form.errors[key])
-                                                    .join(', ') || form.getInputProps('tags').error
+                                                    .join(', ') || tagsInputProps.error
                                             }
+                                            onChange={handleTagsChange}
                                             renderPill={({ value, onRemove }) => (
                                                 <TagInputPill onRemove={onRemove} value={value} />
                                             )}
