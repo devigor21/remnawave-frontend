@@ -180,6 +180,7 @@ export const useRestartNode = createMutationHook({
     endpoint: RestartNodeCommand.TSQ_url,
     responseSchema: RestartNodeCommand.ResponseSchema,
     routeParamsSchema: RestartNodeCommand.RequestSchema,
+    bodySchema: RestartNodeCommand.RequestBodySchema,
     requestMethod: RestartNodeCommand.endpointDetails.REQUEST_METHOD,
     rMutationParams: {
         onSuccess: () => {
