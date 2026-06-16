@@ -9,7 +9,6 @@ import {
 import { Box, Center, Drawer, Group, Stack } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
 
 import {
     useUserModalStoreActions,
@@ -23,11 +22,12 @@ import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCardRoot } from '@shared/ui/section-card/section-card.root'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { prettyBytesToAnyUtil } from '@shared/utils/bytes'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
 import { UserStatusBadge } from '../user-status-badge/user-status-badge.widget'
 
 export const DetailedUserInfoDrawerWidget = () => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const [encryptedSubscriptionLink, setEncryptedSubscriptionLink] = useState('')
 
     const actions = useUserModalStoreActions()
@@ -64,11 +64,6 @@ export const DetailedUserInfoDrawerWidget = () => {
             })
             .catch(() => {})
     }, [selectedUser, user])
-
-    const formatDate = (dateString: Date | null | string) => {
-        if (!dateString) return '—'
-        return dayjs(dateString).format('YYYY-MM-DD HH:mm:ss')
-    }
 
     return (
         <Drawer
@@ -199,7 +194,11 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 />
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.last-traffic-reset')}
-                                    value={formatDate(user.lastTrafficResetAt)}
+                                    value={formatTimeUtil({
+                                        time: user.lastTrafficResetAt,
+                                        template: 'TIME_FIRST_DATETIME',
+                                        language: i18n.language
+                                    })}
                                 />
                             </Stack>
                         </SectionCardSection>
@@ -228,12 +227,20 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 />
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.expires-at')}
-                                    value={formatDate(user.expireAt)}
+                                    value={formatTimeUtil({
+                                        time: user.expireAt,
+                                        template: 'TIME_FIRST_DATETIME',
+                                        language: i18n.language
+                                    })}
                                 />
 
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.revoked-at')}
-                                    value={formatDate(user.subRevokedAt)}
+                                    value={formatTimeUtil({
+                                        time: user.subRevokedAt,
+                                        template: 'TIME_FIRST_DATETIME',
+                                        language: i18n.language
+                                    })}
                                 />
                             </Stack>
                         </SectionCardSection>
@@ -264,15 +271,19 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 />
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.first-connected-at')}
-                                    value={formatDate(user.userTraffic.firstConnectedAt)}
+                                    value={formatTimeUtil({
+                                        time: user.userTraffic.firstConnectedAt,
+                                        template: 'TIME_FIRST_DATETIME',
+                                        language: i18n.language
+                                    })}
                                 />
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.last-online')}
-                                    value={
-                                        user.userTraffic.onlineAt
-                                            ? formatDate(user.userTraffic.onlineAt.toString())
-                                            : '—'
-                                    }
+                                    value={formatTimeUtil({
+                                        time: user.userTraffic.onlineAt,
+                                        template: 'TIME_FIRST_DATETIME',
+                                        language: i18n.language
+                                    })}
                                 />
                                 <CopyableFieldShared
                                     label={t(
@@ -322,13 +333,21 @@ export const DetailedUserInfoDrawerWidget = () => {
                             <Stack gap="xs">
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.created-at')}
-                                    value={formatDate(user.createdAt.toString())}
+                                    value={formatTimeUtil({
+                                        time: user.createdAt,
+                                        template: 'TIME_FIRST_DATETIME',
+                                        language: i18n.language
+                                    })}
                                 />
                             </Stack>
                             <Stack gap="xs">
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.updated-at')}
-                                    value={formatDate(user.updatedAt.toString())}
+                                    value={formatTimeUtil({
+                                        time: user.updatedAt,
+                                        template: 'TIME_FIRST_DATETIME',
+                                        language: i18n.language
+                                    })}
                                 />
                             </Stack>
                         </SectionCardSection>

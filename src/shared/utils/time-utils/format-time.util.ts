@@ -25,7 +25,7 @@ interface FormatTimeUtilProps {
 export const formatTimeUtil = (props: FormatTimeUtilProps): string => {
     const { time, template, language } = props
 
-    if (!time) return 'Unknown date'
+    if (!time) return '-'
 
     const date = dayjs(time)
     if (!date.isValid()) return 'Unknown date'
