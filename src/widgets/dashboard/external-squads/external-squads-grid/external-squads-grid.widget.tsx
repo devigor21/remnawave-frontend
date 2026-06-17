@@ -6,16 +6,19 @@ import { modals } from '@mantine/modals'
 import {
     QueryKeys,
     useAddUsersToExternalSquad,
+    useCreateExternalSquad,
     useDeleteExternalSquad,
     useDeleteUsersFromExternalSquad,
     useGetExternalSquads,
-    useReorderExternalSquads
+    useReorderExternalSquads,
+    useUpdateExternalSquad
 } from '@shared/api/hooks'
 import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
 import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
 import { SectionCard } from '@shared/ui/section-card'
 import { sToMs } from '@shared/utils/time-utils'
+import { cloneString } from '@shared/utils/misc'
 
 import { ExternalSquadCardWidget } from '../external-squad-card/external-squad-card.widget'
 import { IProps } from './interfaces'
@@ -60,6 +63,9 @@ export function ExternalSquadsGridWidget(props: IProps) {
             ...baseNotificationsMutations('delete-users-from-external-squad', refetchExternalSquads)
         }
     })
+
+    const { mutateAsync: createExternalSquad } = useCreateExternalSquad()
+    const { mutateAsync: updateExternalSquad } = useUpdateExternalSquad()
 
     const handleDeleteExternalSquad = (externalSquadUuid: string) => {
         modals.openConfirmModal({
@@ -135,6 +141,55 @@ export function ExternalSquadsGridWidget(props: IProps) {
         })
     }
 
+    const handleCloneExternalSquad = async (externalSquadUuid: string) => {
+        const { data } = await refetchExternalSquads()
+
+        if (!data) {
+            return
+        }
+
+        const externalSquad = data.externalSquads.find((squad) => squad.uuid === externalSquadUuid)
+
+        if (!externalSquad) {
+            return
+        }
+
+        modals.openConfirmModal({
+            title: t('common.confirm-action'),
+            centered: true,
+            children: t('common.confirm-action-description'),
+            labels: {
+                confirm: t('common.clone'),
+                cancel: t('common.cancel')
+            },
+            confirmProps: {
+                color: 'cyan',
+                variant: 'soft'
+            },
+            onConfirm: async () => {
+                try {
+                    const created = await createExternalSquad({
+                        variables: { name: cloneString(externalSquad.name, 30, 'cl_') }
+                    })
+
+                    await updateExternalSquad({
+                        variables: {
+                            ...externalSquad,
+                            uuid: created.uuid,
+                            name: created.name,
+                            subscriptionSettings: externalSquad.subscriptionSettings ?? undefined,
+                            hostOverrides: externalSquad.hostOverrides ?? undefined
+                        }
+                    })
+
+                    refetchExternalSquads()
+                } catch {
+                    //
+                }
+            }
+        })
+    }
+
     if (!externalSquads || externalSquads.length === 0) {
         return (
             <SectionCard.Root p="xl">
@@ -174,6 +229,7 @@ export function ExternalSquadsGridWidget(props: IProps) {
                     <ExternalSquadCardWidget
                         externalSquad={externalSquad}
                         handleAddToUsers={handleAddToUsers}
+                        handleCloneExternalSquad={handleCloneExternalSquad}
                         handleDeleteExternalSquad={handleDeleteExternalSquad}
                         handleRemoveFromUsers={handleRemoveFromUsers}
                         isDragOverlay
@@ -183,6 +239,7 @@ export function ExternalSquadsGridWidget(props: IProps) {
                     <ExternalSquadCardWidget
                         externalSquad={externalSquad}
                         handleAddToUsers={handleAddToUsers}
+                        handleCloneExternalSquad={handleCloneExternalSquad}
                         handleDeleteExternalSquad={handleDeleteExternalSquad}
                         handleRemoveFromUsers={handleRemoveFromUsers}
                     />
