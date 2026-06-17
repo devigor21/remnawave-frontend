@@ -4,13 +4,10 @@ import {
     Badge,
     Button,
     Checkbox,
-    Drawer,
     Group,
     HoverCard,
-    JsonInput,
     MultiSelect,
     NumberInput,
-    px,
     Select,
     Stack,
     Switch,
@@ -33,7 +30,6 @@ import {
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
 import {
-    PiArrowUpDuotone,
     PiCaretDown,
     PiFloppyDiskDuotone,
     PiGearSixDuotone,
@@ -54,17 +50,11 @@ import {
     TbStar
 } from 'react-icons/tb'
 import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { useDisclosure } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
+import { modals } from '@mantine/modals'
 import { Link } from 'react-router'
 
-import {
-    BASIC_MUX_PARAMS,
-    BASIC_SOCKOPT_PARAMS,
-    BASIC_XHTTP_EXTRA_PARAMS,
-    PASTE_BASIC_XHTTP_EXTRA_PARAMS
-} from '@shared/constants'
 import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
@@ -78,8 +68,12 @@ import { DrawerFooter } from '@shared/ui/drawer-footer'
 import { handleFormErrors } from '@shared/utils/misc'
 import { XrayLogo } from '@shared/ui/logos/xray-logo'
 import { SectionCard } from '@shared/ui/section-card'
+import { useIsMobile } from '@shared/hooks'
 
-import { FinalMaskDrawer } from './final-mask.drawer'
+import { FINAL_MASK_MODAL_ID, FinalMaskModalContent } from './modals/final-mask.modal.content'
+import { SOCKOPT_MODAL_ID, SockoptModalContent } from './modals/sockopt.modal.content'
+import { XHTTP_MODAL_ID, XhttpModalContent } from './modals/xhttp.modal.content'
+import { MUX_MODAL_ID, MuxModalContent } from './modals/mux.modal.content'
 import classes from './HostTabs.module.css'
 import { IProps } from './interfaces'
 
@@ -128,14 +122,8 @@ export const BaseHostForm = <
     } = props
 
     const { t } = useTranslation()
-    const [opened, { open, close }] = useDisclosure(false)
     const [activeTab, setActiveTab] = useState<null | string>('basic')
-
-    const [muxParamsOpened, { open: openMuxParams, close: closeMuxParams }] = useDisclosure(false)
-    const [sockoptParamsOpened, { open: openSockoptParams, close: closeSockoptParams }] =
-        useDisclosure(false)
-
-    const [finalMaskOpened, { open: openFinalMask, close: closeFinalMask }] = useDisclosure(false)
+    const isMobile = useIsMobile()
 
     const securityLayerLabels = {
         [SECURITY_LAYERS.TLS]: t('base-host-form.tls-transport-layer-security'),
@@ -982,9 +970,28 @@ export const BaseHostForm = <
                                         >
                                             <Button
                                                 color="gray"
-                                                disabled={isXhttpExtraButtonDisabled()}
+                                                disabled={!isXhttpExtraButtonDisabled()}
                                                 leftSection={<PiPencilDuotone />}
-                                                onClick={open}
+                                                onClick={() => {
+                                                    modals.open({
+                                                        modalId: XHTTP_MODAL_ID,
+                                                        fullScreen: isMobile,
+                                                        title: (
+                                                            <BaseOverlayHeader
+                                                                iconColor="teal"
+                                                                IconComponent={PiPencilDuotone}
+                                                                iconVariant="soft"
+                                                                title={t(
+                                                                    'base-host-form.xhttp-extra-params'
+                                                                )}
+                                                            />
+                                                        ),
+                                                        centered: true,
+                                                        size: 'lg',
+                                                        withCloseButton: true,
+                                                        children: <XhttpModalContent form={form} />
+                                                    })
+                                                }}
                                                 variant="soft"
                                             >
                                                 xHTTP
@@ -993,7 +1000,24 @@ export const BaseHostForm = <
                                             <Button
                                                 color="gray"
                                                 leftSection={<TbCloudNetwork />}
-                                                onClick={openMuxParams}
+                                                onClick={() => {
+                                                    modals.open({
+                                                        modalId: MUX_MODAL_ID,
+                                                        fullScreen: isMobile,
+                                                        title: (
+                                                            <BaseOverlayHeader
+                                                                iconColor="teal"
+                                                                IconComponent={TbCloudNetwork}
+                                                                iconVariant="soft"
+                                                                title="MUX"
+                                                            />
+                                                        ),
+                                                        centered: true,
+                                                        size: 'lg',
+                                                        withCloseButton: true,
+                                                        children: <MuxModalContent form={form} />
+                                                    })
+                                                }}
                                                 variant="soft"
                                             >
                                                 Mux
@@ -1002,7 +1026,26 @@ export const BaseHostForm = <
                                             <Button
                                                 color="gray"
                                                 leftSection={<PiNetwork />}
-                                                onClick={openSockoptParams}
+                                                onClick={() => {
+                                                    modals.open({
+                                                        modalId: SOCKOPT_MODAL_ID,
+                                                        fullScreen: isMobile,
+                                                        title: (
+                                                            <BaseOverlayHeader
+                                                                iconColor="teal"
+                                                                IconComponent={PiNetwork}
+                                                                iconVariant="soft"
+                                                                title="SockOpt"
+                                                            />
+                                                        ),
+                                                        centered: true,
+                                                        size: 'lg',
+                                                        withCloseButton: true,
+                                                        children: (
+                                                            <SockoptModalContent form={form} />
+                                                        )
+                                                    })
+                                                }}
                                                 variant="soft"
                                             >
                                                 SockOpt
@@ -1011,7 +1054,26 @@ export const BaseHostForm = <
                                             <Button
                                                 color="gray"
                                                 leftSection={<TbMask />}
-                                                onClick={openFinalMask}
+                                                onClick={() => {
+                                                    modals.open({
+                                                        modalId: FINAL_MASK_MODAL_ID,
+                                                        fullScreen: isMobile,
+                                                        title: (
+                                                            <BaseOverlayHeader
+                                                                iconColor="teal"
+                                                                IconComponent={TbMask}
+                                                                iconVariant="soft"
+                                                                title="Final Mask"
+                                                            />
+                                                        ),
+                                                        centered: true,
+                                                        size: 'lg',
+                                                        withCloseButton: true,
+                                                        children: (
+                                                            <FinalMaskModalContent form={form} />
+                                                        )
+                                                    })
+                                                }}
                                                 variant="soft"
                                             >
                                                 Final Mask
@@ -1256,175 +1318,6 @@ export const BaseHostForm = <
                     </Group>
                 </Group>
             </DrawerFooter>
-
-            <Drawer
-                onClose={close}
-                opened={opened}
-                overlayProps={{ backgroundOpacity: 0.6, blur: 0 }}
-                padding="lg"
-                position="right"
-                size="lg"
-                title={
-                    <BaseOverlayHeader
-                        iconColor="teal"
-                        IconComponent={PiPencilDuotone}
-                        iconVariant="soft"
-                        title={t('base-host-form.xhttp-extra-params')}
-                    />
-                }
-            >
-                <Stack gap="md">
-                    <Text size="sm">{t('base-host-form.extra-xhttp-description')}</Text>
-                    <JsonInput
-                        autosize
-                        formatOnBlur
-                        key={form.key('xHttpExtraParams')}
-                        minRows={15}
-                        placeholder={BASIC_XHTTP_EXTRA_PARAMS}
-                        validationError={t('base-host-form.invalid-json')}
-                        {...form.getInputProps('xHttpExtraParams')}
-                    />
-
-                    <Button
-                        color="gray"
-                        leftSection={<PiArrowUpDuotone size={px('1.2rem')} />}
-                        onClick={() => {
-                            // @ts-expect-error -- TODO: fix this
-                            form.setFieldValue('xHttpExtraParams', PASTE_BASIC_XHTTP_EXTRA_PARAMS)
-                        }}
-                        variant="light"
-                    >
-                        {t('base-host-form.fill-with-sample-xhttp-extra-params')}
-                    </Button>
-
-                    <Button onClick={close}>{t('common.close')}</Button>
-                </Stack>
-            </Drawer>
-
-            <Drawer
-                onClose={closeMuxParams}
-                opened={muxParamsOpened}
-                padding="lg"
-                position="right"
-                size="lg"
-                title={
-                    <BaseOverlayHeader
-                        iconColor="teal"
-                        IconComponent={TbCloudNetwork}
-                        iconVariant="soft"
-                        title="MUX"
-                    />
-                }
-            >
-                <Stack gap="md">
-                    <Stack gap={0}>
-                        <Text size="sm">
-                            {t('base-host-form.this-will-only-be-used-for-xray-json-output')}
-                        </Text>
-                        <Text size="sm">
-                            {t('base-host-form.please-ensure-you-provide-a-valid-json-mux-object')}
-                        </Text>
-                        <Text size="sm">
-                            {t('base-host-form.for-more-information-refer-to')}{' '}
-                            <Link
-                                target="_blank"
-                                to="https://xtls.github.io/ru/config/outbound.html#muxobject"
-                            >
-                                {t('base-host-form.xtls-documentation')}
-                            </Link>
-                            .
-                        </Text>
-                    </Stack>
-                    <JsonInput
-                        autosize
-                        formatOnBlur
-                        key={form.key('muxParams')}
-                        minRows={15}
-                        placeholder={BASIC_MUX_PARAMS}
-                        validationError={t('base-host-form.invalid-json')}
-                        {...form.getInputProps('muxParams')}
-                    />
-
-                    <Button
-                        color="gray"
-                        leftSection={<PiArrowUpDuotone size={px('1.2rem')} />}
-                        onClick={() => {
-                            // @ts-expect-error -- TODO: fix this
-                            form.setFieldValue('muxParams', BASIC_MUX_PARAMS)
-                        }}
-                        variant="light"
-                    >
-                        {t('base-host-form.paste-default-mux-params')}
-                    </Button>
-
-                    <Button onClick={closeMuxParams}>{t('common.close')}</Button>
-                </Stack>
-            </Drawer>
-
-            <Drawer
-                onClose={closeSockoptParams}
-                opened={sockoptParamsOpened}
-                padding="lg"
-                position="right"
-                size="lg"
-                title={
-                    <BaseOverlayHeader
-                        iconColor="teal"
-                        IconComponent={PiNetwork}
-                        iconVariant="soft"
-                        title="SockOpt"
-                    />
-                }
-            >
-                <Stack gap="md">
-                    <Stack gap={0}>
-                        <Text size="sm">
-                            {t('base-host-form.this-will-only-be-used-for-xray-json-output')}
-                        </Text>
-                        <Text size="sm">
-                            {t(
-                                'base-host-form.please-ensure-you-provide-a-valid-json-sockopt-object'
-                            )}
-                        </Text>
-                        <Text size="sm">
-                            {t('base-host-form.for-more-information-refer-to')}{' '}
-                            <Link
-                                target="_blank"
-                                to="https://xtls.github.io/ru/config/transports/sockopt.html"
-                            >
-                                {t('base-host-form.xtls-documentation')}
-                            </Link>
-                            .
-                        </Text>
-                    </Stack>
-
-                    <JsonInput
-                        autosize
-                        formatOnBlur
-                        key={form.key('sockoptParams')}
-                        minRows={15}
-                        placeholder={BASIC_SOCKOPT_PARAMS}
-                        validationError={t('base-host-form.invalid-json')}
-                        {...form.getInputProps('sockoptParams')}
-                    />
-
-                    <Button
-                        color="gray"
-                        leftSection={<PiArrowUpDuotone size={px('1.2rem')} />}
-                        onClick={() => {
-                            // @ts-expect-error -- TODO: fix this
-                            form.setFieldValue('sockoptParams', BASIC_SOCKOPT_PARAMS)
-                        }}
-                        variant="light"
-                    >
-                        {t('base-host-form.paste-default-sockopt-params')}
-                    </Button>
-
-                    <Button onClick={closeSockoptParams}>{t('common.close')}</Button>
-                </Stack>
-            </Drawer>
-
-            <FinalMaskDrawer close={closeFinalMask} form={form} opened={finalMaskOpened} />
         </form>
     )
 }
