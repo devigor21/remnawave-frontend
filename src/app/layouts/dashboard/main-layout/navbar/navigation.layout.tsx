@@ -1,5 +1,5 @@
-import { NavLink as RouterLink, useLocation } from 'react-router'
 import { Box, Divider, NavLink, Stack, Title } from '@mantine/core'
+import { NavLink as RouterLink, useLocation } from 'react-router'
 import { PiArrowRight } from 'react-icons/pi'
 
 import { useMenuSections } from '../menu-sections/menu-sections'

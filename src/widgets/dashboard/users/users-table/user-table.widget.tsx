@@ -8,8 +8,8 @@ import {
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { TbSearch, TbSearchOff } from 'react-icons/tb'
 import { notifications } from '@mantine/notifications'
-import { useSearchParams } from 'react-router'
 import { PiUsersDuotone } from 'react-icons/pi'
+import { useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
 import {

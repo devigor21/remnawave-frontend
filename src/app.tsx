@@ -9,7 +9,6 @@ import '@mantine/nprogress/styles.css'
 import '@mantine/spotlight/styles.css'
 import '@kastov/mantine-react-table-open/styles.css'
 import '@gfazioli/mantine-list-view-table/styles.css'
-import '@gfazioli/mantine-split-pane/styles.css'
 import 'mantine-datatable/styles.css'
 
 import './global.css'
