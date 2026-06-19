@@ -55,8 +55,11 @@
     @supports (padding: env(safe-area-inset-top)) {
         top: 0;
         padding-top: env(safe-area-inset-top, 0px);
-        height: calc(64px + env(safe-area-inset-top, 0px));
         z-index: 10;
+
+        @media (max-width: 64rem) {
+            height: calc(64px + env(safe-area-inset-top, 0px));
+        }
     }
 }
 
