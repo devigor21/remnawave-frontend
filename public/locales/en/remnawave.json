@@ -62,6 +62,8 @@
         "clone": "Clone",
         "event-sent": "Event sent",
         "open": "Open",
+        "view": "View",
+        "clear": "Clear",
         "color": "Color"
     },
     "bandwidth-metrics": {
@@ -1695,7 +1697,12 @@
             "api-tokens-description": "Manage your API access tokens for programmatic access.",
             "api-tokens": "API Tokens",
             "no-api-tokens-found": "No API tokens found",
-            "token-name": "Token Name"
+            "token-name": "Token Name",
+            "create-api-token": "Create API Token",
+            "full-access": "Full access",
+            "col-scopes": "Scopes",
+            "col-created": "Created",
+            "copy-token": "Copy token"
         }
     },
     "external-squads-hosts": {
