@@ -1683,7 +1683,7 @@
             "the-title-that-will-be-displayed-on-login-page": "The title that will be displayed on login page",
             "brand-name": "Brand Name",
             "logo-url": "Logo URL",
-            "the-url-to-your-brand-logo-image": "The URL to your brand logo image",
+            "the-url-to-your-brand-logo-image": "The URL to your brand logo image. Accepts a regular http(s) URL or a base64 data URL (data:image/svg+xml;base64,...)",
             "colored-title-format": "Colored Title Format",
             "colored-title-description": "You can color individual words using {color}word syntax. Supports both HEX colors (#RRGGBB) and MantineUI color names.",
             "example-hex-colors": "Example with HEX colors",
