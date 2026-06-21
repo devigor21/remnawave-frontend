@@ -28,6 +28,7 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
             {
                 accessorKey: 'id',
                 header: 'ID',
+                size: 80,
                 accessorFn: (row) => row.id
             },
             {
@@ -64,6 +65,7 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
                 accessorKey: 'requestAt',
                 header: t('get-user-subscription-request-history.feature.request-at'),
                 sortingFn: 'datetime',
+                size: 250,
                 Cell: ({ row }) =>
                     formatTimeUtil({
                         time: row.original.requestAt,
@@ -71,7 +73,7 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
                         language: i18n.language
                     }),
                 mantineTableBodyCellProps: {
-                    align: 'center',
+                    align: 'left',
                     ff: 'monospace'
                 }
             }
@@ -103,7 +105,7 @@ export const UserSubscriptionRequestsTable = (props: IProps) => {
         enableSortingRemoval: true,
         initialState: {
             showGlobalFilter: true,
-            density: 'xxs',
+            density: 'xs',
             sorting: [{ id: 'requestAt', desc: true }],
             pagination: {
                 pageIndex: 0,
