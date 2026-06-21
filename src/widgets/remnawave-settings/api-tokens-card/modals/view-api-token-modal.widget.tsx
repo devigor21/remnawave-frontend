@@ -1,5 +1,5 @@
+import { ActionIcon, ActionIconGroup, Button, CopyButton, Stack, Tooltip } from '@mantine/core'
 import { CreateApiTokenCommand, FindAllApiTokensCommand } from '@remnawave/backend-contract'
-import { ActionIcon, ActionIconGroup, Button, CopyButton, Stack } from '@mantine/core'
 import { TbCheck, TbCopy } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { useMemo, useState } from 'react'
@@ -69,14 +69,16 @@ export const ViewApiTokenContentWidget = ({ isMobile, token }: IProps) => {
                 <ActionIconGroup ml="auto">
                     <CopyButton timeout={1600} value={JSON.stringify(token.scopes, null, 2)}>
                         {({ copied, copy }) => (
-                            <ActionIcon
-                                color={copied ? 'teal' : 'gray'}
-                                onClick={copy}
-                                size="input-md"
-                                variant="soft"
-                            >
-                                {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
-                            </ActionIcon>
+                            <Tooltip label={t('common.copy')}>
+                                <ActionIcon
+                                    color={copied ? 'teal' : 'gray'}
+                                    onClick={copy}
+                                    size="input-md"
+                                    variant="soft"
+                                >
+                                    {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
+                                </ActionIcon>
+                            </Tooltip>
                         )}
                     </CopyButton>
                 </ActionIconGroup>

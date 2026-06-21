@@ -256,24 +256,29 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
                         value={JSON.stringify(buildScopes(resources, selectedEndpoints), null, 2)}
                     >
                         {({ copied, copy }) => (
-                            <ActionIcon
-                                color={copied ? 'teal' : 'gray'}
-                                onClick={copy}
-                                size="input-md"
-                                variant="soft"
-                            >
-                                {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
-                            </ActionIcon>
+                            <Tooltip label={t('common.copy')}>
+                                <ActionIcon
+                                    color={copied ? 'teal' : 'gray'}
+                                    onClick={copy}
+                                    size="input-md"
+                                    variant="soft"
+                                >
+                                    {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
+                                </ActionIcon>
+                            </Tooltip>
                         )}
                     </CopyButton>
-                    <ActionIcon
-                        color="gray"
-                        onClick={handlePasteScopes}
-                        size="input-md"
-                        variant="soft"
-                    >
-                        <TbClipboard size={24} />
-                    </ActionIcon>
+
+                    <Tooltip label={t('common.paste')}>
+                        <ActionIcon
+                            color="gray"
+                            onClick={handlePasteScopes}
+                            size="input-md"
+                            variant="soft"
+                        >
+                            <TbClipboard size={24} />
+                        </ActionIcon>
+                    </Tooltip>
                 </ActionIconGroup>
 
                 <Button
