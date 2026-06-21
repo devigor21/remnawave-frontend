@@ -175,7 +175,7 @@ export const useUserTableColumns = (
             },
             {
                 accessorKey: 'trafficLimitBytes',
-                header: 'Traffic Limit',
+                header: t('traffic-limits-card.traffic-limit'),
                 Cell: ({ cell }) => {
                     const limitBytes = cell.row.original.trafficLimitBytes ?? 0
                     return limitBytes === 0 ? '∞' : prettyBytesUtil(limitBytes) || '0 B'
