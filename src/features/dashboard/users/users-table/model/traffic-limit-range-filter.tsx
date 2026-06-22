@@ -54,7 +54,8 @@ export const TrafficLimitRangeFilter = ({ column }: IProps) => {
         }
     }
 
-    const [debounced] = useDebouncedValue({ unit, values }, FILTER_DEBOUNCE_MS)
+    const [debouncedValues] = useDebouncedValue(values, FILTER_DEBOUNCE_MS)
+    const [debouncedUnit] = useDebouncedValue(unit, FILTER_DEBOUNCE_MS)
     const isMounted = useRef(false)
 
     useEffect(() => {
@@ -64,14 +65,25 @@ export const TrafficLimitRangeFilter = ({ column }: IProps) => {
         }
 
         const toBound = (value: number | string): null | string => {
-            const bytes = unitToBytesUtil(value, debounced.unit)
+            const bytes = unitToBytesUtil(value, debouncedUnit)
             return bytes === undefined ? null : String(bytes)
         }
 
-        const next: TRange = [toBound(debounced.values[0]), toBound(debounced.values[1])]
+        const next: TRange = [toBound(debouncedValues[0]), toBound(debouncedValues[1])]
+        const normalized = next[0] === null && next[1] === null ? undefined : next
 
-        column.setFilterValue(next[0] === null && next[1] === null ? undefined : next)
-    }, [debounced])
+        const current = column.getFilterValue() as TRange | undefined
+        const unchanged =
+            (current === undefined && normalized === undefined) ||
+            (Array.isArray(current) &&
+                Array.isArray(normalized) &&
+                current[0] === normalized[0] &&
+                current[1] === normalized[1])
+
+        if (!unchanged) {
+            column.setFilterValue(normalized)
+        }
+    }, [debouncedValues, debouncedUnit])
 
     return (
         <Group align="center" gap={6} style={{ gridColumn: '1 / -1' }} w="100%" wrap="nowrap">
