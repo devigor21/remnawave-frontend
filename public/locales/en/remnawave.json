@@ -1117,7 +1117,10 @@
                 "please-select-a-provider-and-billing-node": "Please select a provider and billing node",
                 "billing-node": "Billing Node",
                 "next-billing-at": "Next Billing At",
-                "next-billing-at-description": "The date and time for the next billing of this node. Remnawave will notify you about upcoming billing."
+                "next-billing-at-description": "The date and time for the next billing of this node. Remnawave will notify you about upcoming billing.",
+                "existing-node": "Existing node",
+                "custom-name": "Custom name",
+                "custom-name-description": "Use a custom name when the node is not managed by Remnawave."
             }
         }
     },

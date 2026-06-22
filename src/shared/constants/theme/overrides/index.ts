@@ -1,3 +1,4 @@
+import segmentedControl from './segmented-control'
 import loadingOverlay from './loading-overlay'
 import ringProgress from './ring-progress'
 import notification from './notification'
@@ -29,6 +30,7 @@ export default {
     ...menu,
     ...notification,
     ...ringProgress,
+    ...segmentedControl,
     ...table,
     ...tooltip,
     ...layouts

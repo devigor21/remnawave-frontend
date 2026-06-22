@@ -81,6 +81,8 @@ export function MobileNodesListWidget(props: IProps) {
     }
 
     const handleOpenNode = (node: BillingNode) => {
+        if (!node.nodeUuid) return
+
         openModalWithData(MODALS.EDIT_NODE_BY_UUID_MODAL, {
             nodeUuid: node.nodeUuid
         })
@@ -178,27 +180,40 @@ export function MobileNodesListWidget(props: IProps) {
                                                     />
                                                 )}
 
-                                                <BaseOverlayHeader
-                                                    countryCode={node.node.countryCode}
-                                                    hideIcon={true}
-                                                    iconColor="blue"
-                                                    IconComponent={TbServer}
-                                                    iconVariant="soft"
-                                                    subtitle={node.provider.name}
-                                                    title={node.node.name}
-                                                />
+                                                {node.node && (
+                                                    <BaseOverlayHeader
+                                                        countryCode={node.node.countryCode}
+                                                        hideIcon={true}
+                                                        iconColor="blue"
+                                                        IconComponent={TbServer}
+                                                        iconVariant="soft"
+                                                        subtitle={node.provider.name}
+                                                        title={node.node.name}
+                                                    />
+                                                )}
+
+                                                {!node.node && (
+                                                    <BaseOverlayHeader
+                                                        iconColor="blue"
+                                                        IconComponent={TbServer}
+                                                        iconVariant="soft"
+                                                        title={node.name!}
+                                                    />
+                                                )}
                                             </Group>
 
                                             {!selectMode && (
                                                 <Group gap={4} wrap="nowrap">
-                                                    <ActionIcon
-                                                        color="blue"
-                                                        onClick={() => handleOpenNode(node)}
-                                                        size="input-xs"
-                                                        variant="soft"
-                                                    >
-                                                        <TbCpu size={18} />
-                                                    </ActionIcon>
+                                                    {node.node && (
+                                                        <ActionIcon
+                                                            color="blue"
+                                                            onClick={() => handleOpenNode(node)}
+                                                            size="input-xs"
+                                                            variant="soft"
+                                                        >
+                                                            <TbCpu size={18} />
+                                                        </ActionIcon>
+                                                    )}
 
                                                     {node.provider.loginUrl && (
                                                         <ActionIcon

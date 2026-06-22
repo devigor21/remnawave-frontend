@@ -1,5 +1,5 @@
+import { Menu, Menubar, UnstyledButton } from '@mantine/core'
 import { Link, matchPath, useLocation } from 'react-router'
-import { Button, Group, Menu } from '@mantine/core'
 import { PiCaretDownBold } from 'react-icons/pi'
 import { ElementType, Fragment } from 'react'
 import clsx from 'clsx'
@@ -25,7 +25,7 @@ export const DesktopNavigation = () => {
     const menu = useDesktopMenuSections()
 
     return (
-        <Group align="stretch" className={classes.navBar} gap={4} wrap="nowrap">
+        <Menubar className={classes.navBar} trigger="hover">
             {menu.map((section) => {
                 const sectionActive = section.section.some((item) => {
                     if (item.newTab) {
@@ -47,46 +47,32 @@ export const DesktopNavigation = () => {
 
                 if (singleItem) {
                     return (
-                        <Button
+                        <UnstyledButton
                             className={clsx(classes.navItem, {
                                 [classes.navItemActive]: sectionActive
                             })}
                             component={Link}
                             key={section.id}
-                            leftSection={<NavIcon icon={section.icon ?? singleItem.icon} />}
                             to={singleItem.href}
-                            variant="subtle"
                         >
-                            {section.header}
-                        </Button>
+                            <NavIcon icon={section.icon ?? singleItem.icon} />
+                            <span>{section.header}</span>
+                        </UnstyledButton>
                     )
                 }
 
                 return (
-                    <Menu
-                        closeDelay={120}
-                        key={section.id}
-                        openDelay={50}
-                        position="bottom-start"
-                        trigger="click-hover"
-                        width={250}
-                        withinPortal
-                    >
-                        <Menu.Target>
-                            <Button
-                                className={clsx(classes.navItem, {
-                                    [classes.navItemActive]: sectionActive
-                                })}
-                                leftSection={<NavIcon icon={section.icon} />}
-                                rightSection={
-                                    <PiCaretDownBold className={classes.caret} size={11} />
-                                }
-                                variant="subtle"
-                            >
-                                {section.header}
-                            </Button>
-                        </Menu.Target>
-                        <Menu.Dropdown>
+                    <Menubar.Menu key={section.id} width={250} withinPortal>
+                        <Menubar.Target
+                            className={clsx(classes.navItem, {
+                                [classes.navItemActive]: sectionActive
+                            })}
+                        >
+                            <NavIcon icon={section.icon} />
+                            <span>{section.header}</span>
+                            <PiCaretDownBold className={classes.caret} size={11} />
+                        </Menubar.Target>
+                        <Menubar.Dropdown>
                             {section.section.map((item, index) =>
                                 item.dropdownItems ? (
                                     <Fragment key={item.id}>
@@ -126,10 +112,10 @@ export const DesktopNavigation = () => {
                                     </Menu.Item>
                                 )
                             )}
-                        </Menu.Dropdown>
-                    </Menu>
+                        </Menubar.Dropdown>
+                    </Menubar.Menu>
                 )
             })}
-        </Group>
+        </Menubar>
     )
 }

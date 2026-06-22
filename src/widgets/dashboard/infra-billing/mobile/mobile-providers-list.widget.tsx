@@ -11,8 +11,8 @@ import {
     ThemeIcon,
     Tooltip
 } from '@mantine/core'
+import { TbCloud, TbEdit, TbLink, TbServer, TbTrash } from 'react-icons/tb'
 import { GetInfraProvidersCommand } from '@remnawave/backend-contract'
-import { TbCloud, TbEdit, TbLink, TbTrash } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 
@@ -193,10 +193,15 @@ export function MobileProvidersListWidget(props: IProps) {
                                     <Badge
                                         autoContrast
                                         color="gray"
-                                        key={`${node.nodeUuid}`}
-                                        leftSection={resolveCountryCode(node.countryCode, 18)}
+                                        key={`${node.details ? node.details.nodeUuid : node.name}`}
+                                        leftSection={
+                                            node.details ? (
+                                                resolveCountryCode(node.details.countryCode, 18)
+                                            ) : (
+                                                <TbServer size={18} />
+                                            )
+                                        }
                                         size="md"
-                                        style={{ cursor: 'pointer' }}
                                         variant="soft"
                                     >
                                         {node.name}
@@ -210,11 +215,17 @@ export function MobileProvidersListWidget(props: IProps) {
                                                     <Badge
                                                         color="gray"
                                                         fullWidth
-                                                        key={`${node.nodeUuid}`}
-                                                        leftSection={resolveCountryCode(
-                                                            node.countryCode,
-                                                            18
-                                                        )}
+                                                        key={`${node.details ? node.details.nodeUuid : node.name}`}
+                                                        leftSection={
+                                                            node.details ? (
+                                                                resolveCountryCode(
+                                                                    node.details.countryCode,
+                                                                    18
+                                                                )
+                                                            ) : (
+                                                                <TbServer size={18} />
+                                                            )
+                                                        }
                                                         variant="soft"
                                                     >
                                                         {node.name}
