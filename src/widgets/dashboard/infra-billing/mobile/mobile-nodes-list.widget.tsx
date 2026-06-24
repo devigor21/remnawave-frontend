@@ -197,6 +197,7 @@ export function MobileNodesListWidget(props: IProps) {
                                                         iconColor="blue"
                                                         IconComponent={TbServer}
                                                         iconVariant="soft"
+                                                        subtitle={node.provider.name}
                                                         title={node.name!}
                                                     />
                                                 )}
