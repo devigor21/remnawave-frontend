@@ -191,7 +191,11 @@ export function MainLayout() {
                 )}
             </AppShell.Header>
 
-            <AppShell.Main pt="calc(var(--app-shell-header-height) + var(--mantine-spacing-md))">
+            <AppShell.Main
+                pl={isHiResDesktop ? '10vw' : undefined}
+                pr={isHiResDesktop ? '10vw' : undefined}
+                pt="calc(var(--app-shell-header-height) + var(--mantine-spacing-md))"
+            >
                 <Outlet />
                 <ScrollRestoration />
             </AppShell.Main>
