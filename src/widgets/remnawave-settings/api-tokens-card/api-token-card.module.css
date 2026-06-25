@@ -151,3 +151,93 @@
     border-color: var(--mantine-color-teal-9);
     color: var(--mantine-color-teal-4);
 }
+
+.oneTimeNotice {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: var(--mantine-radius-md);
+    border: 1px solid rgb(245, 159, 11, 0.22);
+    background: linear-gradient(
+        135deg,
+        rgb(245, 159, 11, 0.1) 0%,
+        rgb(245, 159, 11, 0.02) 100%
+    );
+    transition:
+        border-color 150ms ease,
+        background-color 150ms ease;
+}
+
+.oneTimeNoticeIcon {
+    flex: none;
+    margin-top: 1px;
+    color: var(--mantine-color-yellow-5);
+}
+
+.oneTimeNoticeText {
+    font-size: var(--mantine-font-size-sm);
+    line-height: 1.45;
+    color: var(--mantine-color-gray-3);
+}
+
+.oneTimeNoticeEmphasis {
+    font-weight: 700;
+    color: var(--mantine-color-yellow-4);
+}
+
+.metaGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr);
+    border: 1px solid rgb(255, 255, 255, 0.08);
+    border-radius: var(--mantine-radius-md);
+    overflow: hidden;
+    background: rgb(255, 255, 255, 0.02);
+}
+
+@media (max-width: 48em) {
+    .metaGrid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.metaCell {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+    padding: 10px 14px;
+    border-right: 1px solid rgb(255, 255, 255, 0.06);
+}
+
+.metaCell:last-child {
+    border-right: none;
+}
+
+@media (max-width: 48em) {
+    .metaCell {
+        border-right: none;
+        border-bottom: 1px solid rgb(255, 255, 255, 0.06);
+    }
+
+    .metaCell:last-child {
+        border-bottom: none;
+    }
+}
+
+.metaValue {
+    font-size: var(--mantine-font-size-sm);
+}
+
+.metaUuid {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.metaUuidText {
+    font-size: 12.5px;
+    font-family: var(--mantine-font-family-monospace);
+    color: var(--mantine-color-gray-3);
+}

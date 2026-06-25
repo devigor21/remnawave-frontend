@@ -1,10 +1,14 @@
 import {
     ActionIcon,
     ActionIconGroup,
+    Box,
     Button,
     CopyButton,
+    Flex,
     Group,
+    NumberInput,
     Stack,
+    Text,
     TextInput,
     Tooltip
 } from '@mantine/core'
@@ -13,8 +17,9 @@ import { modals } from '@mantine/modals'
 import { notifications } from '@mantine/notifications'
 import { CreateApiTokenCommand } from '@remnawave/backend-contract'
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import {
+    TbAlertTriangle,
     TbCheck,
     TbClearAll,
     TbClipboard,
@@ -31,6 +36,7 @@ import { ModalFooter } from '@shared/ui/modal-footer'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { sleep } from '@shared/utils/misc'
 
+import classes from '../api-token-card.module.css'
 import { ScopeResourceRow } from './scope-resource-row'
 import {
     buildScopes,
@@ -41,6 +47,8 @@ import {
     ScopeResource
 } from './scopes.utils'
 import { ViewApiTokenContentWidget } from './view-api-token-modal.widget'
+
+const DEFAULT_EXPIRES_IN_DAYS = 30
 
 const SUBPAGE_PRESET_KEYS = [
     'subscription-page-configs:list',
@@ -59,17 +67,18 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
 
     const { data: scopesData } = useGetScopes()
 
-    const tokenNameField = useField<CreateApiTokenCommand.Request['tokenName']>({
+    const tokenNameField = useField<CreateApiTokenCommand.Request['name']>({
         initialValue: '',
         validateOnChange: true,
         validate: (value) => {
-            const result = CreateApiTokenCommand.RequestSchema.safeParse({ tokenName: value })
+            const result = CreateApiTokenCommand.RequestSchema.shape.name.safeParse(value)
             return result.success ? null : result.error.errors[0]?.message
         }
     })
 
     const [selectedEndpoints, setSelectedEndpoints] = useState<Set<string>>(new Set())
     const [expanded, setExpanded] = useState<Set<string>>(new Set())
+    const [expiresInDays, setExpiresInDays] = useState<number | string>(DEFAULT_EXPIRES_IN_DAYS)
 
     const resources = scopesData?.resources ?? []
 
@@ -89,7 +98,7 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
                             iconColor="teal"
                             IconComponent={TbCookie}
                             iconVariant="soft"
-                            title={data.tokenName}
+                            title={data.name}
                         />
                     ),
                     fullScreen: isMobile,
@@ -176,7 +185,8 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
     const handleSubmit = () => {
         createApiToken({
             variables: {
-                tokenName: tokenNameField.getValue(),
+                name: tokenNameField.getValue(),
+                expiresInDays: Number(expiresInDays),
                 scopes: buildScopes(resources, selectedEndpoints)
             }
         })
@@ -184,17 +194,49 @@ export const CreateApiTokenContentWidget = ({ isMobile }: IProps) => {
 
     const totalSelected = selectedEndpoints.size
     const isNameInvalid = !!tokenNameField.error || tokenNameField.getValue().trim() === ''
-    const canCreate = !isNameInvalid && totalSelected > 0
+    const isExpiresInvalid = !Number.isInteger(Number(expiresInDays)) || Number(expiresInDays) < 1
+    const canCreate = !isNameInvalid && !isExpiresInvalid && totalSelected > 0
 
     return (
         <Stack gap="md">
-            <TextInput
-                data-autofocus
-                label={t('api-tokens-card.widget.token-name')}
-                placeholder="Service Bot"
-                required
-                {...tokenNameField.getInputProps()}
-            />
+            <Box className={classes.oneTimeNotice}>
+                <TbAlertTriangle className={classes.oneTimeNoticeIcon} size={20} />
+                <Text className={classes.oneTimeNoticeText}>
+                    <Trans
+                        components={{
+                            emphasis: <span className={classes.oneTimeNoticeEmphasis} />
+                        }}
+                        i18nKey="api-tokens-card.widget.one-time-notice"
+                    />
+                </Text>
+            </Box>
+
+            <Flex
+                align={isMobile ? 'stretch' : 'flex-start'}
+                direction={isMobile ? 'column' : 'row'}
+                gap="xs"
+            >
+                <TextInput
+                    data-autofocus
+                    flex={isMobile ? undefined : 1}
+                    label={t('api-tokens-card.widget.token-name')}
+                    placeholder="Service Bot"
+                    required
+                    {...tokenNameField.getInputProps()}
+                />
+                <NumberInput
+                    allowDecimal={false}
+                    allowNegative={false}
+                    clampBehavior="strict"
+                    label={t('api-tokens-card.widget.expires-in-days')}
+                    max={9999}
+                    min={1}
+                    onChange={setExpiresInDays}
+                    required
+                    value={expiresInDays}
+                    w={isMobile ? '100%' : 300}
+                />
+            </Flex>
 
             <Group gap="xs">
                 <Button

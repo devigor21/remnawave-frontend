@@ -1,8 +1,9 @@
-import { ActionIcon, Box, CopyButton, Group, Menu, Text } from '@mantine/core'
+import { ActionIcon, Box, Group, Menu, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { FindAllApiTokensCommand } from '@remnawave/backend-contract'
+import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
-import { TbCheck, TbCookie, TbCopy, TbDots, TbEye, TbId, TbTrash } from 'react-icons/tb'
+import { TbCookie, TbDots, TbEye, TbTrash } from 'react-icons/tb'
 
 import { queryClient } from '@shared/api'
 import { QueryKeys, useDeleteApiToken } from '@shared/api/hooks'
@@ -14,7 +15,7 @@ import classes from './api-token-card.module.css'
 import { ViewApiTokenContentWidget } from './modals/view-api-token-modal.widget'
 
 interface IProps {
-    apiToken: FindAllApiTokensCommand.Response['response']['apiKeys'][number]
+    apiToken: FindAllApiTokensCommand.Response['response']['tokens'][number]
 }
 
 export const ApiTokenItem = ({ apiToken }: IProps) => {
@@ -33,6 +34,7 @@ export const ApiTokenItem = ({ apiToken }: IProps) => {
 
     const isFull = apiToken.scopes.includes('*')
     const hasScopes = isFull || apiToken.scopes.length > 0
+    const isExpired = dayjs(apiToken.expireAt).isBefore(dayjs())
 
     const getDotColor = () => {
         if (isFull) return 'var(--mantine-color-teal-5)'
@@ -54,7 +56,7 @@ export const ApiTokenItem = ({ apiToken }: IProps) => {
                     }}
                 />
                 <Text fw={500} size="sm" truncate="end">
-                    {apiToken.tokenName}
+                    {apiToken.name}
                 </Text>
             </Group>
 
@@ -62,12 +64,20 @@ export const ApiTokenItem = ({ apiToken }: IProps) => {
                 {isFull ? t('api-tokens-card.widget.full-access') : apiToken.scopes.length}{' '}
             </Text>
 
-            <Text c="dimmed" size="xs" truncate="end" visibleFrom="sm">
-                {formatTimeUtil({
-                    time: apiToken.createdAt,
-                    template: 'TIME_FIRST_DATETIME',
-                    language: i18n.language
-                })}
+            <Text
+                c={isExpired ? 'red.5' : 'dimmed'}
+                size="xs"
+                truncate="end"
+                visibleFrom="sm"
+                fw={isExpired ? 600 : 400}
+            >
+                {isExpired
+                    ? t('api-tokens-card.widget.expired')
+                    : formatTimeUtil({
+                          time: apiToken.expireAt,
+                          template: 'TIME_FIRST_DATETIME',
+                          language: i18n.language
+                      })}
             </Text>
 
             <Menu position="bottom-end" shadow="lg" trigger="click-hover" width={190}>
@@ -91,12 +101,7 @@ export const ApiTokenItem = ({ apiToken }: IProps) => {
                                         iconColor="teal"
                                         IconComponent={TbCookie}
                                         iconVariant="soft"
-                                        subtitle={formatTimeUtil({
-                                            time: apiToken.createdAt,
-                                            template: 'TIME_FIRST_DATETIME',
-                                            language: i18n.language
-                                        })}
-                                        title={apiToken.tokenName}
+                                        title={apiToken.name}
                                     />
                                 ),
                                 fullScreen: isMobile,
@@ -112,26 +117,6 @@ export const ApiTokenItem = ({ apiToken }: IProps) => {
                         }}
                     >
                         {t('common.view')}
-                    </Menu.Item>
-                    <Menu.Divider />
-                    <CopyButton timeout={1600} value={apiToken.token}>
-                        {({ copied, copy }) => (
-                            <Menu.Item
-                                closeMenuOnClick={false}
-                                leftSection={copied ? <TbCheck size={15} /> : <TbCopy size={15} />}
-                                onClick={copy}
-                            >
-                                {copied
-                                    ? t('common.copied')
-                                    : t('api-tokens-card.widget.copy-token')}
-                            </Menu.Item>
-                        )}
-                    </CopyButton>
-                    <Menu.Item
-                        leftSection={<TbId size={15} />}
-                        onClick={() => navigator.clipboard?.writeText(apiToken.uuid)}
-                    >
-                        {t('common.copy-uuid')}
                     </Menu.Item>
                     <Menu.Divider />
                     <Menu.Item

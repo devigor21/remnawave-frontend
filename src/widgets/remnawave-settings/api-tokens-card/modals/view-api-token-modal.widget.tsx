@@ -1,6 +1,16 @@
-import { ActionIcon, ActionIconGroup, Button, CopyButton, Stack, Tooltip } from '@mantine/core'
+import {
+    ActionIcon,
+    ActionIconGroup,
+    Box,
+    Button,
+    CopyButton,
+    Stack,
+    Text,
+    Tooltip
+} from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { CreateApiTokenCommand, FindAllApiTokensCommand } from '@remnawave/backend-contract'
+import dayjs from 'dayjs'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbCheck, TbCopy } from 'react-icons/tb'
@@ -8,7 +18,9 @@ import { TbCheck, TbCopy } from 'react-icons/tb'
 import { useGetScopes } from '@shared/api/hooks'
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
 import { ModalFooter } from '@shared/ui/modal-footer'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
+import classes from '../api-token-card.module.css'
 import { ScopeResourceRow } from './scope-resource-row'
 import { countSelected, expandScopesToKeys } from './scopes.utils'
 
@@ -16,14 +28,16 @@ interface IProps {
     isMobile: boolean
     token:
         | CreateApiTokenCommand.Response['response']
-        | FindAllApiTokensCommand.Response['response']['apiKeys'][number]
+        | FindAllApiTokensCommand.Response['response']['tokens'][number]
 }
 
 export const ViewApiTokenContentWidget = ({ isMobile, token }: IProps) => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
 
     const { data: scopesData } = useGetScopes()
     const resources = scopesData?.resources ?? []
+
+    const isExpired = dayjs(token.expireAt).isBefore(dayjs())
 
     const [expanded, setExpanded] = useState<Set<string>>(new Set())
 
@@ -48,7 +62,60 @@ export const ViewApiTokenContentWidget = ({ isMobile, token }: IProps) => {
     return (
         <Stack>
             <Stack gap="md" pb="xs">
-                <CopyableCodeBlock value={token.token} />
+                <Box className={classes.metaGrid}>
+                    <div className={classes.metaCell}>
+                        <Text className={classes.tokenColLabel}>
+                            {t('api-tokens-card.widget.col-created')}
+                        </Text>
+                        <Text c="gray.2" className={classes.metaValue}>
+                            {formatTimeUtil({
+                                time: token.createdAt,
+                                template: 'TIME_FIRST_DATETIME',
+                                language: i18n.language
+                            })}
+                        </Text>
+                    </div>
+                    <div className={classes.metaCell}>
+                        <Text className={classes.tokenColLabel}>
+                            {t('api-tokens-card.widget.col-expires')}
+                        </Text>
+                        <Text c={isExpired ? 'red.5' : 'gray.2'} className={classes.metaValue}>
+                            {formatTimeUtil({
+                                time: token.expireAt,
+                                template: 'TIME_FIRST_DATETIME',
+                                language: i18n.language
+                            })}
+                        </Text>
+                    </div>
+                    <div className={classes.metaCell}>
+                        <Text className={classes.tokenColLabel}>UUID</Text>
+                        <div className={classes.metaUuid}>
+                            <Text className={classes.metaUuidText} truncate="end">
+                                {token.uuid}
+                            </Text>
+                            <CopyButton timeout={1600} value={token.uuid}>
+                                {({ copied, copy }) => (
+                                    <Tooltip label={t('common.copy')}>
+                                        <ActionIcon
+                                            color={copied ? 'teal' : 'gray'}
+                                            onClick={copy}
+                                            size="xs"
+                                            variant="subtle"
+                                        >
+                                            {copied ? (
+                                                <TbCheck size={14} />
+                                            ) : (
+                                                <TbCopy size={14} />
+                                            )}
+                                        </ActionIcon>
+                                    </Tooltip>
+                                )}
+                            </CopyButton>
+                        </div>
+                    </div>
+                </Box>
+
+                {'token' in token && <CopyableCodeBlock value={token.token} />}
 
                 <Stack gap={6}>
                     {grantedResources.map((resource) => (

@@ -1,7 +1,6 @@
 import {
     ActionIcon,
     Box,
-    Button,
     Center,
     Group,
     ScrollArea,
@@ -15,7 +14,7 @@ import { FindAllApiTokensCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { PiBookOpenTextDuotone, PiEmpty } from 'react-icons/pi'
 import { SiSwagger } from 'react-icons/si'
-import { TbCookie, TbRefresh } from 'react-icons/tb'
+import { TbCookie, TbPlus, TbRefresh } from 'react-icons/tb'
 import { Link } from 'react-router'
 
 import { useGetApiTokens } from '@shared/api/hooks'
@@ -49,7 +48,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
             />
 
             <SettingsCardShared.Content>
-                {apiTokensData.apiKeys.length === 0 && (
+                {apiTokensData.tokens.length === 0 && (
                     <Center h="300px">
                         <Stack align="center" gap="xs">
                             <PiEmpty size={48} />
@@ -60,10 +59,10 @@ export const ApiTokensCardWidget = (props: IProps) => {
                     </Center>
                 )}
 
-                <Transition mounted={apiTokensData.apiKeys.length > 0} transition="fade">
+                <Transition mounted={apiTokensData.tokens.length > 0} transition="fade">
                     {(styles) => (
                         <Box style={{ ...styles }}>
-                            {apiTokensData.apiKeys.length > 0 && (
+                            {apiTokensData.tokens.length > 0 && (
                                 <Box className={classes.tokenTable}>
                                     <Box className={classes.tokenHeaderRow}>
                                         <Text className={classes.tokenColLabel}>
@@ -73,13 +72,13 @@ export const ApiTokensCardWidget = (props: IProps) => {
                                             {t('api-tokens-card.widget.col-scopes')}
                                         </Text>
                                         <Text className={classes.tokenColLabel} visibleFrom="sm">
-                                            {t('api-tokens-card.widget.col-created')}
+                                            {t('api-tokens-card.widget.col-expires')}
                                         </Text>
                                         <span />
                                     </Box>
-                                    <ScrollArea.Autosize mah={300}>
+                                    <ScrollArea.Autosize mah={300} mih={300}>
                                         <Stack gap={0}>
-                                            {apiTokensData.apiKeys.map((apiToken) => (
+                                            {apiTokensData.tokens.map((apiToken) => (
                                                 <ApiTokenItem
                                                     apiToken={apiToken}
                                                     key={apiToken.uuid}
@@ -108,7 +107,7 @@ export const ApiTokensCardWidget = (props: IProps) => {
                             </ActionIcon>
                         </Tooltip>
 
-                        {apiTokensData.docs.isDocsEnabled && (
+                        {apiTokensData.docs.enabled && (
                             <>
                                 {apiTokensData.docs.swaggerPath && (
                                     <ActionIcon
@@ -140,29 +139,31 @@ export const ApiTokensCardWidget = (props: IProps) => {
                         )}
                     </ActionIcon.Group>
 
-                    <Button
-                        color="teal"
-                        onClick={() => {
-                            modals.open({
-                                title: (
-                                    <BaseOverlayHeader
-                                        iconColor="teal"
-                                        IconComponent={TbCookie}
-                                        iconVariant="soft"
-                                        title={t('api-tokens-card.widget.create-api-token')}
-                                    />
-                                ),
-                                fullScreen: isMobile,
-                                centered: true,
-                                size: 'min(800px, 90vw)',
-                                children: <CreateApiTokenContentWidget isMobile={isMobile} />
-                            })
-                        }}
-                        size="md"
-                        variant="soft"
-                    >
-                        {t('common.create')}
-                    </Button>
+                    <Tooltip label={t('common.create')}>
+                        <ActionIcon
+                            onClick={() => {
+                                modals.open({
+                                    title: (
+                                        <BaseOverlayHeader
+                                            iconColor="teal"
+                                            IconComponent={TbCookie}
+                                            iconVariant="soft"
+                                            title={t('api-tokens-card.widget.create-api-token')}
+                                        />
+                                    ),
+                                    fullScreen: isMobile,
+                                    centered: true,
+                                    size: 'min(800px, 90vw)',
+                                    children: <CreateApiTokenContentWidget isMobile={isMobile} />
+                                })
+                            }}
+                            size="input-md"
+                            color="teal"
+                            variant="soft"
+                        >
+                            <TbPlus size={24} />
+                        </ActionIcon>
+                    </Tooltip>
                 </Group>
             </SettingsCardShared.Bottom>
         </SettingsCardShared.Container>
