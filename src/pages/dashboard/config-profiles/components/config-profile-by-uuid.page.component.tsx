@@ -1,18 +1,19 @@
-import { GetConfigProfileByUuidCommand, GetSnippetsCommand } from '@remnawave/backend-contract'
 import { ActionIcon, Box, Drawer, Flex, Group, Transition } from '@mantine/core'
-import { TbArrowBackUp, TbCode, TbFile } from 'react-icons/tb'
 import { useMediaQuery } from '@mantine/hooks'
-import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router'
-
+import { GetConfigProfileByUuidCommand, GetSnippetsCommand } from '@remnawave/backend-contract'
 import { ConfigEditorWidget } from '@widgets/dashboard/config-profiles/config-editor/config-editor.widget'
 import { SnippetsDrawerWidget } from '@widgets/dashboard/config-profiles/snippets-drawer'
-import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
-import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { HelpActionIconShared } from '@shared/ui/help-drawer'
+import { useTranslation } from 'react-i18next'
+import { TbArrowBackUp, TbCode, TbFile } from 'react-icons/tb'
+import { useNavigate } from 'react-router'
+
 import { ROUTES } from '@shared/constants'
+import { HelpActionIconShared } from '@shared/ui/help-drawer'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { Page } from '@shared/ui/page'
+import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
+
+import { MODALS, useModalClose, useModalIsOpen } from '@entities/dashboard/modal-store'
 
 interface Props {
     configProfile: GetConfigProfileByUuidCommand.Response['response']

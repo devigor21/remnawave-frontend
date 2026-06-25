@@ -1,14 +1,15 @@
-import { useTranslation } from 'react-i18next'
-import { TbCpu } from 'react-icons/tb'
 import { Modal } from '@mantine/core'
 import { motion } from 'motion/react'
+import { useTranslation } from 'react-i18next'
+import { TbCpu } from 'react-icons/tb'
+
+import { queryClient } from '@shared/api'
+import { nodesQueryKeys, QueryKeys } from '@shared/api/hooks'
+import { useIsMobile } from '@shared/hooks'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { nodesQueryKeys, QueryKeys } from '@shared/api/hooks'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { useIsMobile } from '@shared/hooks'
-import { queryClient } from '@shared/api'
 
 import { EditNodeByUuidModalContent } from './edit-node-by-uuid-modal.content'
 

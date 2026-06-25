@@ -1,17 +1,18 @@
 import { AppShell, Box, Burger, Container, Divider, Group, ScrollArea } from '@mantine/core'
 import { useClickOutside, useDisclosure, useMediaQuery } from '@mantine/hooks'
-import { Outlet, ScrollRestoration } from 'react-router'
 import clsx from 'clsx'
+import { Outlet, ScrollRestoration } from 'react-router'
 
-import { useIsLoadingRemnawaveUpdates, useRemnawaveInfo } from '@entities/dashboard/updates-store'
-import { SidebarTitleShared } from '@shared/ui/sidebar/sidebar-title'
-import { SidebarLogoShared } from '@shared/ui/sidebar/sidebar-logo'
 import { HeaderControls } from '@shared/ui/header-buttons'
 import { HelpDrawerShared } from '@shared/ui/help-drawer'
+import { SidebarLogoShared } from '@shared/ui/sidebar/sidebar-logo'
+import { SidebarTitleShared } from '@shared/ui/sidebar/sidebar-title'
 
+import { useIsLoadingRemnawaveUpdates, useRemnawaveInfo } from '@entities/dashboard/updates-store'
+
+import classes from './Main.module.css'
 import { DesktopNavigation } from './navbar/desktop-navigation.layout'
 import { MobileNavigation } from './navbar/mobile-navigation.layout'
-import classes from './Main.module.css'
 
 export function MainLayout() {
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure()

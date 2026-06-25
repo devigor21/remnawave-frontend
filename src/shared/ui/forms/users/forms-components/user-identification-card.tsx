@@ -1,3 +1,9 @@
+import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
+import { GetUserActiveSessionsFeature } from '@features/ui/dashboard/users/get-user-active-sessions'
+import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
+import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard/users/get-user-subscription-request-history'
+import { GetUserTorrentBlockerReportsFeature } from '@features/ui/dashboard/users/get-user-torrent-blocker-reports'
+import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
 import {
     ActionIcon,
     Box,
@@ -12,36 +18,31 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
-import { TbCalendar, TbChartArcs, TbJson, TbServerCog, TbUser, TbWifi } from 'react-icons/tb'
-import { GetUserByUuidCommand, USERS_STATUS } from '@remnawave/backend-contract'
-import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { PiLinkDuotone, PiQrCode, PiUserCircle } from 'react-icons/pi'
-import { githubDarkTheme, JsonEditor } from 'json-edit-react'
-import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { useTranslation } from 'react-i18next'
 import { useDisclosure } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
-import { memo } from 'react'
-import dayjs from 'dayjs'
-
-import { GetUserSubscriptionRequestHistoryFeature } from '@features/ui/dashboard/users/get-user-subscription-request-history'
-import { GetUserTorrentBlockerReportsFeature } from '@features/ui/dashboard/users/get-user-torrent-blocker-reports'
-import { GetUserSubscriptionLinksFeature } from '@features/ui/dashboard/users/get-user-subscription-links'
-import { GetUserActiveSessionsFeature } from '@features/ui/dashboard/users/get-user-active-sessions'
-import { formatRelativeDateUtil, formatTimeUtil, getTimeAgoUtil } from '@shared/utils/time-utils'
-import { GetHwidUserDevicesFeature } from '@features/ui/dashboard/users/get-hwid-user-devices'
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { GetUserUsageFeature } from '@features/ui/dashboard/users/get-user-usage'
-import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
-import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { GetUserByUuidCommand, USERS_STATUS } from '@remnawave/backend-contract'
 import { UserStatusBadge } from '@widgets/dashboard/users/user-status-badge'
-import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
-import { QrCodeBuilder } from '@shared/ui/qr-code-builder'
-import { prettifyBytesUtil } from '@shared/utils/bytes'
+import dayjs from 'dayjs'
+import { githubDarkTheme, JsonEditor } from 'json-edit-react'
+import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
+import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
+import { PiLinkDuotone, PiQrCode, PiUserCircle } from 'react-icons/pi'
+import { TbCalendar, TbChartArcs, TbJson, TbServerCog, TbUser, TbWifi } from 'react-icons/tb'
+
 import { useGetUserMetadata } from '@shared/api/hooks'
+import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
+import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { QrCodeBuilder } from '@shared/ui/qr-code-builder'
 import { SectionCard } from '@shared/ui/section-card'
+import { prettifyBytesUtil } from '@shared/utils/bytes'
+import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
+import { formatRelativeDateUtil, formatTimeUtil, getTimeAgoUtil } from '@shared/utils/time-utils'
+
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 
 interface IProps {
     cardVariants: Variants

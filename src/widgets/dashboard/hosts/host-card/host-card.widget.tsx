@@ -1,3 +1,5 @@
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 import {
     ActionIcon,
     Badge,
@@ -12,6 +14,17 @@ import {
     Tooltip
 } from '@mantine/core'
 import {
+    GetAllHostsCommand,
+    GetAllNodesCommand,
+    GetConfigProfilesCommand
+} from '@remnawave/backend-contract'
+import cx from 'clsx'
+import ColorHash from 'color-hash'
+import { CSSProperties, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiNetwork, PiProhibit, PiPulse } from 'react-icons/pi'
+import { RiDraggable } from 'react-icons/ri'
+import {
     TbAlertCircle,
     TbCirclesRelation,
     TbCloudNetwork,
@@ -20,28 +33,16 @@ import {
     TbMask,
     TbStar
 } from 'react-icons/tb'
-import {
-    GetAllHostsCommand,
-    GetAllNodesCommand,
-    GetConfigProfilesCommand
-} from '@remnawave/backend-contract'
-import { PiNetwork, PiProhibit, PiPulse } from 'react-icons/pi'
 import { createSearchParams, useNavigate } from 'react-router'
-import { CSSProperties, useState } from 'react'
-import { useSortable } from '@dnd-kit/sortable'
-import { useTranslation } from 'react-i18next'
-import { RiDraggable } from 'react-icons/ri'
-import { CSS } from '@dnd-kit/utilities'
-import ColorHash from 'color-hash'
-import cx from 'clsx'
+
+import { ROUTES } from '@shared/constants'
+import { SEARCH_PARAMS } from '@shared/constants/search-params'
+import { useIsMobile } from '@shared/hooks'
+import { XrayLogo } from '@shared/ui/logos'
+import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
+import { openOrNavigate } from '@shared/utils/open-or-navigate'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
-import { SEARCH_PARAMS } from '@shared/constants/search-params'
-import { openOrNavigate } from '@shared/utils/open-or-navigate'
-import { XrayLogo } from '@shared/ui/logos'
-import { useIsMobile } from '@shared/hooks'
-import { ROUTES } from '@shared/constants'
 
 import classes from './HostCard.module.css'
 

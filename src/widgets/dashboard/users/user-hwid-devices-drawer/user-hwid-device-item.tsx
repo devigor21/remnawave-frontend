@@ -1,3 +1,6 @@
+import { ActionIcon, Box, Divider, Group, Stack, Text, ThemeIcon } from '@mantine/core'
+import { GetUserHwidDevicesCommand } from '@remnawave/backend-contract'
+import { useTranslation } from 'react-i18next'
 import {
     PiAndroidLogo,
     PiAppleLogo,
@@ -6,10 +9,7 @@ import {
     PiTrash,
     PiWindowsLogo
 } from 'react-icons/pi'
-import { ActionIcon, Box, Divider, Group, Stack, Text, ThemeIcon } from '@mantine/core'
-import { GetUserHwidDevicesCommand } from '@remnawave/backend-contract'
 import { TbExternalLink } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
 
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { SettingsCardShared } from '@shared/ui/settings-card'

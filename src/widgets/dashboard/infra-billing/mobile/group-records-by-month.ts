@@ -1,6 +1,6 @@
 import { GetInfraBillingHistoryRecordsCommand } from '@remnawave/backend-contract'
-import utc from 'dayjs/plugin/utc'
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 
 dayjs.extend(utc)
 

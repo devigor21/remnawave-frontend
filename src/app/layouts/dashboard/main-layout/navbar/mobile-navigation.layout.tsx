@@ -1,6 +1,6 @@
 import { Box, Divider, NavLink, Stack, Title } from '@mantine/core'
-import { NavLink as RouterLink, useLocation } from 'react-router'
 import { PiArrowRight } from 'react-icons/pi'
+import { NavLink as RouterLink, useLocation } from 'react-router'
 
 import { useMobileMenuSections } from '../menu-sections/mobile-menu-sections'
 import classes from './mobile-navigation.module.css'

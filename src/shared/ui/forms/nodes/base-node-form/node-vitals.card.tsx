@@ -1,15 +1,15 @@
+import { Group, NumberInput, Select, Stack, TextInput } from '@mantine/core'
+import { UseFormReturnType } from '@mantine/form'
 import {
     CreateNodeCommand,
     GetNodePluginsCommand,
     GetPubKeyCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
-import { TbCertificate, TbMapPin, TbNetwork, TbPackage, TbUserCheck, TbWorld } from 'react-icons/tb'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { Group, NumberInput, Select, Stack, TextInput } from '@mantine/core'
-import { UseFormReturnType } from '@mantine/form'
-import { HiOutlineServer } from 'react-icons/hi'
 import { useTranslation } from 'react-i18next'
+import { HiOutlineServer } from 'react-icons/hi'
+import { TbCertificate, TbMapPin, TbNetwork, TbPackage, TbUserCheck, TbWorld } from 'react-icons/tb'
 
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'

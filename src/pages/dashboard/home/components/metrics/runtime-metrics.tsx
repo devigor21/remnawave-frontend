@@ -1,3 +1,5 @@
+import { GetRemnawaveHealthCommand } from '@remnawave/backend-contract'
+import { TFunction } from 'i18next'
 import {
     PiClockDuotone,
     PiCloudDuotone,
@@ -7,8 +9,6 @@ import {
     PiTimerDuotone,
     PiTreeStructureDuotone
 } from 'react-icons/pi'
-import { GetRemnawaveHealthCommand } from '@remnawave/backend-contract'
-import { TFunction } from 'i18next'
 
 import { IMetricCardProps } from '@shared/ui/metrics/metric-card'
 import { prettifyBytesUtil } from '@shared/utils/bytes'

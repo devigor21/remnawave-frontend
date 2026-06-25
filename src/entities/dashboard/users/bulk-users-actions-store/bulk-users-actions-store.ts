@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 import { MRT_RowSelectionState } from '@kastov/mantine-react-table-open'
 import { devtools } from 'zustand/middleware'
 

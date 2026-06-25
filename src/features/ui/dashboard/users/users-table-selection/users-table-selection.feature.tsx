@@ -1,15 +1,16 @@
 import { Button, Group, Text } from '@mantine/core'
-import { PiClockClockwise } from 'react-icons/pi'
-import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
+import { BulkUsersActionsWidget } from '@widgets/dashboard/users/bulk-users-actions/bulk-users-actions.widget'
+import { useTranslation } from 'react-i18next'
+import { PiClockClockwise } from 'react-icons/pi'
 import { TbDots } from 'react-icons/tb'
 
-import { BulkUsersActionsWidget } from '@widgets/dashboard/users/bulk-users-actions/bulk-users-actions.widget'
-import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { queryClient } from '@shared/api/query-client'
 import { QueryKeys } from '@shared/api/hooks'
+import { queryClient } from '@shared/api/query-client'
 import { useIsMobile } from '@shared/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+
+import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 
 import { IProps } from './interfaces/props.interface'
 

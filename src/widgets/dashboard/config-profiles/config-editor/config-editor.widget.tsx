@@ -1,18 +1,18 @@
 import type { editor } from 'monaco-editor'
 
-import { Box, Button, Card, Code, Group, Loader, Paper } from '@mantine/core'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
-import { TbAlertTriangle } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { useBlocker } from 'react-router'
-import { modals } from '@mantine/modals'
-
 import { ConfigEditorActionsFeature } from '@features/dashboard/config-profiles/config-editor-actions'
 import { ConfigValidationFeature } from '@features/dashboard/config-profiles/config-validation'
 import { MonacoSetupFeature } from '@features/dashboard/config-profiles/monaco-setup'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { Box, Button, Card, Code, Group, Loader, Paper } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import Editor, { Monaco, useMonaco } from '@monaco-editor/react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbAlertTriangle } from 'react-icons/tb'
+import { useBlocker } from 'react-router'
+
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
 
 import styles from './ConfigEditor.module.css'

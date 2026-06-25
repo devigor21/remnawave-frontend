@@ -1,9 +1,9 @@
-import { GetTopUsersByHwidDevicesCommand } from '@remnawave/backend-contract'
 import { ActionIcon, Group, Text } from '@mantine/core'
-import { DataTableColumn } from 'mantine-datatable'
-import { TbSum, TbUser } from 'react-icons/tb'
-import { PiUserCircle } from 'react-icons/pi'
+import { GetTopUsersByHwidDevicesCommand } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
+import { DataTableColumn } from 'mantine-datatable'
+import { PiUserCircle } from 'react-icons/pi'
+import { TbSum, TbUser } from 'react-icons/tb'
 
 export function getHwidInspectorLeaderboardColumns(
     t: TFunction,

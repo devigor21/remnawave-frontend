@@ -1,7 +1,10 @@
 import { Box, Collapse, Group, Stack, Text, ThemeIcon, UnstyledButton } from '@mantine/core'
-import { TbChevronRight } from 'react-icons/tb'
 import clsx from 'clsx'
+import { TbChevronRight } from 'react-icons/tb'
 
+import classes from '../api-token-card.module.css'
+import { KindPill } from './kind-pill'
+import { ScopeEndpointItem } from './scope-endpoint-item'
 import {
     countSelected,
     getKindState,
@@ -12,9 +15,6 @@ import {
     ScopeEndpoint,
     ScopeResource
 } from './scopes.utils'
-import { ScopeEndpointItem } from './scope-endpoint-item'
-import classes from '../api-token-card.module.css'
-import { KindPill } from './kind-pill'
 
 interface IProps {
     endpoints: ScopeEndpoint[]

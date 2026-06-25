@@ -1,17 +1,17 @@
-import { CreateNodeCommand } from '@remnawave/backend-contract'
+import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/nodes/show-config-profiles-with-inbounds'
 import { Button, Group, Skeleton, Stack } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
+import { CreateNodeCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 import { PiArrowLeft } from 'react-icons/pi'
 import { TbCheck } from 'react-icons/tb'
 
-import { ShowConfigProfilesWithInboundsFeature } from '@features/ui/dashboard/nodes/show-config-profiles-with-inbounds'
 import { useGetConfigProfiles } from '@shared/api/hooks'
 
 import { CopyDockerComposeWidget } from './copy-docker-compose.widget'
 
 interface IProps {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line
     form: UseFormReturnType<CreateNodeCommand.Request, any>
     isCreating: boolean
     onCreateNode: () => void

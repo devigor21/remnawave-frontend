@@ -28,7 +28,7 @@
     "crowdin:upload": "crowdin upload sources --branch=dev",
     "format": "oxfmt --check",
     "format:fix": "oxfmt",
-    "lint": "oxlint",
+    "lint": "oxlint --format=stylish",
     "lint:fix": "oxlint --fix",
     "check": "oxfmt --check && oxlint",
     "fix": "oxfmt && oxlint --fix"
@@ -133,6 +133,7 @@
     "@types/semver": "^7.7.1",
     "@vitejs/plugin-react": "6.0.2",
     "cross-env": "^10.1.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.3.0",
     "i18next-resources-for-ts": "^2.0.0",
     "identity-obj-proxy": "^3.0.0",

@@ -10,17 +10,17 @@ import {
     useSensor,
     useSensors
 } from '@dnd-kit/core'
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Box, Container, Stack } from '@mantine/core'
 import { GetAllHostsCommand } from '@remnawave/backend-contract'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
-import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
-import { Box, Container, Stack } from '@mantine/core'
-
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card'
-import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+
 import { useGetNodes } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
+import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 
 import classes from './hosts-table.module.css'
 import { IProps } from './interfaces'

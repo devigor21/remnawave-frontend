@@ -1,20 +1,20 @@
 import type { editor } from 'monaco-editor'
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Box, Card, Code, Paper } from '@mantine/core'
-import Editor, { Monaco } from '@monaco-editor/react'
-import { TbAlertTriangle } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { useBlocker } from 'react-router'
-import { modals } from '@mantine/modals'
-
-import { ResponseRulesEditorActionsFeature } from '@features/dashboard/response-rules/response-rules-editor-actions'
 import { MonacoSetupResponseRulesFeature } from '@features/dashboard/config-profiles/monaco-setup'
+import { ResponseRulesEditorActionsFeature } from '@features/dashboard/response-rules/response-rules-editor-actions'
+import { Box, Card, Code, Paper } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import Editor, { Monaco } from '@monaco-editor/react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbAlertTriangle } from 'react-icons/tb'
+import { useBlocker } from 'react-router'
+
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
 
-import styles from './ResponseRulesEditor.module.css'
 import { IProps } from './interfaces'
+import styles from './ResponseRulesEditor.module.css'
 
 export function ResponseRulesEditorWidget(props: IProps) {
     const { t } = useTranslation()

@@ -1,12 +1,13 @@
+import { Drawer } from '@mantine/core'
+import { useForm } from '@mantine/form'
+import { notifications } from '@mantine/notifications'
 import { CreateHostCommand, SECURITY_LAYERS } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { notifications } from '@mantine/notifications'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
-import { useForm } from '@mantine/form'
-import { Drawer } from '@mantine/core'
-import { useState } from 'react'
 
+import { queryClient } from '@shared/api'
 import {
     QueryKeys,
     useCreateHost,
@@ -16,10 +17,10 @@ import {
     useGetNodes,
     useGetSubscriptionTemplates
 } from '@shared/api/hooks'
-import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
-import { queryClient } from '@shared/api'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 export const CreateHostModalWidget = () => {
     const { t } = useTranslation()

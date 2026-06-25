@@ -1,3 +1,6 @@
+import { Box, Center, Drawer, Group, Stack } from '@mantine/core'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
     PiArrowsDownUpDuotone,
     PiCalendarDotDuotone,
@@ -6,23 +9,21 @@ import {
     PiTagDuotone,
     PiUserDuotone
 } from 'react-icons/pi'
-import { Box, Center, Drawer, Group, Stack } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
+
+import { useEncryptSubscriptionLink, useGetUserByUuid } from '@shared/api/hooks'
+import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SectionCardRoot } from '@shared/ui/section-card/section-card.root'
+import { SectionCardSection } from '@shared/ui/section-card/section-card.section'
+import { prettifyBytesUtil } from '@shared/utils/bytes'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
 import {
     useUserModalStoreActions,
     useUserModalStoreDrawerUserUuid,
     useUserModalStoreIsDetailedUserInfoDrawerOpen
 } from '@entities/dashboard/user-modal-store/user-modal-store'
-import { SectionCardSection } from '@shared/ui/section-card/section-card.section'
-import { useEncryptSubscriptionLink, useGetUserByUuid } from '@shared/api/hooks'
-import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { SectionCardRoot } from '@shared/ui/section-card/section-card.root'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { formatTimeUtil } from '@shared/utils/time-utils'
-import { prettifyBytesUtil } from '@shared/utils/bytes'
 
 import { UserStatusBadge } from '../user-status-badge/user-status-badge.widget'
 

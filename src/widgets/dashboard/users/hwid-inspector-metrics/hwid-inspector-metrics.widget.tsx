@@ -1,18 +1,16 @@
-/* eslint-disable no-nested-ternary */
-
+import { Chart } from '@highcharts/react'
+import { Box, Card, Center, Group, Loader, SimpleGrid, Stack, Text, ThemeIcon } from '@mantine/core'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
     PiCalculatorDuotone,
     PiChartPieDuotone,
     PiDeviceMobileDuotone,
     PiDevicesDuotone
 } from 'react-icons/pi'
-import { Box, Card, Center, Group, Loader, SimpleGrid, Stack, Text, ThemeIcon } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
-import { Chart } from '@highcharts/react'
-import { useMemo } from 'react'
 
-import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
 import { useGetHwidDevicesStats } from '@shared/api/hooks'
+import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
 
 export function HwidInspectorMetrics() {
     const { t } = useTranslation()

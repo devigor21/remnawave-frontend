@@ -1,6 +1,6 @@
-import { PiChartBarDuotone, PiCpuDuotone, PiMemoryFill, PiMemoryLight } from 'react-icons/pi'
 import { GetStatsCommand } from '@remnawave/backend-contract'
 import { TFunction } from 'i18next'
+import { PiChartBarDuotone, PiCpuDuotone, PiMemoryFill, PiMemoryLight } from 'react-icons/pi'
 
 import { IMetricCardProps } from '@shared/ui/metrics/metric-card'
 import { prettifyBytesUtil } from '@shared/utils/bytes'

@@ -1,3 +1,8 @@
+import { ActionIcon, ActionIconGroup, Group, Stack, Tooltip } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { spotlight } from '@mantine/spotlight'
+import { useTranslation } from 'react-i18next'
+import { PiSpiral } from 'react-icons/pi'
 import {
     TbAlertCircle,
     TbCards,
@@ -7,17 +12,13 @@ import {
     TbSearch,
     TbTable
 } from 'react-icons/tb'
-import { ActionIcon, ActionIconGroup, Group, Stack, Tooltip } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
-import { spotlight } from '@mantine/spotlight'
-import { PiSpiral } from 'react-icons/pi'
-import { modals } from '@mantine/modals'
+
+import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
+import { ActionCardShared } from '@shared/ui'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { useNodesStoreActions } from '@entities/dashboard/nodes/nodes-store/nodes-store'
 import { NODES_VIEW_MODE } from '@entities/dashboard/view-preferences-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { useGetNodes, useRestartAllNodes } from '@shared/api/hooks'
-import { ActionCardShared } from '@shared/ui'
 
 interface IProps {
     setViewMode: (viewMode: NODES_VIEW_MODE) => void

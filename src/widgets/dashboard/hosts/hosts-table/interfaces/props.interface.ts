@@ -1,5 +1,5 @@
-import { GetAllHostsCommand, GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { UseListStateHandlers } from '@mantine/hooks'
+import { GetAllHostsCommand, GetConfigProfilesCommand } from '@remnawave/backend-contract'
 
 export interface IProps {
     configProfiles: GetConfigProfilesCommand.Response['response']['configProfiles'] | undefined

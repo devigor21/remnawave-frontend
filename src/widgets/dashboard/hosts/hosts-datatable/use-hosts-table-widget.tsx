@@ -1,9 +1,9 @@
 import { ActionIcon, Group, MultiSelect, Text } from '@mantine/core'
 import { GetAllHostsCommand } from '@remnawave/backend-contract'
-import { TbEdit, TbEyeOff, TbSearch } from 'react-icons/tb'
-import { PiProhibit, PiPulse } from 'react-icons/pi'
-import { DataTableColumn } from 'mantine-datatable'
 import { TFunction } from 'i18next'
+import { DataTableColumn } from 'mantine-datatable'
+import { PiProhibit, PiPulse } from 'react-icons/pi'
+import { TbEdit, TbEyeOff, TbSearch } from 'react-icons/tb'
 
 import {
     BooleanCell,

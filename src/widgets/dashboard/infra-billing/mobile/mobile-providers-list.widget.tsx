@@ -11,18 +11,19 @@ import {
     ThemeIcon,
     Tooltip
 } from '@mantine/core'
-import { TbCloud, TbEdit, TbLink, TbServer, TbTrash } from 'react-icons/tb'
+import { modals } from '@mantine/modals'
 import { GetInfraProvidersCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
+import { TbCloud, TbEdit, TbLink, TbServer, TbTrash } from 'react-icons/tb'
 
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { queryClient } from '@shared/api'
+import { QueryKeys, useDeleteInfraProvider } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SectionCard } from '@shared/ui/section-card'
 import { faviconResolver, formatCurrencyWithIntl } from '@shared/utils/misc'
 import { resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { QueryKeys, useDeleteInfraProvider } from '@shared/api/hooks'
-import { SectionCard } from '@shared/ui/section-card'
-import { queryClient } from '@shared/api'
+
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
 interface IProps {
     providers: GetInfraProvidersCommand.Response['response']['providers']

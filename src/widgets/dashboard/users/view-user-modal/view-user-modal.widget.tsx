@@ -1,7 +1,13 @@
-import { useTranslation } from 'react-i18next'
-import { IconUser } from '@tabler/icons-react'
 import { Modal } from '@mantine/core'
+import { IconUser } from '@tabler/icons-react'
 import { motion } from 'motion/react'
+import { useTranslation } from 'react-i18next'
+
+import { queryClient } from '@shared/api'
+import { usersQueryKeys } from '@shared/api/hooks'
+import { useIsMobile } from '@shared/hooks'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import {
     useUserModalStoreActions,
@@ -9,11 +15,6 @@ import {
     useUserModalStoreUserUuid
 } from '@entities/dashboard/user-modal-store/user-modal-store'
 import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { usersQueryKeys } from '@shared/api/hooks'
-import { useIsMobile } from '@shared/hooks'
-import { queryClient } from '@shared/api'
 
 import { ViewUserModalContent } from './view-user-modal.content'
 

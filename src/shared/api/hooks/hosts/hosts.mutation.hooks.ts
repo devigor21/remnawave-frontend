@@ -1,3 +1,4 @@
+import { notifications } from '@mantine/notifications'
 import {
     BulkDeleteHostsCommand,
     BulkDisableHostsCommand,
@@ -8,7 +9,6 @@ import {
     UpdateHostCommand,
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
-import { notifications } from '@mantine/notifications'
 
 import { createMutationHook } from '../../tsq-helpers'
 

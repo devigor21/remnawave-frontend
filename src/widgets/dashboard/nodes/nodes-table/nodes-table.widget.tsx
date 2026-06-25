@@ -10,25 +10,26 @@ import {
     useSensor,
     useSensors
 } from '@dnd-kit/core'
-import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { GetAllNodesCommand } from '@remnawave/backend-contract'
-import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Box, Container, Stack } from '@mantine/core'
 import { useListState } from '@mantine/hooks'
+import { GetAllNodesCommand } from '@remnawave/backend-contract'
+import { useWindowVirtualizer } from '@tanstack/react-virtual'
+import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { queryClient } from '@shared/api'
 import { nodesQueryKeys, useGetNodes, useReorderNodes } from '@shared/api/hooks'
+import { useIsMobile } from '@shared/hooks'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { sToMs } from '@shared/utils/time-utils'
-import { useIsMobile } from '@shared/hooks'
-import { queryClient } from '@shared/api'
 
-import { NodesSpotlightSearchWidget } from '../nodes-spotlight-search'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+
 import { NodeCardWidget } from '../node-card'
-import styles from './NodesTable.module.css'
+import { NodesSpotlightSearchWidget } from '../nodes-spotlight-search'
 import { IProps } from './interfaces'
+import styles from './NodesTable.module.css'
 
 export const NodesTableWidget = memo((props: IProps) => {
     const { nodes } = props

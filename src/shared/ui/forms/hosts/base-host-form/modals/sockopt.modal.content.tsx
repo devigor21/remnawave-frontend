@@ -1,14 +1,14 @@
+import { Anchor, Button, JsonInput, px, Stack, Text } from '@mantine/core'
+import { UseFormReturnType } from '@mantine/form'
+import { modals } from '@mantine/modals'
 import {
     CreateHostCommand,
     UpdateHostCommand,
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
-import { Anchor, Button, JsonInput, px, Stack, Text } from '@mantine/core'
-import { UseFormReturnType } from '@mantine/form'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbArrowUp } from 'react-icons/tb'
-import { modals } from '@mantine/modals'
-import { useState } from 'react'
 
 import { BASIC_SOCKOPT_PARAMS } from '@shared/constants'
 

@@ -1,13 +1,14 @@
-import { TbCopy, TbSettings, TbUsersMinus, TbUsersPlus, TbWebhook } from 'react-icons/tb'
-import { PiCheck, PiCopy, PiPencil, PiTrashDuotone, PiUsers } from 'react-icons/pi'
 import { Badge, CopyButton, Group, Menu, Tooltip } from '@mantine/core'
 import { GetExternalSquadsCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
+import { PiCheck, PiCopy, PiPencil, PiTrashDuotone, PiUsers } from 'react-icons/pi'
+import { TbCopy, TbSettings, TbUsersMinus, TbUsersPlus, TbWebhook } from 'react-icons/tb'
 
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { WithDndSortable } from '@shared/hocs/with-dnd-sortable'
 import { EntityCardShared } from '@shared/ui/entity-card'
 import { formatInt } from '@shared/utils/misc'
+
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
 interface IProps {
     externalSquad: GetExternalSquadsCommand.Response['response']['externalSquads'][number]

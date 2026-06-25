@@ -1,3 +1,4 @@
+import { notifications } from '@mantine/notifications'
 import {
     BulkNodesActionsCommand,
     BulkNodesProfileModificationCommand,
@@ -12,7 +13,6 @@ import {
     RestartNodeCommand,
     UpdateNodeCommand
 } from '@remnawave/backend-contract'
-import { notifications } from '@mantine/notifications'
 
 import { createMutationHook } from '../../tsq-helpers'
 

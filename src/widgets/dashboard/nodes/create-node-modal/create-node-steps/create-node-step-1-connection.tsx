@@ -13,6 +13,11 @@ import {
     TextInput,
     UnstyledButton
 } from '@mantine/core'
+import { UseFormReturnType } from '@mantine/form'
+import { CreateNodeCommand } from '@remnawave/backend-contract'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiArrowRight, PiTagDuotone } from 'react-icons/pi'
 import {
     TbCertificate,
     TbChevronDown,
@@ -22,16 +27,11 @@ import {
     TbSettings,
     TbWorld
 } from 'react-icons/tb'
-import { CreateNodeCommand } from '@remnawave/backend-contract'
-import { PiArrowRight, PiTagDuotone } from 'react-icons/pi'
-import { UseFormReturnType } from '@mantine/form'
-import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
 
-import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
+import { useGetNodePlugins, useGetNodesTags } from '@shared/api/hooks'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { COUNTRIES } from '@shared/ui/forms/nodes/base-node-form/constants'
-import { useGetNodePlugins, useGetNodesTags } from '@shared/api/hooks'
+import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
 import { TagInputPill } from '@shared/ui/tag-input-pill'
 
 import { CopyDockerComposeWidget } from './copy-docker-compose.widget'

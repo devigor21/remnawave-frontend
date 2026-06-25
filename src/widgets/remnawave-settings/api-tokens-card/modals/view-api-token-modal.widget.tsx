@@ -1,16 +1,16 @@
 import { ActionIcon, ActionIconGroup, Button, CopyButton, Stack, Tooltip } from '@mantine/core'
-import { CreateApiTokenCommand, FindAllApiTokensCommand } from '@remnawave/backend-contract'
-import { TbCheck, TbCopy } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { useMemo, useState } from 'react'
 import { modals } from '@mantine/modals'
+import { CreateApiTokenCommand, FindAllApiTokensCommand } from '@remnawave/backend-contract'
+import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbCheck, TbCopy } from 'react-icons/tb'
 
+import { useGetScopes } from '@shared/api/hooks'
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
 import { ModalFooter } from '@shared/ui/modal-footer'
-import { useGetScopes } from '@shared/api/hooks'
 
-import { countSelected, expandScopesToKeys } from './scopes.utils'
 import { ScopeResourceRow } from './scope-resource-row'
+import { countSelected, expandScopesToKeys } from './scopes.utils'
 
 interface IProps {
     isMobile: boolean

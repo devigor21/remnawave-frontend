@@ -1,4 +1,13 @@
-/* eslint-disable camelcase */
+import {
+    MantineReactTable,
+    type MRT_ColumnDef,
+    useMantineReactTable
+} from '@kastov/mantine-react-table-open'
+import { ActionIcon, Anchor, Group, Text, ThemeIcon } from '@mantine/core'
+import { GetUserHwidDevicesCommand } from '@remnawave/backend-contract'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiDeviceMobile, PiLinuxLogo } from 'react-icons/pi'
 import {
     TbBrandAndroid,
     TbBrandApple,
@@ -7,16 +16,6 @@ import {
     TbSearch,
     TbTrash
 } from 'react-icons/tb'
-import {
-    MantineReactTable,
-    type MRT_ColumnDef,
-    useMantineReactTable
-} from '@kastov/mantine-react-table-open'
-import { ActionIcon, Anchor, Group, Text, ThemeIcon } from '@mantine/core'
-import { GetUserHwidDevicesCommand } from '@remnawave/backend-contract'
-import { PiDeviceMobile, PiLinuxLogo } from 'react-icons/pi'
-import { useTranslation } from 'react-i18next'
-import { useMemo } from 'react'
 
 import { formatTimeUtil } from '@shared/utils/time-utils'
 

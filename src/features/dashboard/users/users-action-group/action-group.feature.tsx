@@ -1,4 +1,18 @@
 import {
+    ActionIcon,
+    ActionIconGroup,
+    Drawer,
+    Group,
+    Stack,
+    Table,
+    Text,
+    Tooltip
+} from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { modals } from '@mantine/modals'
+import { BulkAllUsersActionsWidget } from '@widgets/dashboard/users/bulk-all-users-actions/bulk-all-users-actions.widget'
+import { useTranslation } from 'react-i18next'
+import {
     TbBaselineDensityLarge,
     TbBaselineDensityMedium,
     TbBaselineDensitySmall,
@@ -14,27 +28,14 @@ import {
     TbRestore,
     TbSettings
 } from 'react-icons/tb'
-import {
-    ActionIcon,
-    ActionIconGroup,
-    Drawer,
-    Group,
-    Stack,
-    Table,
-    Text,
-    Tooltip
-} from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
-import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
 
-import { BulkAllUsersActionsWidget } from '@widgets/dashboard/users/bulk-all-users-actions/bulk-all-users-actions.widget'
+import { QueryKeys } from '@shared/api/hooks'
+import { queryClient } from '@shared/api/query-client'
+import { useIsMobile } from '@shared/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+
 import { useUserCreationModalStoreActions } from '@entities/dashboard/user-creation-modal-store'
 import { useUsersTableStoreActions } from '@entities/dashboard/users/users-table-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { queryClient } from '@shared/api/query-client'
-import { QueryKeys } from '@shared/api/hooks'
-import { useIsMobile } from '@shared/hooks'
 
 import { UsersTableTemplatesFeature } from '../users-table-templates/users-table-templates.feature'
 import { IProps } from './interfaces'

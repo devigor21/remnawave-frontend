@@ -1,10 +1,11 @@
+import { Modal } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { TbChartArcs3 } from 'react-icons/tb'
-import { Modal } from '@mantine/core'
+
+import { useIsMobile } from '@shared/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { MODALS, useModalCloseActions, useModalState } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { useIsMobile } from '@shared/hooks'
 
 import { NodesUsersUsageStatisticsContent } from './nodes-users-usage-statistics.content'
 

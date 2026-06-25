@@ -9,10 +9,10 @@ import {
     ThemeIcon,
     Tooltip
 } from '@mantine/core'
-import { TbDevices, TbRefresh, TbTrash } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { Virtuoso } from 'react-virtuoso'
 import { modals } from '@mantine/modals'
+import { useTranslation } from 'react-i18next'
+import { TbDevices, TbRefresh, TbTrash } from 'react-icons/tb'
+import { Virtuoso } from 'react-virtuoso'
 
 import {
     QueryKeys,
@@ -20,13 +20,13 @@ import {
     useDeleteUserHwidDevice,
     useGetUserHwidDevices
 } from '@shared/api/hooks'
+import { queryClient } from '@shared/api/query-client'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { queryClient } from '@shared/api/query-client'
 
-import { UserHwidDevicesTable } from './user-hwid-devices.table'
 import { UserHwidDeviceItem } from './user-hwid-device-item'
 import classes from './user-hwid-devices.module.css'
+import { UserHwidDevicesTable } from './user-hwid-devices.table'
 
 interface IProps {
     mobile: boolean

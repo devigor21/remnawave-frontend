@@ -1,8 +1,8 @@
 import { Box, Button, ColorPicker, Group, Stack } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
-import { TbCopy, TbDownload } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
 import { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbCopy, TbDownload } from 'react-icons/tb'
 import { renderSVG } from 'uqr'
 
 import {

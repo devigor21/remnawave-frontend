@@ -1,11 +1,11 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { UserSubscriptionRequestsContentWidget } from '@widgets/dashboard/users/user-subscription-requests-drawer/user-subscription-requests.content.widget'
 import { useTranslation } from 'react-i18next'
 import { TbTimeline } from 'react-icons/tb'
-import { modals } from '@mantine/modals'
 
-import { UserSubscriptionRequestsContentWidget } from '@widgets/dashboard/users/user-subscription-requests-drawer/user-subscription-requests.content.widget'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useIsMobile } from '@shared/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 interface IProps {
     userUuid: string

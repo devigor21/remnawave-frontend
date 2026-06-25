@@ -1,12 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable @stylistic/indent */
 
-import {
-    GetAllNodesCommand,
-    GetAllUsersCommand,
-    GetExternalSquadsCommand,
-    GetInternalSquadsCommand
-} from '@remnawave/backend-contract'
+import { MRT_ColumnDef } from '@kastov/mantine-react-table-open'
 import {
     Badge,
     ComboboxItem,
@@ -17,17 +12,23 @@ import {
     Text,
     Tooltip
 } from '@mantine/core'
-import { MRT_ColumnDef } from '@kastov/mantine-react-table-open'
-import { useTranslation } from 'react-i18next'
+import {
+    GetAllNodesCommand,
+    GetAllUsersCommand,
+    GetExternalSquadsCommand,
+    GetInternalSquadsCommand
+} from '@remnawave/backend-contract'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { ConnectedNodeColumnEntity } from '@entities/dashboard/users/ui/table-columns/connected-node'
-import { UsernameColumnEntity } from '@entities/dashboard/users/ui/table-columns/username'
-import { StatusColumnEntity } from '@entities/dashboard/users/ui/table-columns/status'
-import { DataUsageColumnEntity } from '@entities/dashboard/users/ui'
-import { formatTimeUtil } from '@shared/utils/time-utils'
 import { prettifyBytesUtil } from '@shared/utils/bytes'
 import { formatInt } from '@shared/utils/misc'
+import { formatTimeUtil } from '@shared/utils/time-utils'
+
+import { DataUsageColumnEntity } from '@entities/dashboard/users/ui'
+import { ConnectedNodeColumnEntity } from '@entities/dashboard/users/ui/table-columns/connected-node'
+import { StatusColumnEntity } from '@entities/dashboard/users/ui/table-columns/status'
+import { UsernameColumnEntity } from '@entities/dashboard/users/ui/table-columns/username'
 
 import { NodeSelectItem, NodeSelectItemProps } from './node-select-item'
 import { TrafficLimitRangeFilter } from './traffic-limit-range-filter'

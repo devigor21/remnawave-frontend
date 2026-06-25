@@ -1,3 +1,4 @@
+import { createQueryKeys } from '@lukemorales/query-key-factory'
 import {
     GetAllTagsCommand,
     GetAllUsersCommand,
@@ -7,7 +8,6 @@ import {
     GetUserMetadataCommand,
     GetUserSubscriptionRequestHistoryCommand
 } from '@remnawave/backend-contract'
-import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
 
 import { sToMs } from '@shared/utils/time-utils'

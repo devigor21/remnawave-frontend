@@ -14,26 +14,27 @@ import {
     TextInput,
     Tooltip
 } from '@mantine/core'
-import { PiCheck, PiCopy, PiList, PiTag, PiTreeView, PiUsers } from 'react-icons/pi'
-import { TbCirclesRelation, TbDeviceFloppy, TbSearch } from 'react-icons/tb'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PiCheck, PiCopy, PiList, PiTag, PiTreeView, PiUsers } from 'react-icons/pi'
+import { TbCirclesRelation, TbDeviceFloppy, TbSearch } from 'react-icons/tb'
 import { Virtuoso } from 'react-virtuoso'
 
-import { VirtualizedFlatInboundsListShared } from '@shared/ui/config-profiles/virtualized-flat-inbounds-list/virtualized-flat-inbounds-list.shared'
 import {
     internalSquadsQueryKeys,
     useGetConfigProfiles,
     useGetInternalSquad,
     useUpdateInternalSquad
 } from '@shared/api/hooks'
-import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
-import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { queryClient } from '@shared/api/query-client'
+import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
+import { VirtualizedFlatInboundsListShared } from '@shared/ui/config-profiles/virtualized-flat-inbounds-list/virtualized-flat-inbounds-list.shared'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { formatInt } from '@shared/utils/misc'
+
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 import classes from './internal-squads-with-store.module.css'
 

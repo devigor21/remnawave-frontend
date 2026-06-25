@@ -1,15 +1,4 @@
 import {
-    PiCheck,
-    PiCopy,
-    PiEmptyDuotone,
-    PiEyeSlashDuotone,
-    PiLinkBreak,
-    PiLinkBreakDuotone,
-    PiProhibitDuotone,
-    PiQrCodeDuotone,
-    PiWifiHighDuotone
-} from 'react-icons/pi'
-import {
     ActionIcon,
     Badge,
     Center,
@@ -23,16 +12,27 @@ import {
     Tooltip
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import {
+    PiCheck,
+    PiCopy,
+    PiEmptyDuotone,
+    PiEyeSlashDuotone,
+    PiLinkBreak,
+    PiLinkBreakDuotone,
+    PiProhibitDuotone,
+    PiQrCodeDuotone,
+    PiWifiHighDuotone
+} from 'react-icons/pi'
 
-import { SectionCardSection } from '@shared/ui/section-card/section-card.section'
-import { SectionCardRoot } from '@shared/ui/section-card/section-card.root'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetConnectionKeysByUuid } from '@shared/api/hooks'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { QrCodeBuilder } from '@shared/ui/qr-code-builder'
+import { SectionCardRoot } from '@shared/ui/section-card/section-card.root'
+import { SectionCardSection } from '@shared/ui/section-card/section-card.section'
 
 import { IProps } from './interfaces'
 

@@ -1,8 +1,8 @@
-import { GetOneNodeCommand } from '@remnawave/backend-contract'
-import { TbReload, TbRocket } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
 import { Menu } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { GetOneNodeCommand } from '@remnawave/backend-contract'
+import { useTranslation } from 'react-i18next'
+import { TbReload, TbRocket } from 'react-icons/tb'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 

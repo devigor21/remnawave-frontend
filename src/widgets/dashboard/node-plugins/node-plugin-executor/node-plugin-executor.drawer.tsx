@@ -1,12 +1,13 @@
-import { TbTerminal } from 'react-icons/tb'
 import { Modal } from '@mantine/core'
 import { motion } from 'motion/react'
+import { TbTerminal } from 'react-icons/tb'
 
-import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { useGetNodes } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 import { NodePluginExecutorContent } from './node-plugin-executor.content'
 

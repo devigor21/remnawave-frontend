@@ -1,10 +1,10 @@
-import { PiClockCounterClockwiseDuotone } from 'react-icons/pi'
-import { useTranslation } from 'react-i18next'
 import { Loader, Menu } from '@mantine/core'
 import { modals } from '@mantine/modals'
+import { useTranslation } from 'react-i18next'
+import { PiClockCounterClockwiseDuotone } from 'react-icons/pi'
 
-import { useResetUserTraffic, usersQueryKeys } from '@shared/api/hooks'
 import { queryClient } from '@shared/api'
+import { useResetUserTraffic, usersQueryKeys } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 

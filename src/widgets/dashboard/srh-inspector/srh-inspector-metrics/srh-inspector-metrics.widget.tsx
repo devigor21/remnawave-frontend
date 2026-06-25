@@ -1,10 +1,9 @@
-/* eslint-disable no-nested-ternary */
-import { Box, Card, Center, Group, Loader, SimpleGrid, Stack, Text, ThemeIcon } from '@mantine/core'
-import { PiChartBar, PiChartPieDuotone } from 'react-icons/pi'
-import { useTranslation } from 'react-i18next'
 import { Chart } from '@highcharts/react'
-import { useMemo } from 'react'
+import { Box, Card, Center, Group, Loader, SimpleGrid, Stack, Text, ThemeIcon } from '@mantine/core'
 import dayjs from 'dayjs'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiChartBar, PiChartPieDuotone } from 'react-icons/pi'
 
 import { useGetSubscriptionRequestHistoryStats } from '@shared/api/hooks'
 
@@ -132,7 +131,6 @@ export function SrhInspectorMetrics() {
                 style: {
                     color: 'var(--mantine-color-text)'
                 },
-                // eslint-disable-next-line react-hooks/unsupported-syntax
                 pointFormatter(this: { x: number; y: number }): string {
                     return `<b>${dayjs(this.x).format('DD.MM.YYYY, HH:mm')}</b> </br> Requests: <b>${this.y}<b>`
                 }

@@ -1,7 +1,7 @@
-import { GetAllHostsCommand } from '@remnawave/backend-contract'
-import { configureMonacoYaml } from 'monaco-yaml'
 import { Monaco } from '@monaco-editor/react'
+import { GetAllHostsCommand } from '@remnawave/backend-contract'
 import consola from 'consola'
+import { configureMonacoYaml } from 'monaco-yaml'
 
 type Host = GetAllHostsCommand.Response['response'][number]
 
@@ -94,6 +94,7 @@ export const configureMonaco = (
                                                         },
                                                         required: ['type']
                                                     },
+                                                    // oxlint-disable-next-line
                                                     then: {
                                                         properties: {
                                                             type: true,
@@ -122,6 +123,7 @@ export const configureMonaco = (
                                                         },
                                                         required: ['type']
                                                     },
+                                                    // oxlint-disable-next-line
                                                     then: {
                                                         properties: {
                                                             type: true,
@@ -141,6 +143,7 @@ export const configureMonaco = (
                                                         },
                                                         required: ['type']
                                                     },
+                                                    // oxlint-disable-next-line
                                                     then: {
                                                         properties: {
                                                             type: true,
@@ -162,6 +165,7 @@ export const configureMonaco = (
                                                         },
                                                         required: ['type']
                                                     },
+                                                    // oxlint-disable-next-line
                                                     then: {
                                                         properties: { type: true },
                                                         additionalProperties: false

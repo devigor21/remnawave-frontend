@@ -1,9 +1,9 @@
+import { rem } from '@mantine/core'
 import { PiArrowsClockwise } from 'react-icons/pi'
 import { useNavigate } from 'react-router'
-import { rem } from '@mantine/core'
 
-import { resetAllStores } from '@shared/hocs/store-wrapper'
 import { clearQueryClient } from '@shared/api'
+import { resetAllStores } from '@shared/hocs/store-wrapper'
 
 import { HeaderControl } from './HeaderControl'
 

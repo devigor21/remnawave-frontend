@@ -1,9 +1,10 @@
+import { useForm } from '@mantine/form'
 import { UpdateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { useEffect, useRef } from 'react'
-import { useForm } from '@mantine/form'
 import { motion } from 'motion/react'
+import { useEffect, useRef } from 'react'
 
+import { queryClient } from '@shared/api'
 import {
     configProfilesQueryKeys,
     nodesQueryKeys,
@@ -14,7 +15,6 @@ import {
 } from '@shared/api/hooks'
 import { BaseNodeForm } from '@shared/ui/forms/nodes/base-node-form/base-node-form'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { queryClient } from '@shared/api'
 
 import { NodeDetailsCardWidget } from '../node-details-card/node-details-card.widget'
 import { NodeSystemCardWidget } from '../node-system-card/node-system-card.widget'

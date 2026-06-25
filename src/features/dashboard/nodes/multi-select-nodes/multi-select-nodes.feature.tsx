@@ -9,18 +9,19 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { TbCategoryPlus, TbChartArcs3, TbDots } from 'react-icons/tb'
-import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { useDisclosure } from '@mantine/hooks'
-import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
-
+import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { ConfigProfilesDrawer } from '@widgets/dashboard/nodes/config-profiles-drawer'
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { QueryKeys, useBulkNodesProfileModification } from '@shared/api/hooks'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { XrayLogo } from '@shared/ui/logos'
+import { useTranslation } from 'react-i18next'
+import { TbCategoryPlus, TbChartArcs3, TbDots } from 'react-icons/tb'
+
 import { queryClient } from '@shared/api'
+import { QueryKeys, useBulkNodesProfileModification } from '@shared/api/hooks'
+import { XrayLogo } from '@shared/ui/logos'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
 import { BulkUpdateNodesModalContent } from './bulk-update-nodes.modal.content'
 import { MultiSelectNodesModalContent } from './multi-select-modal.content'

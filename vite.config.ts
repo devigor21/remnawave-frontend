@@ -1,10 +1,10 @@
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
 // import { splashScreen } from 'vite-plugin-splash-screen'
 // import { visualizer } from 'rollup-plugin-visualizer'
 // import deadFile from 'vite-plugin-deadfile'
 import removeConsole from 'vite-plugin-remove-console'
 import webfontDownload from 'vite-plugin-webfont-dl'
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
 import 'dotenv/config'
 
 export default defineConfig({

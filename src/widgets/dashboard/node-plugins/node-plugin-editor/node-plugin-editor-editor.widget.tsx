@@ -1,16 +1,16 @@
 import type { editor } from 'monaco-editor'
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { GetNodePluginCommand } from '@remnawave/backend-contract'
-import { Box, Card, Code, Paper } from '@mantine/core'
-import Editor, { Monaco } from '@monaco-editor/react'
-import { TbAlertTriangle } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { useBlocker } from 'react-router'
-import { modals } from '@mantine/modals'
-
-import { NodePluginsEditorActionsFeature } from '@features/dashboard/node-plugins/node-plugins-editor-actions'
 import { MonacoSetupNodePluginEditorFeature } from '@features/dashboard/config-profiles/monaco-setup'
+import { NodePluginsEditorActionsFeature } from '@features/dashboard/node-plugins/node-plugins-editor-actions'
+import { Box, Card, Code, Paper } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import Editor, { Monaco } from '@monaco-editor/react'
+import { GetNodePluginCommand } from '@remnawave/backend-contract'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbAlertTriangle } from 'react-icons/tb'
+import { useBlocker } from 'react-router'
+
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { preventBackScroll } from '@shared/utils/misc'
 

@@ -1,5 +1,5 @@
-import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 import { create } from 'zustand'
+import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 
 import {
     CONFIG_PROFILES_VIEW_MODE,

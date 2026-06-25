@@ -1,8 +1,7 @@
+import type { MrtTableStore } from './create-mrt-table-store'
 import type { StoreApi, UseBoundStore } from 'zustand'
 
 import { useShallow } from 'zustand/react/shallow'
-
-import type { MrtTableStore } from './create-mrt-table-store'
 
 export const useMrtTableBinding = (useStore: UseBoundStore<StoreApi<MrtTableStore>>) => {
     const state = useStore(

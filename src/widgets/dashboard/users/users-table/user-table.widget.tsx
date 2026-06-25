@@ -1,22 +1,20 @@
-/* eslint-disable camelcase */
+import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
+import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
+import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
 import {
     MantineReactTable,
     MRT_ColumnFilterFnsState,
     MRT_SortingState,
     useMantineReactTable
 } from '@kastov/mantine-react-table-open'
-import { useEffect, useLayoutEffect, useState } from 'react'
-import { TbSearch, TbSearchOff } from 'react-icons/tb'
-import { notifications } from '@mantine/notifications'
-import { PiUsersDuotone } from 'react-icons/pi'
-import { useSearchParams } from 'react-router'
-import { useTranslation } from 'react-i18next'
 import { Badge } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
+import { useEffect, useLayoutEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiUsersDuotone } from 'react-icons/pi'
+import { TbSearch, TbSearchOff } from 'react-icons/tb'
+import { useSearchParams } from 'react-router'
 
-import {
-    useBulkUsersActionsStoreActions,
-    useBulkUsersActionsStoreTableSelection
-} from '@entities/dashboard/users/bulk-users-actions-store'
 import {
     useGetExternalSquads,
     useGetInternalSquads,
@@ -24,16 +22,18 @@ import {
     useGetUsersV2,
     useGetUserTags
 } from '@shared/api/hooks'
-import { UsersTableSelectionFeature } from '@features/ui/dashboard/users/users-table-selection/users-table-selection.feature'
-import { useUserTableColumns } from '@features/dashboard/users/users-table/model/use-table-columns'
-import { DEFAULT_PAGINATION_STATE, useMrtTableBinding } from '@shared/lib/mrt-table-store'
-import { UserActionGroupFeature } from '@features/dashboard/users/users-action-group'
-import { useUsersTableStore } from '@entities/dashboard/users/users-table-store'
-import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 import { SEARCH_PARAMS } from '@shared/constants/search-params'
-import { preventBackScrollTables } from '@shared/utils/misc'
+import { DEFAULT_PAGINATION_STATE, useMrtTableBinding } from '@shared/lib/mrt-table-store'
 import { DataTableShared } from '@shared/ui/table'
+import { preventBackScrollTables } from '@shared/utils/misc'
 import { sToMs } from '@shared/utils/time-utils'
+
+import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
+import {
+    useBulkUsersActionsStoreActions,
+    useBulkUsersActionsStoreTableSelection
+} from '@entities/dashboard/users/bulk-users-actions-store'
+import { useUsersTableStore } from '@entities/dashboard/users/users-table-store'
 
 export function UserTableWidget() {
     const { t } = useTranslation()
@@ -150,8 +150,9 @@ export function UserTableWidget() {
             }
         },
         icons: {
-            /* eslint-disable @typescript-eslint/no-explicit-any */
+            // oxlint-disable-next-line
             IconFilter: (props: any) => <TbSearch size={24} {...props} />,
+            // oxlint-disable-next-line
             IconFilterOff: (props: any) => <TbSearchOff size={24} {...props} />
         },
         // mantineTableBodyCellProps: { style: { padding: '2px 6px' } },

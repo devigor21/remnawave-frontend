@@ -7,8 +7,8 @@ import {
     MRT_PaginationState,
     MRT_VisibilityState
 } from '@kastov/mantine-react-table-open'
-import { createJSONStorage, persist } from 'zustand/middleware'
 import { create } from 'zustand'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 export interface MrtTableState {
     columnFilter: MRT_ColumnFiltersState

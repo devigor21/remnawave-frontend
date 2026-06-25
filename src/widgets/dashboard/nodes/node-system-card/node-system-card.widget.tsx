@@ -1,3 +1,8 @@
+import { ActionIcon, Badge, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
+import { GetOneNodeCommand } from '@remnawave/backend-contract'
+import { memo, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
     PiArrowDownDuotone,
     PiArrowUpDuotone,
@@ -7,22 +12,17 @@ import {
     PiNetworkDuotone,
     PiTimerDuotone
 } from 'react-icons/pi'
-import { ActionIcon, Badge, Group, Progress, Stack, Text, Tooltip } from '@mantine/core'
-import { GetOneNodeCommand } from '@remnawave/backend-contract'
-import { memo, useMemo, useRef, useState } from 'react'
-import { notifications } from '@mantine/notifications'
-import { useTranslation } from 'react-i18next'
 import { TbCamera } from 'react-icons/tb'
 
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SectionCard } from '@shared/ui/section-card'
 import {
     prettifyBytesUtil,
     prettySiBytesUtil,
     prettySiRealtimeBytesUtil
 } from '@shared/utils/bytes'
 import { copyScreenshotToClipboard } from '@shared/utils/copy-screenshot.util'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { formatDurationUtil } from '@shared/utils/time-utils'
-import { SectionCard } from '@shared/ui/section-card'
 
 import classes from './node-system-card.module.css'
 

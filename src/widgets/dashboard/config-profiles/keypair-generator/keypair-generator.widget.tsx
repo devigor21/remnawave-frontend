@@ -1,11 +1,11 @@
 import { Button, Divider, Group, px, Stack, Tabs, Transition } from '@mantine/core'
-import { TbKey, TbLock, TbSignature } from 'react-icons/tb'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiKey } from 'react-icons/pi'
-import { useState } from 'react'
+import { TbKey, TbLock, TbSignature } from 'react-icons/tb'
 
-import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { CopyableAreaShared } from '@shared/ui/copyable-area/copyable-area'
+import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 
 import { generateMlDsa65, generateMlKem768, generateX25519 } from './keypair-utils'
 import classes from './KeypairGenerator.module.css'

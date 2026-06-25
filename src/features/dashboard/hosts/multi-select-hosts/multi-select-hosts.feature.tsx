@@ -1,14 +1,4 @@
 import {
-    TbArrowBarToDown,
-    TbArrowBarToUp,
-    TbArrowBigDown,
-    TbArrowBigUp,
-    TbCategoryPlus,
-    TbCopy,
-    TbSelectAll,
-    TbTrash
-} from 'react-icons/tb'
-import {
     ActionIcon,
     Affix,
     Badge,
@@ -20,19 +10,30 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { PiProhibitDuotone, PiPulseDuotone } from 'react-icons/pi'
-import { notifications } from '@mantine/notifications'
-import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
+import { notifications } from '@mantine/notifications'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiProhibitDuotone, PiPulseDuotone } from 'react-icons/pi'
+import {
+    TbArrowBarToDown,
+    TbArrowBarToUp,
+    TbArrowBigDown,
+    TbArrowBigUp,
+    TbCategoryPlus,
+    TbCopy,
+    TbSelectAll,
+    TbTrash
+} from 'react-icons/tb'
 
+import { useBulkEnableHosts, useCreateHost, useGetHosts } from '@shared/api/hooks'
 import {
     useBulkDeleteHosts,
     useBulkDisableHosts
 } from '@shared/api/hooks/hosts/hosts.mutation.hooks'
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { useBulkEnableHosts, useCreateHost, useGetHosts } from '@shared/api/hooks'
 import { cloneString } from '@shared/utils/misc/clone-string'
+
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 
 import { IProps } from './interfaces/props.interface'
 

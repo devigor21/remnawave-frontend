@@ -1,10 +1,10 @@
-import { TbAlertCircle, TbRocket } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
 import { Stack } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { useTranslation } from 'react-i18next'
+import { TbAlertCircle, TbRocket } from 'react-icons/tb'
 
-import { ActionCardShared } from '@shared/ui/action-card'
 import { useRestartNode } from '@shared/api/hooks'
+import { ActionCardShared } from '@shared/ui/action-card'
 
 interface IProps {
     handleClose: () => void

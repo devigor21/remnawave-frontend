@@ -2,12 +2,12 @@
 
 import { Badge, Button, Flex, Group, Paper, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { ConfigProfilesDrawer } from '@widgets/dashboard/nodes/config-profiles-drawer/config-profiles.drawer.widget'
+import clsx from 'clsx'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbFile, TbTag } from 'react-icons/tb'
-import { useMemo } from 'react'
-import clsx from 'clsx'
 
-import { ConfigProfilesDrawer } from '@widgets/dashboard/nodes/config-profiles-drawer/config-profiles.drawer.widget'
 import { XrayLogo } from '@shared/ui/logos'
 
 import { IProps } from './interfaces'

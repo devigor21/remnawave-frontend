@@ -1,28 +1,29 @@
+import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
+import { HeaderActionButtonsFeature } from '@features/ui/dashboard/hosts/header-action-buttons'
+import { useListState } from '@mantine/hooks'
+import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-modal'
+import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
+import { EditManyHostsDrawer } from '@widgets/dashboard/hosts/edit-many-hosts-drawer'
+import { HostsDataTableWidget } from '@widgets/dashboard/hosts/hosts-datatable/hosts-datatable.widget'
+import { HostsSpotlightWidget } from '@widgets/dashboard/hosts/hosts-spotlight'
+import { HostsTableWidget } from '@widgets/dashboard/hosts/hosts-table'
+import { motion } from 'motion/react'
 /* eslint-disable no-nested-ternary */
 import { useCallback, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { useListState } from '@mantine/hooks'
 import { TbListCheck } from 'react-icons/tb'
-import { motion } from 'motion/react'
+import { useSearchParams } from 'react-router'
 
+import { useReorderHosts } from '@shared/api/hooks'
+import { SEARCH_PARAMS } from '@shared/constants/search-params'
+import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
+
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import {
     HOSTS_VIEW_MODE,
     useHostsViewMode,
     useViewPreferencesStoreActions
 } from '@entities/dashboard/view-preferences-store'
-import { MultiSelectHostsFeature } from '@features/dashboard/hosts/multi-select-hosts/multi-select-hosts.feature'
-import { HostsDataTableWidget } from '@widgets/dashboard/hosts/hosts-datatable/hosts-datatable.widget'
-import { HeaderActionButtonsFeature } from '@features/ui/dashboard/hosts/header-action-buttons'
-import { EditManyHostsDrawer } from '@widgets/dashboard/hosts/edit-many-hosts-drawer'
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { CreateHostModalWidget } from '@widgets/dashboard/hosts/create-host-modal'
-import { HostsSpotlightWidget } from '@widgets/dashboard/hosts/hosts-spotlight'
-import { EditHostModalWidget } from '@widgets/dashboard/hosts/edit-host-modal'
-import { HostsTableWidget } from '@widgets/dashboard/hosts/hosts-table'
-import { LoadingScreen, Page, PageHeaderShared } from '@shared/ui'
-import { SEARCH_PARAMS } from '@shared/constants/search-params'
-import { useReorderHosts } from '@shared/api/hooks'
 
 import { IProps } from './interfaces'
 

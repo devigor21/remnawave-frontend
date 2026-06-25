@@ -1,3 +1,8 @@
+import { Button, Divider, Group, NumberInput, Paper, Stack, Text, ThemeIcon } from '@mantine/core'
+import { useForm } from '@mantine/form'
+import { modals } from '@mantine/modals'
+import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
     TbCalendarUp,
     TbCirclesRelation,
@@ -7,11 +12,6 @@ import {
     TbUsers,
     TbUsersMinus
 } from 'react-icons/tb'
-import { Button, Divider, Group, NumberInput, Paper, Stack, Text, ThemeIcon } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
-import { useMemo, useState } from 'react'
-import { modals } from '@mantine/modals'
-import { useForm } from '@mantine/form'
 
 import {
     useBulkDeleteUsers,
@@ -21,12 +21,13 @@ import {
     useBulkSetActiveInternalSquads,
     useGetInternalSquads
 } from '@shared/api/hooks'
-import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { ActionCardShared } from '@shared/ui'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
-import { BulkUsersUpdateWidget } from './bulk-users-update.widget'
+import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
+
 import { InternalSquadsListWidget } from '../internal-squads-list'
+import { BulkUsersUpdateWidget } from './bulk-users-update.widget'
 
 interface IProps {
     isMobile: boolean

@@ -1,6 +1,6 @@
+import { NodesBandwidthTableWidget } from '@widgets/dashboard/nodes-bandwidth-table/table'
 import { useTranslation } from 'react-i18next'
 
-import { NodesBandwidthTableWidget } from '@widgets/dashboard/nodes-bandwidth-table/table'
 import { LoadingScreen, Page } from '@shared/ui'
 
 import { IProps } from './interfaces'

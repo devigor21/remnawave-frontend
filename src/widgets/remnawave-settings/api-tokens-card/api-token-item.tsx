@@ -1,17 +1,17 @@
-import { TbCheck, TbCookie, TbCopy, TbDots, TbEye, TbId, TbTrash } from 'react-icons/tb'
 import { ActionIcon, Box, CopyButton, Group, Menu, Text } from '@mantine/core'
+import { modals } from '@mantine/modals'
 import { FindAllApiTokensCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
+import { TbCheck, TbCookie, TbCopy, TbDots, TbEye, TbId, TbTrash } from 'react-icons/tb'
 
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { QueryKeys, useDeleteApiToken } from '@shared/api/hooks'
-import { formatTimeUtil } from '@shared/utils/time-utils'
-import { useIsMobile } from '@shared/hooks'
 import { queryClient } from '@shared/api'
+import { QueryKeys, useDeleteApiToken } from '@shared/api/hooks'
+import { useIsMobile } from '@shared/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
-import { ViewApiTokenContentWidget } from './modals/view-api-token-modal.widget'
 import classes from './api-token-card.module.css'
+import { ViewApiTokenContentWidget } from './modals/view-api-token-modal.widget'
 
 interface IProps {
     apiToken: FindAllApiTokensCommand.Response['response']['apiKeys'][number]

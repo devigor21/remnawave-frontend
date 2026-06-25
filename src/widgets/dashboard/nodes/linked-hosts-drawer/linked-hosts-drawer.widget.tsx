@@ -1,14 +1,16 @@
-import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 import { Center, Drawer, Stack, Text, ThemeIcon } from '@mantine/core'
-import { useGetConfigProfiles, useGetHosts, useGetNodes } from '@shared/api/hooks'
-import { LoadingScreen } from '@shared/ui'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { SectionCard } from '@shared/ui/section-card'
 import { HostCardWidget } from '@widgets/dashboard/hosts/host-card/host-card.widget'
 import { memo, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
 import { TbListCheck } from 'react-icons/tb'
+
+import { useGetConfigProfiles, useGetHosts, useGetNodes } from '@shared/api/hooks'
+import { LoadingScreen } from '@shared/ui'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SectionCard } from '@shared/ui/section-card'
+
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 export const LinkedHostsDrawer = memo(() => {
     const { isOpen, internalState: nodeUuid } = useModalState(MODALS.SHOW_NODE_LINKED_HOSTS_DRAWER)

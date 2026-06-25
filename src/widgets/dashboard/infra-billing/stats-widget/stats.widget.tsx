@@ -1,12 +1,12 @@
-import { MdPayment, MdTrendingUp } from 'react-icons/md'
-import { TbAlertTriangle } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { FaServer } from 'react-icons/fa'
 import { Grid } from '@mantine/core'
 import dayjs from 'dayjs'
+import { useTranslation } from 'react-i18next'
+import { FaServer } from 'react-icons/fa'
+import { MdPayment, MdTrendingUp } from 'react-icons/md'
+import { TbAlertTriangle } from 'react-icons/tb'
 
-import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
 import { useGetInfraBillingNodes } from '@shared/api/hooks'
+import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
 import { formatCurrency } from '@shared/utils/misc'
 
 export function StatsWidget() {

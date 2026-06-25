@@ -1,9 +1,10 @@
-import { RESET_PERIODS } from '@remnawave/backend-contract'
 import { Box, Group, Progress, Text } from '@mantine/core'
+import { RESET_PERIODS } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
 
-import { IProps } from '@entities/dashboard/users/ui/table-columns/username/interface'
 import { prettifyBytesUtil } from '@shared/utils/bytes'
+
+import { IProps } from '@entities/dashboard/users/ui/table-columns/username/interface'
 
 export function DataUsageColumnEntity(props: IProps) {
     const { t } = useTranslation()

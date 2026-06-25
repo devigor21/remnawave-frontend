@@ -12,29 +12,29 @@ import {
     Text,
     Textarea
 } from '@mantine/core'
-import { BulkNodesUpdateCommand, GetAllNodesCommand } from '@remnawave/backend-contract'
-import { TbCheck, TbMapPin, TbMinus, TbPackage, TbPlus } from 'react-icons/tb'
-import { zodResolver } from 'mantine-form-zod-resolver'
-import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { useTranslation } from 'react-i18next'
-import { PiTagDuotone } from 'react-icons/pi'
-import { modals } from '@mantine/modals'
 import { useForm } from '@mantine/form'
+import { modals } from '@mantine/modals'
+import { BulkNodesUpdateCommand, GetAllNodesCommand } from '@remnawave/backend-contract'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { motion } from 'motion/react'
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
+import { PiTagDuotone } from 'react-icons/pi'
+import { TbCheck, TbMapPin, TbMinus, TbPackage, TbPlus } from 'react-icons/tb'
 
-import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
 import {
     QueryKeys,
     useBulkNodesUpdate,
     useGetNodePlugins,
     useGetNodesTags
 } from '@shared/api/hooks'
-import { COUNTRIES } from '@shared/ui/forms/nodes/base-node-form/constants'
-import { LoaderModalShared } from '@shared/ui/loader-modal'
-import { TagInputPill } from '@shared/ui/tag-input-pill'
 import { queryClient } from '@shared/api/query-client'
+import { COUNTRIES } from '@shared/ui/forms/nodes/base-node-form/constants'
+import { SelectInfraProviderShared } from '@shared/ui/infra-billing/select-infra-provider/select-infra-provider.shared'
+import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { SectionCard } from '@shared/ui/section-card'
+import { TagInputPill } from '@shared/ui/tag-input-pill'
 
 type NodeType = GetAllNodesCommand.Response['response'][number]
 

@@ -1,3 +1,10 @@
+import { ActionIcon, Badge, SimpleGrid, Tooltip } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { MobileNodesListWidget } from '@widgets/dashboard/infra-billing/mobile/mobile-nodes-list.widget'
+import { MobileProvidersListWidget } from '@widgets/dashboard/infra-billing/mobile/mobile-providers-list.widget'
+import { VirtualizedRecordsList } from '@widgets/dashboard/infra-billing/mobile/virtualized-records-list.widget'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
     TbCalendar,
     TbCloud,
@@ -7,11 +14,8 @@ import {
     TbTrash,
     TbX
 } from 'react-icons/tb'
-import { ActionIcon, Badge, SimpleGrid, Tooltip } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
-import { useState } from 'react'
 
+import { queryClient } from '@shared/api'
 import {
     QueryKeys,
     useDeleteInfraBillingNode,
@@ -19,16 +23,13 @@ import {
     useGetInfraBillingNodes,
     useGetInfraProviders
 } from '@shared/api/hooks'
-import { VirtualizedRecordsList } from '@widgets/dashboard/infra-billing/mobile/virtualized-records-list.widget'
-import { MobileProvidersListWidget } from '@widgets/dashboard/infra-billing/mobile/mobile-providers-list.widget'
-import { MobileNodesListWidget } from '@widgets/dashboard/infra-billing/mobile/mobile-nodes-list.widget'
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
 import { LoadingScreen } from '@shared/ui'
-import { queryClient } from '@shared/api'
 
-import { RefreshButton } from './refresh-button'
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+
 import { AddButton } from './add-button'
 import { Column } from './column'
+import { RefreshButton } from './refresh-button'
 
 const COLUMN_HEIGHT = 'calc(100vh - 320px)'
 

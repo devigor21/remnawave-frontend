@@ -1,3 +1,17 @@
+import { useHotkeys } from '@mantine/hooks'
+import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { HiChartPie, HiServer } from 'react-icons/hi'
+import {
+    PiAirTrafficControlDuotone,
+    PiArrowsInCardinalFill,
+    PiChartLine,
+    PiCpu,
+    PiListChecks,
+    PiStarDuotone,
+    PiUsers
+} from 'react-icons/pi'
 import {
     TbChartArcs,
     TbCirclesRelation,
@@ -12,24 +26,10 @@ import {
     TbRoute,
     TbWebhook
 } from 'react-icons/tb'
-import {
-    PiAirTrafficControlDuotone,
-    PiArrowsInCardinalFill,
-    PiChartLine,
-    PiCpu,
-    PiListChecks,
-    PiStarDuotone,
-    PiUsers
-} from 'react-icons/pi'
-import { SUBSCRIPTION_TEMPLATE_TYPE } from '@remnawave/backend-contract'
-import { HiChartPie, HiServer } from 'react-icons/hi'
-import { useTranslation } from 'react-i18next'
-import { useHotkeys } from '@mantine/hooks'
-import { useState } from 'react'
 
-import { MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
 import { ROUTES } from '@shared/constants'
 import { Logo } from '@shared/ui'
+import { MihomoLogo, SingboxLogo, StashLogo, XrayLogo } from '@shared/ui/logos'
 
 import { MenuItem } from './interfaces'
 

@@ -1,8 +1,8 @@
 import { Button, CheckIcon, ColorSwatch, Group, Stack, Text, TextInput } from '@mantine/core'
-import { TbDeviceFloppy } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbDeviceFloppy } from 'react-icons/tb'
 
 import {
     UsersTableTemplateSnapshot,

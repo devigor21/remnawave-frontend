@@ -1,11 +1,11 @@
 import { ActionIcon, Avatar, Group, Text } from '@mantine/core'
-import { TbCreditCard, TbTrash } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { TbCreditCard, TbTrash } from 'react-icons/tb'
 
-import { faviconResolver, formatCurrencyWithIntl } from '@shared/utils/misc'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { formatTimeUtil } from '@shared/utils/time-utils'
 import { SectionCard } from '@shared/ui/section-card'
+import { faviconResolver, formatCurrencyWithIntl } from '@shared/utils/misc'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
 import { BillingRecord } from './group-records-by-month'
 

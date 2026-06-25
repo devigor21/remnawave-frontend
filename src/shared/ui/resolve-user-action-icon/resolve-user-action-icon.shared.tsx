@@ -1,8 +1,9 @@
-import { PiUserCircle } from 'react-icons/pi'
 import { ActionIcon } from '@mantine/core'
+import { PiUserCircle } from 'react-icons/pi'
+
+import { useResolveUser } from '@shared/api/hooks'
 
 import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
-import { useResolveUser } from '@shared/api/hooks'
 
 interface IProps {
     userId: number

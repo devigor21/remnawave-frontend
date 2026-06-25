@@ -1,16 +1,16 @@
 import { Box, Center, Loader, MantineStyleProp, Stack, Text, ThemeIcon } from '@mantine/core'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TbCreditCard } from 'react-icons/tb'
 
 import { SectionCard } from '@shared/ui/section-card'
 
-import { BillingRecord, groupRecordsByMonth } from './group-records-by-month'
-import { useDeleteBillingRecord } from './use-delete-billing-record'
-import { MonthDivider } from './month-divider'
 import styles from './fade-mask.module.css'
+import { BillingRecord, groupRecordsByMonth } from './group-records-by-month'
+import { MonthDivider } from './month-divider'
 import { RecordCard } from './record-card'
+import { useDeleteBillingRecord } from './use-delete-billing-record'
 
 type Row =
     | { key: string; label: string; total: number; type: 'divider' }
@@ -103,7 +103,9 @@ export function VirtualizedRecordsList(props: IProps) {
 
                             <Stack align="center" gap="xs">
                                 <Text c="dimmed" fw={600} size="md" ta="center">
-                                    {t('infra-billing-records-table.widget.no-billing-records-found')}
+                                    {t(
+                                        'infra-billing-records-table.widget.no-billing-records-found'
+                                    )}
                                 </Text>
                             </Stack>
                         </Stack>

@@ -1,19 +1,19 @@
 import type { editor } from 'monaco-editor'
 
-import { GetAllHostsCommand, GetSubscriptionTemplateCommand } from '@remnawave/backend-contract'
+import { TemplateEditorActionsFeature } from '@features/dashboard/subscription-templates/template-editor-actions'
+import { Box, Card, Paper } from '@mantine/core'
 import Editor, { Monaco } from '@monaco-editor/react'
 import 'monaco-yaml/yaml.worker.js'
-import { Box, Card, Paper } from '@mantine/core'
+import { GetAllHostsCommand, GetSubscriptionTemplateCommand } from '@remnawave/backend-contract'
+import { decode } from '@stablelib/base64'
 import { useLayoutEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { decode } from '@stablelib/base64'
 
-import { TemplateEditorActionsFeature } from '@features/dashboard/subscription-templates/template-editor-actions'
 import { monacoTheme } from '@shared/constants/monaco-theme/monaco-theme'
 import { preventBackScroll } from '@shared/utils/misc'
 
-import { configureMonaco } from './utils/setup-template-monaco'
 import styles from './SubscriptionTemplateEditor.module.css'
+import { configureMonaco } from './utils/setup-template-monaco'
 
 interface Props {
     editorType: 'json' | 'yaml'

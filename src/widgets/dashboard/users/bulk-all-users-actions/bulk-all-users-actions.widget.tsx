@@ -1,12 +1,12 @@
-import { TbCalendarUp, TbPencil, TbRefresh, TbTrash, TbUsers, TbUsersMinus } from 'react-icons/tb'
-import { Button, NumberInput, Stack } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
-
 import { DeleteAllUsersByStatusFeature } from '@features/ui/dashboard/users/delete-all-users-by-status'
+import { Button, NumberInput, Stack } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { useTranslation } from 'react-i18next'
+import { TbCalendarUp, TbPencil, TbRefresh, TbTrash, TbUsers, TbUsersMinus } from 'react-icons/tb'
+
 import { useBulkAllExtendUsersExpirationDate, useBulkAllResetTrafficUsers } from '@shared/api/hooks'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { ActionCardShared } from '@shared/ui'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { BulkAllUsersUpdateWidget } from './bulk-all-users-update.widget'
 

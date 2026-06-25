@@ -1,3 +1,5 @@
+import type { BooleanFilterValue } from './use-hosts-table-widget'
+
 import {
     ActionIcon,
     Group,
@@ -8,11 +10,9 @@ import {
     TextInput,
     ThemeIcon
 } from '@mantine/core'
+import { ReactNode } from 'react'
 import { PiCheckCircleDuotone, PiXCircleDuotone } from 'react-icons/pi'
 import { TbSearch, TbX } from 'react-icons/tb'
-import { ReactNode } from 'react'
-
-import type { BooleanFilterValue } from './use-hosts-table-widget'
 
 export function EllipsisCell({ children }: { children: ReactNode }) {
     return (

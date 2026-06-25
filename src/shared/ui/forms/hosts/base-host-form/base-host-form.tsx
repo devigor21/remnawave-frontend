@@ -1,3 +1,5 @@
+import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
+import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
 import {
     ActionIcon,
     Autocomplete,
@@ -19,6 +21,7 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
+import { modals } from '@mantine/modals'
 import {
     ALPN,
     CreateHostCommand,
@@ -29,6 +32,9 @@ import {
     UpdateHostCommand,
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
 import {
     PiCaretDown,
     PiFloppyDiskDuotone,
@@ -49,33 +55,27 @@ import {
     TbServer2,
     TbStar
 } from 'react-icons/tb'
-import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
-import { modals } from '@mantine/modals'
 import { Link } from 'react-router'
 
-import { HostSelectInboundFeature } from '@features/ui/dashboard/hosts/host-select-inbound/host-select-inbound.feature'
-import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
-import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
-import { DeleteHostFeature } from '@features/ui/dashboard/hosts/delete-host'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { MihomoLogo, SingboxLogo, StashLogo } from '@shared/ui/logos'
-import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
-import { ChipMultiSelect } from '@shared/ui/chip-multi-select'
-import { TagInputPill } from '@shared/ui/tag-input-pill'
-import { DrawerFooter } from '@shared/ui/drawer-footer'
-import { handleFormErrors } from '@shared/utils/misc'
-import { XrayLogo } from '@shared/ui/logos/xray-logo'
-import { SectionCard } from '@shared/ui/section-card'
 import { useIsMobile } from '@shared/hooks'
+import { ChipMultiSelect } from '@shared/ui/chip-multi-select'
+import { DrawerFooter } from '@shared/ui/drawer-footer'
+import { MihomoLogo, SingboxLogo, StashLogo } from '@shared/ui/logos'
+import { XrayLogo } from '@shared/ui/logos/xray-logo'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { TemplateInfoPopoverShared } from '@shared/ui/popovers'
+import { PopoverWithInfoShared } from '@shared/ui/popovers/popover-with-info'
+import { SectionCard } from '@shared/ui/section-card'
+import { TagInputPill } from '@shared/ui/tag-input-pill'
+import { handleFormErrors } from '@shared/utils/misc'
+import { emojiFlag, resolveCountryCode } from '@shared/utils/misc/resolve-country-code'
 
-import { FINAL_MASK_MODAL_ID, FinalMaskModalContent } from './modals/final-mask.modal.content'
-import { SOCKOPT_MODAL_ID, SockoptModalContent } from './modals/sockopt.modal.content'
-import { XHTTP_MODAL_ID, XhttpModalContent } from './modals/xhttp.modal.content'
-import { MUX_MODAL_ID, MuxModalContent } from './modals/mux.modal.content'
 import classes from './HostTabs.module.css'
 import { IProps } from './interfaces'
+import { FINAL_MASK_MODAL_ID, FinalMaskModalContent } from './modals/final-mask.modal.content'
+import { MUX_MODAL_ID, MuxModalContent } from './modals/mux.modal.content'
+import { SOCKOPT_MODAL_ID, SockoptModalContent } from './modals/sockopt.modal.content'
+import { XHTTP_MODAL_ID, XhttpModalContent } from './modals/xhttp.modal.content'
 
 const SUBSCRIPTION_TYPES = {
     [SUBSCRIPTION_TEMPLATE_TYPE.XRAY_JSON]: {

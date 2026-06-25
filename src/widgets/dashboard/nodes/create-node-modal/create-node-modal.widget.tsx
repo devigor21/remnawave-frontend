@@ -1,19 +1,20 @@
 import { Group, Modal, Progress, Stack, Transition } from '@mantine/core'
+import { useForm } from '@mantine/form'
 import { CreateNodeCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
-import { useForm } from '@mantine/form'
+import { useTranslation } from 'react-i18next'
 import { TbCpu } from 'react-icons/tb'
 
-import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
-import { configProfilesQueryKeys, useCreateNode, useGetPubKey } from '@shared/api/hooks'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { useIsMobile } from '@shared/hooks'
 import { queryClient } from '@shared/api'
+import { configProfilesQueryKeys, useCreateNode, useGetPubKey } from '@shared/api/hooks'
+import { useIsMobile } from '@shared/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
-import { CreateNodeStep2ConfigProfiles } from './create-node-steps/create-node-step-2-config-profiles'
+import { useNodesStoreActions, useNodesStoreCreateModalIsOpen } from '@entities/dashboard/nodes'
+
 import { CreateNodeStep1Connection } from './create-node-steps/create-node-step-1-connection'
+import { CreateNodeStep2ConfigProfiles } from './create-node-steps/create-node-step-2-config-profiles'
 import { CreateNodeStep3Status } from './create-node-steps/create-node-step-3-status'
 
 export const CreateNodeModalWidget = () => {

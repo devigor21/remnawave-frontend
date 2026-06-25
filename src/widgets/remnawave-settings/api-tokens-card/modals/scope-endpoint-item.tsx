@@ -1,8 +1,8 @@
 import { Badge, Box, Checkbox, Group, Stack, Text } from '@mantine/core'
 import { memo } from 'react'
 
-import { getMethodColor, ScopeEndpoint } from './scopes.utils'
 import classes from '../api-token-card.module.css'
+import { getMethodColor, ScopeEndpoint } from './scopes.utils'
 
 interface IProps {
     checked: boolean

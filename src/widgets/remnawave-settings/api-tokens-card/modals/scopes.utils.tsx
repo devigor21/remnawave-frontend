@@ -1,3 +1,7 @@
+import { GetApiTokenScopesCommand } from '@remnawave/backend-contract'
+import { createElement, ReactNode } from 'react'
+import { HiServer } from 'react-icons/hi'
+import { PiArrowsInCardinalFill, PiListChecks, PiUsers } from 'react-icons/pi'
 import {
     TbApi,
     TbChartArcs,
@@ -15,10 +19,6 @@ import {
     TbTags,
     TbWebhook
 } from 'react-icons/tb'
-import { PiArrowsInCardinalFill, PiListChecks, PiUsers } from 'react-icons/pi'
-import { GetApiTokenScopesCommand } from '@remnawave/backend-contract'
-import { createElement, ReactNode } from 'react'
-import { HiServer } from 'react-icons/hi'
 
 import { XrayLogo } from '@shared/ui/logos'
 

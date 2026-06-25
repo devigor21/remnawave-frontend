@@ -1,3 +1,4 @@
+import { createQueryKeys } from '@lukemorales/query-key-factory'
 import {
     GetLegacyStatsNodeUserUsageCommand,
     GetLegacyStatsUserUsageCommand,
@@ -6,7 +7,6 @@ import {
     GetStatsNodeUsersUsageCommand,
     GetStatsUserUsageCommand
 } from '@remnawave/backend-contract'
-import { createQueryKeys } from '@lukemorales/query-key-factory'
 
 import { sToMs } from '@shared/utils/time-utils'
 

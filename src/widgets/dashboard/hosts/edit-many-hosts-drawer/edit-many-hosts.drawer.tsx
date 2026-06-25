@@ -1,13 +1,14 @@
-import { UpdateManyHostsCommand } from '@remnawave/backend-contract'
 import { Code, Drawer, List, Stack, Text } from '@mantine/core'
-import { zodResolver } from 'mantine-form-zod-resolver'
+import { useForm } from '@mantine/form'
+import { modals } from '@mantine/modals'
 import { notifications } from '@mantine/notifications'
+import { UpdateManyHostsCommand } from '@remnawave/backend-contract'
+import { zodResolver } from 'mantine-form-zod-resolver'
+import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiListChecks } from 'react-icons/pi'
-import { modals } from '@mantine/modals'
-import { useForm } from '@mantine/form'
-import { memo, useState } from 'react'
 
+import { queryClient } from '@shared/api'
 import {
     QueryKeys,
     useGetConfigProfiles,
@@ -17,11 +18,11 @@ import {
     useGetSubscriptionTemplates,
     useUpdateManyHosts
 } from '@shared/api/hooks'
-import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { parseJsonField } from '@shared/utils/misc'
-import { queryClient } from '@shared/api'
+
+import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
 
 export const EditManyHostsDrawer = memo(() => {
     const { t } = useTranslation()

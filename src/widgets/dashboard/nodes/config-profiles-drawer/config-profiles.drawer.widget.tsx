@@ -11,14 +11,14 @@ import {
 } from '@mantine/core'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
+import { TbDeviceFloppy, TbSearch, TbX } from 'react-icons/tb'
 import { Virtuoso } from 'react-virtuoso'
 
-import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { useGetConfigProfiles } from '@shared/api/hooks'
+import { ConfigProfileCardShared } from '@shared/ui/config-profiles/config-profile-card/config-profile-card.shared'
 import { XrayLogo } from '@shared/ui/logos'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import classes from './config-profiles.module.css'
 import { IProps } from './interfaces'

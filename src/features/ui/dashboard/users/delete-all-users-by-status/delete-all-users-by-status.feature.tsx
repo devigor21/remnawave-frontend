@@ -1,14 +1,14 @@
-import { BulkDeleteUsersByStatusCommand, TUsersStatus } from '@remnawave/backend-contract'
-import { TbCheck as IconCheck, TbX as IconX } from 'react-icons/tb'
 import { Button, Group, Select, Stack } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
-import { PiClockDuotone } from 'react-icons/pi'
-import { useTranslation } from 'react-i18next'
 import { modals } from '@mantine/modals'
+import { notifications } from '@mantine/notifications'
+import { BulkDeleteUsersByStatusCommand, TUsersStatus } from '@remnawave/backend-contract'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiClockDuotone } from 'react-icons/pi'
+import { TbCheck as IconCheck, TbX as IconX } from 'react-icons/tb'
 
-import { userStatusValues } from '@shared/constants/forms/user-status.constants'
 import { useBulkDeleteUsersByStatus } from '@shared/api/hooks'
+import { userStatusValues } from '@shared/constants/forms/user-status.constants'
 
 export const DeleteAllUsersByStatusFeature = () => {
     const { t } = useTranslation()

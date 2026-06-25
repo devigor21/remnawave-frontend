@@ -1,17 +1,17 @@
-import { PiArrowDownDuotone, PiArrowUpDuotone, PiPulse, PiWarningCircle } from 'react-icons/pi'
-import { GetAllNodesCommand } from '@remnawave/backend-contract'
-import { TbServer2, TbSum, TbUsers } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
 import { SimpleGrid } from '@mantine/core'
+import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { motion } from 'motion/react'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiArrowDownDuotone, PiArrowUpDuotone, PiPulse, PiWarningCircle } from 'react-icons/pi'
+import { TbServer2, TbSum, TbUsers } from 'react-icons/tb'
 
+import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
 import {
     prettifyBytesUtil,
     prettySiBytesUtil,
     prettySiRealtimeBytesUtil
 } from '@shared/utils/bytes'
-import { IMetricCardProps, MetricCardShared } from '@shared/ui/metrics/metric-card'
 
 interface IProps {
     isLoading: boolean

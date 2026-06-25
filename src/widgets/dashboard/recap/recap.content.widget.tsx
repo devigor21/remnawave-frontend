@@ -1,3 +1,5 @@
+import type { BgStyle, MaskableField } from './recap.constants'
+
 import {
     alpha,
     Button,
@@ -9,19 +11,17 @@ import {
     Switch,
     TextInput
 } from '@mantine/core'
-import { TbCheck, TbCopy, TbDownload, TbX } from 'react-icons/tb'
 import { notifications } from '@mantine/notifications'
-import { useTranslation } from 'react-i18next'
-import { useRef, useState } from 'react'
-import { motion } from 'motion/react'
 import dayjs from 'dayjs'
+import { motion } from 'motion/react'
+import { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbCheck, TbCopy, TbDownload, TbX } from 'react-icons/tb'
 
-import { copyScreenshotToClipboard, downloadScreenshot } from '@shared/utils/copy-screenshot.util'
 import { useGetRecap } from '@shared/api/hooks/system/system.query.hooks'
-import { prettifyBytesUtil } from '@shared/utils/bytes'
 import { Logo } from '@shared/ui/logo'
-
-import type { BgStyle, MaskableField } from './recap.constants'
+import { prettifyBytesUtil } from '@shared/utils/bytes'
+import { copyScreenshotToClipboard, downloadScreenshot } from '@shared/utils/copy-screenshot.util'
 
 import {
     BG_STYLES,

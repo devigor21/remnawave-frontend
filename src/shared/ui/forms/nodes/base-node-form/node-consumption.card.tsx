@@ -8,13 +8,13 @@ import {
     Stack,
     Text
 } from '@mantine/core'
+import { UseFormReturnType } from '@mantine/form'
 import { CreateNodeCommand, UpdateNodeCommand } from '@remnawave/backend-contract'
 import { ForwardRefComponent, HTMLMotionProps, Variants } from 'motion/react'
-import { TbChartLine, TbMinus, TbPlus } from 'react-icons/tb'
-import { HiQuestionMarkCircle } from 'react-icons/hi'
-import { UseFormReturnType } from '@mantine/form'
-import { useTranslation } from 'react-i18next'
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { HiQuestionMarkCircle } from 'react-icons/hi'
+import { TbChartLine, TbMinus, TbPlus } from 'react-icons/tb'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { SectionCard } from '@shared/ui/section-card'

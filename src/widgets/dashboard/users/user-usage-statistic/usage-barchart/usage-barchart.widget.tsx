@@ -1,4 +1,4 @@
-/* eslint-disable @stylistic/indent */
+import { Chart } from '@highcharts/react'
 import {
     alpha,
     Box,
@@ -11,17 +11,16 @@ import {
     Table,
     Text
 } from '@mantine/core'
+import { modals } from '@mantine/modals'
 import { GetStatsUserUsageCommand } from '@remnawave/backend-contract'
 import { useTranslation } from 'react-i18next'
-import { TbChartBar } from 'react-icons/tb'
-import { Chart } from '@highcharts/react'
 import { PiEmpty } from 'react-icons/pi'
-import { modals } from '@mantine/modals'
+import { TbChartBar } from 'react-icons/tb'
 
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { formatTimeUtil } from '@shared/utils/time-utils'
 import { CountryFlag } from '@shared/ui/get-country-flag'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 import { prettifyBytesUtil } from '@shared/utils/bytes'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
 interface IProps {
     categories: string[] | undefined

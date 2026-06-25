@@ -1,3 +1,12 @@
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import { Avatar, Badge, Box, Flex, Progress, Stack, Text, Tooltip } from '@mantine/core'
+import { useClipboard } from '@mantine/hooks'
+import { notifications } from '@mantine/notifications'
+import clsx from 'clsx'
+import { CSSProperties, memo, useMemo } from 'react'
+import ReactCountryFlag from 'react-country-flag'
+import { useTranslation } from 'react-i18next'
 import {
     PiArrowDownDuotone,
     PiArrowsCounterClockwise,
@@ -8,26 +17,17 @@ import {
     PiMemoryDuotone,
     PiUsersDuotone
 } from 'react-icons/pi'
-import { Avatar, Badge, Box, Flex, Progress, Stack, Text, Tooltip } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
-import { CSSProperties, memo, useMemo } from 'react'
-import ReactCountryFlag from 'react-country-flag'
-import { useSortable } from '@dnd-kit/sortable'
 import { TbAlertCircle } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { useClipboard } from '@mantine/hooks'
-import { CSS } from '@dnd-kit/utilities'
-import clsx from 'clsx'
 
-import { prettifyBytesUtil, prettySiRealtimeBytesUtil } from '@shared/utils/bytes'
-import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
-import { faviconResolver } from '@shared/utils/misc'
-import { XrayLogo } from '@shared/ui/logos'
 import { Logo } from '@shared/ui/logo'
+import { XrayLogo } from '@shared/ui/logos'
+import { prettifyBytesUtil, prettySiRealtimeBytesUtil } from '@shared/utils/bytes'
+import { faviconResolver } from '@shared/utils/misc'
+import { getNodeResetDaysUtil, getXrayUptimeUtil } from '@shared/utils/time-utils'
 
 import { NodeStatusBadgeWidget } from '../node-status-badge'
-import classes from './NodeCard.module.css'
 import { IProps } from './interfaces'
+import classes from './NodeCard.module.css'
 
 const getNodeColors = (node: IProps['node']) => {
     if (node.isDisabled) {

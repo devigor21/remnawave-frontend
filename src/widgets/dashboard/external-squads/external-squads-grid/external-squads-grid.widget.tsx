@@ -1,7 +1,7 @@
 import { Center, Stack, Text, ThemeIcon } from '@mantine/core'
+import { modals } from '@mantine/modals'
 import { useTranslation } from 'react-i18next'
 import { TbWebhook } from 'react-icons/tb'
-import { modals } from '@mantine/modals'
 
 import {
     QueryKeys,
@@ -13,12 +13,12 @@ import {
     useReorderExternalSquads,
     useUpdateExternalSquad
 } from '@shared/api/hooks'
-import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
-import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { queryClient } from '@shared/api/query-client'
+import { baseNotificationsMutations } from '@shared/ui/notifications/base-notification-mutations'
 import { SectionCard } from '@shared/ui/section-card'
-import { sToMs } from '@shared/utils/time-utils'
+import { VirtualizedDndGrid } from '@shared/ui/virtualized-dnd-grid'
 import { cloneString } from '@shared/utils/misc'
+import { sToMs } from '@shared/utils/time-utils'
 
 import { ExternalSquadCardWidget } from '../external-squad-card/external-squad-card.widget'
 import { IProps } from './interfaces'

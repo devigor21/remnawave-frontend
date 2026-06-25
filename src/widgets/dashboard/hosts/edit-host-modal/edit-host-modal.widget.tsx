@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next'
-import { PiListChecks } from 'react-icons/pi'
 import { Drawer } from '@mantine/core'
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PiListChecks } from 'react-icons/pi'
+
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { MODALS, useModalClose, useModalState } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
 
 import { EditHostModalContentWidget } from './edit-host-modal-content.widget'
 

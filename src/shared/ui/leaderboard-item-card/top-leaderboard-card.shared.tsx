@@ -1,6 +1,6 @@
 import { Card, Center, ScrollArea, Skeleton, Stack, Text } from '@mantine/core'
-import { PiEmpty } from 'react-icons/pi'
 import { ReactNode } from 'react'
+import { PiEmpty } from 'react-icons/pi'
 
 import { LeaderboardItemCardShared } from './leaderboard-item-card.shared'
 

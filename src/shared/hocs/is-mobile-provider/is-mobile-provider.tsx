@@ -1,6 +1,6 @@
-import { createContext, ReactNode } from 'react'
-import { useMediaQuery } from '@mantine/hooks'
 import { em } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
+import { createContext, ReactNode } from 'react'
 
 const MOBILE_QUERY = `(max-width: ${em(768)})`
 

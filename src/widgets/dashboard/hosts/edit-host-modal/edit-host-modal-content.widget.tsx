@@ -1,8 +1,9 @@
+import { useForm } from '@mantine/form'
 import { UpdateHostCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { memo, useEffect, useState } from 'react'
-import { useForm } from '@mantine/form'
 
+import { queryClient } from '@shared/api'
 import {
     QueryKeys,
     useGetConfigProfiles,
@@ -12,9 +13,8 @@ import {
     useGetSubscriptionTemplates,
     useUpdateHost
 } from '@shared/api/hooks'
-import { parseJsonField, stringifyJsonField } from '@shared/utils/misc'
 import { BaseHostForm } from '@shared/ui/forms/hosts/base-host-form'
-import { queryClient } from '@shared/api'
+import { parseJsonField, stringifyJsonField } from '@shared/utils/misc'
 
 type HostType = UpdateHostCommand.Response['response']
 

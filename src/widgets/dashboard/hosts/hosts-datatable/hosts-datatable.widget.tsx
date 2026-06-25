@@ -1,15 +1,15 @@
+import { Button, Group } from '@mantine/core'
+import { useDebouncedValue } from '@mantine/hooks'
 import {
     GetAllHostsCommand,
     GetAllHostTagsCommand,
     GetConfigProfilesCommand
 } from '@remnawave/backend-contract'
+import get from 'lodash/get'
 import { DataTable, type DataTableSortStatus, useDataTableColumns } from 'mantine-datatable'
 import { memo, useCallback, useLayoutEffect, useMemo, useState } from 'react'
-import { useDebouncedValue } from '@mantine/hooks'
 import { useTranslation } from 'react-i18next'
-import { Button, Group } from '@mantine/core'
 import { TbRestore } from 'react-icons/tb'
-import get from 'lodash/get'
 
 import {
     useGetHosts,
@@ -17,11 +17,13 @@ import {
     useGetNodes,
     useGetSubscriptionTemplates
 } from '@shared/api/hooks'
-import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { LoadingScreen } from '@shared/ui'
 import { preventBackScrollTables } from '@shared/utils/misc'
 import { sToMs } from '@shared/utils/time-utils'
-import { LoadingScreen } from '@shared/ui'
 
+import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+
+import { ColumnsVisibilityPopover } from './columns-visibility-popover'
 import {
     type BooleanFilterValue,
     getHostColumnLabels,
@@ -33,7 +35,6 @@ import {
     type HostStatusFilter,
     type HostType
 } from './use-hosts-table-widget'
-import { ColumnsVisibilityPopover } from './columns-visibility-popover'
 
 function getHostSortValue(host: HostType, accessor: string): unknown {
     return get(host, accessor)

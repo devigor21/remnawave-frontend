@@ -1,19 +1,20 @@
+import { ConfigProfilesHeaderActionButtonsFeature } from '@features/ui/dashboard/config-profiles/header-action-buttons'
+import { ConfigProfilesGridWidget } from '@widgets/dashboard/config-profiles/config-profiles-grid/config-profiles-grid.widget'
+import { ConfigProfilesSpotlightWidget } from '@widgets/dashboard/config-profiles/config-profiles-spotlight/config-profiles-spotlight'
+import { SnippetsDrawerWidget } from '@widgets/dashboard/config-profiles/snippets-drawer'
+import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
 import { useTranslation } from 'react-i18next'
+
+import { XrayLogo } from '@shared/ui/logos'
+import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
+import { Page } from '@shared/ui/page'
+import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
 
 import {
     CONFIG_PROFILES_VIEW_MODE,
     useConfigProfilesViewMode,
     useViewPreferencesStoreActions
 } from '@entities/dashboard/view-preferences-store'
-import { ConfigProfilesSpotlightWidget } from '@widgets/dashboard/config-profiles/config-profiles-spotlight/config-profiles-spotlight'
-import { ConfigProfilesGridWidget } from '@widgets/dashboard/config-profiles/config-profiles-grid/config-profiles-grid.widget'
-import { ConfigProfilesHeaderActionButtonsFeature } from '@features/ui/dashboard/config-profiles/header-action-buttons'
-import { InternalSquadsDrawerWithStore } from '@widgets/dashboard/users/internal-squads-drawer-with-store'
-import { SnippetsDrawerWidget } from '@widgets/dashboard/config-profiles/snippets-drawer'
-import { PageHeaderShared } from '@shared/ui/page-header/page-header.shared'
-import { RenameModalShared } from '@shared/ui/modals/rename-modal.shared'
-import { XrayLogo } from '@shared/ui/logos'
-import { Page } from '@shared/ui/page'
 
 import { Props } from './interfaces'
 

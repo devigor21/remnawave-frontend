@@ -5,5 +5,4 @@ export const useTbReportsTableStore = createMrtTableStore({
     version: 1
 })
 
-export const useTbReportsTableStoreActions = () =>
-    useTbReportsTableStore((store) => store.actions)
+export const useTbReportsTableStoreActions = () => useTbReportsTableStore((store) => store.actions)

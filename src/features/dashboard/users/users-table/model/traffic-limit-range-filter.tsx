@@ -1,9 +1,9 @@
+import { MRT_Column } from '@kastov/mantine-react-table-open'
 /* eslint-disable camelcase */
 import { Group, NativeSelect, NumberInput } from '@mantine/core'
-import { GetAllUsersCommand } from '@remnawave/backend-contract'
-import { MRT_Column } from '@kastov/mantine-react-table-open'
-import { useEffect, useRef, useState } from 'react'
 import { useDebouncedValue } from '@mantine/hooks'
+import { GetAllUsersCommand } from '@remnawave/backend-contract'
+import { useEffect, useRef, useState } from 'react'
 
 import {
     bestFitIecUnitUtil,

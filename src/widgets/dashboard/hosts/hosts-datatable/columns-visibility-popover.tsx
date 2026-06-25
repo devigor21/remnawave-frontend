@@ -1,8 +1,8 @@
 import { Button, Checkbox, Divider, Group, Popover, ScrollArea, Stack, Text } from '@mantine/core'
-import { type DataTableColumnToggle } from 'mantine-datatable'
-import { TbColumns3, TbEye, TbEyeOff } from 'react-icons/tb'
 import { useDisclosure } from '@mantine/hooks'
+import { type DataTableColumnToggle } from 'mantine-datatable'
 import { useTranslation } from 'react-i18next'
+import { TbColumns3, TbEye, TbEyeOff } from 'react-icons/tb'
 
 interface IProps {
     columnsToggle: DataTableColumnToggle[]

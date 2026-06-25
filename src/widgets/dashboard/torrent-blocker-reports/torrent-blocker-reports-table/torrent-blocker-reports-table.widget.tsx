@@ -1,17 +1,16 @@
-/* eslint-disable camelcase */
 import {
     MantineReactTable,
     MRT_ColumnFilterFnsState,
     MRT_SortingState,
     useMantineReactTable
 } from '@kastov/mantine-react-table-open'
-import { TbExternalLink, TbFlame, TbJson, TbRefresh, TbRestore, TbTrash } from 'react-icons/tb'
 import { ActionIcon, ActionIconGroup, Box, Tooltip } from '@mantine/core'
+import { modals } from '@mantine/modals'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PiUserCircle } from 'react-icons/pi'
-import { modals } from '@mantine/modals'
+import { TbExternalLink, TbFlame, TbJson, TbRefresh, TbRestore, TbTrash } from 'react-icons/tb'
 
 import {
     useGetNodes,
@@ -19,13 +18,14 @@ import {
     useGetTorrentBlockerStats,
     useTruncateTorrentBlockerReports
 } from '@shared/api/hooks'
-import { useTbReportsTableStore } from '@entities/dashboard/torrent-blocker-reports/tb-reports-table-store'
 import { DEFAULT_PAGINATION_STATE, useMrtTableBinding } from '@shared/lib/mrt-table-store'
-import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { preventBackScrollTables } from '@shared/utils/misc'
 import { DataTableShared } from '@shared/ui/table'
+import { preventBackScrollTables } from '@shared/utils/misc'
 import { sToMs } from '@shared/utils/time-utils'
+
+import { useTbReportsTableStore } from '@entities/dashboard/torrent-blocker-reports/tb-reports-table-store'
+import { useUserModalStoreActions } from '@entities/dashboard/user-modal-store'
 
 import { useTbReportsTableColumns } from './use-tb-reports-table-columns'
 

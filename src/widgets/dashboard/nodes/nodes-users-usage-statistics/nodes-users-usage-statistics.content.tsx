@@ -1,18 +1,18 @@
-import { createSearchParams, useNavigate } from 'react-router'
-import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
 import { ActionIcon, Group, Select, Stack } from '@mantine/core'
-import { TbCalendar, TbRefresh, TbUsers } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
-import dayjs from 'dayjs'
-
+import { DatePickerInput, DatesRangeValue } from '@mantine/dates'
 import { NodeUsersSparklineCardWidget } from '@widgets/dashboard/nodes/node-users-usage-statistic'
-import { ITopLeaderboardItem, TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
+import dayjs from 'dayjs'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbCalendar, TbRefresh, TbUsers } from 'react-icons/tb'
+import { createSearchParams, useNavigate } from 'react-router'
+
 import { useGetStatsNodesUsersUsage, useResolveUser } from '@shared/api/hooks'
-import { openOrNavigate } from '@shared/utils/open-or-navigate'
-import { SEARCH_PARAMS } from '@shared/constants/search-params'
-import { getDefaultDateRange } from '@shared/utils/time-utils'
 import { ROUTES } from '@shared/constants/routes'
+import { SEARCH_PARAMS } from '@shared/constants/search-params'
+import { ITopLeaderboardItem, TopLeaderboardCardShared } from '@shared/ui/leaderboard-item-card'
+import { openOrNavigate } from '@shared/utils/open-or-navigate'
+import { getDefaultDateRange } from '@shared/utils/time-utils'
 
 interface IProps {
     nodeUuids: string[]

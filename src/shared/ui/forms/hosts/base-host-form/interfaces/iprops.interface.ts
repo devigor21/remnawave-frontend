@@ -1,3 +1,4 @@
+import { UseFormReturnType } from '@mantine/form'
 import {
     CreateHostCommand,
     GetAllHostTagsCommand,
@@ -8,7 +9,6 @@ import {
     UpdateHostCommand,
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
-import { UseFormReturnType } from '@mantine/form'
 
 export interface IProps<
     T extends CreateHostCommand.Request | UpdateHostCommand.Request | UpdateManyHostsCommand.Request

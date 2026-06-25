@@ -11,18 +11,19 @@ import {
     Text,
     ThemeIcon
 } from '@mantine/core'
-import { TbCalendar, TbCheck, TbCpu, TbCreditCard, TbExternalLink, TbServer } from 'react-icons/tb'
 import { GetInfraBillingNodesCommand } from '@remnawave/backend-contract'
-import { useTranslation } from 'react-i18next'
-import { useMemo, useState } from 'react'
 import dayjs from 'dayjs'
+import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { TbCalendar, TbCheck, TbCpu, TbCreditCard, TbExternalLink, TbServer } from 'react-icons/tb'
+
+import { queryClient } from '@shared/api'
+import { QueryKeys, useUpdateInfraBillingNode } from '@shared/api/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SectionCard } from '@shared/ui/section-card'
+import { formatTimeUtil } from '@shared/utils/time-utils'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { QueryKeys, useUpdateInfraBillingNode } from '@shared/api/hooks'
-import { formatTimeUtil } from '@shared/utils/time-utils'
-import { SectionCard } from '@shared/ui/section-card'
-import { queryClient } from '@shared/api'
 
 type BillingNode = GetInfraBillingNodesCommand.Response['response']['billingNodes'][number]
 

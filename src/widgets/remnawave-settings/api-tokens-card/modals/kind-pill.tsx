@@ -1,7 +1,7 @@
-import { TbCheck, TbMinus } from 'react-icons/tb'
 import { UnstyledButton } from '@mantine/core'
-import { MouseEvent } from 'react'
 import clsx from 'clsx'
+import { MouseEvent } from 'react'
+import { TbCheck, TbMinus } from 'react-icons/tb'
 
 import classes from '../api-token-card.module.css'
 import { KindState } from './scopes.utils'

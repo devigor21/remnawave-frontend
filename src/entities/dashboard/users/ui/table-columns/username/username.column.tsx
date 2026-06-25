@@ -2,6 +2,7 @@ import { Box, Group, Indicator, Text } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 
 import { getConnectionStatusColorUtil, getTimeAgoUtil } from '@shared/utils/time-utils'
+
 import { IProps } from '@entities/dashboard/users/ui/table-columns/username/interface'
 
 export function UsernameColumnEntity(props: IProps) {

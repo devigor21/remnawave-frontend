@@ -1,11 +1,11 @@
 import { ListViewTableColumn } from '@gfazioli/mantine-list-view-table'
-import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { Flex, Progress, Text } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
+import { GetAllNodesCommand } from '@remnawave/backend-contract'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { getNodeResetPeriodUtil } from '@shared/utils/time-utils/get-node-reset-days'
 import { prettifyBytesUtil } from '@shared/utils/bytes'
+import { getNodeResetPeriodUtil } from '@shared/utils/time-utils/get-node-reset-days'
 
 export const useBandwidthTableColumns = () => {
     const { t } = useTranslation()

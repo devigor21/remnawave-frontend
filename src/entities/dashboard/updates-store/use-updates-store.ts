@@ -1,6 +1,6 @@
-import { createJSONStorage, devtools, persist } from 'zustand/middleware'
-import { create } from 'zustand'
 import axios from 'axios'
+import { create } from 'zustand'
+import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 
 import { sToMs } from '@shared/utils/time-utils'
 

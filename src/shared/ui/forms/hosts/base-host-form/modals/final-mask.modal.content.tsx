@@ -1,13 +1,13 @@
+import { Anchor, Button, JsonInput, Stack, Text } from '@mantine/core'
+import { UseFormReturnType } from '@mantine/form'
+import { modals } from '@mantine/modals'
 import {
     CreateHostCommand,
     UpdateHostCommand,
     UpdateManyHostsCommand
 } from '@remnawave/backend-contract'
-import { Anchor, Button, JsonInput, Stack, Text } from '@mantine/core'
 import { Trans, useTranslation } from 'react-i18next'
-import { UseFormReturnType } from '@mantine/form'
 import { TbDeviceFloppy } from 'react-icons/tb'
-import { modals } from '@mantine/modals'
 
 export const FINAL_MASK_MODAL_ID = 'final-mask-modal'
 

@@ -1,8 +1,8 @@
 import { Menu, Menubar, UnstyledButton } from '@mantine/core'
-import { Link, matchPath, useLocation } from 'react-router'
-import { PiCaretDownBold } from 'react-icons/pi'
-import { ElementType, Fragment } from 'react'
 import clsx from 'clsx'
+import { ElementType, Fragment } from 'react'
+import { PiCaretDownBold } from 'react-icons/pi'
+import { Link, matchPath, useLocation } from 'react-router'
 
 import { useDesktopMenuSections } from '../menu-sections/desktop-menu-sections'
 import classes from './desktop-navigation.module.css'

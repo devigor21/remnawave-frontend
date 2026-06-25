@@ -1,18 +1,19 @@
-import { BulkUpdateUsersCommand } from '@remnawave/backend-contract'
-import { zodResolver } from 'mantine-form-zod-resolver'
 import { Button, Group, Stack } from '@mantine/core'
-import { PiFloppyDiskDuotone } from 'react-icons/pi'
-import { useTranslation } from 'react-i18next'
 import { useForm } from '@mantine/form'
-import { motion } from 'motion/react'
+import { BulkUpdateUsersCommand } from '@remnawave/backend-contract'
 import dayjs from 'dayjs'
+import { zodResolver } from 'mantine-form-zod-resolver'
+import { motion } from 'motion/react'
+import { useTranslation } from 'react-i18next'
+import { PiFloppyDiskDuotone } from 'react-icons/pi'
 import { z } from 'zod'
 
-import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 import { useBulkUpdateUsers, useGetExternalSquads, useGetUserTags } from '@shared/api/hooks'
 import { BulkManyFormsUsersShared } from '@shared/ui/forms/users/bulk-many-forms-components'
-import { handleFormErrors } from '@shared/utils/misc'
 import { ModalFooter } from '@shared/ui/modal-footer'
+import { handleFormErrors } from '@shared/utils/misc'
+
+import { useBulkUsersActionsStoreActions } from '@entities/dashboard/users/bulk-users-actions-store'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)

@@ -1,14 +1,14 @@
 import { BoxProps, Group } from '@mantine/core'
 
+import { GithubControl } from './GithubControl'
 import { LanguageControl } from './LanguageControl'
-import { TelegramControl } from './TelegramControl'
+import { LogoutControl } from './LogoutControl'
+import { PrimeControl } from './PrimeControl'
+import { RecapControl } from './RecapControl'
 import { RefreshControl } from './RefreshControl'
 import { SupportControl } from './SupportControl'
+import { TelegramControl } from './TelegramControl'
 import { VersionControl } from './VersionControl'
-import { GithubControl } from './GithubControl'
-import { LogoutControl } from './LogoutControl'
-import { RecapControl } from './RecapControl'
-import { PrimeControl } from './PrimeControl'
 
 interface HeaderControlsProps extends BoxProps {
     githubLink?: string

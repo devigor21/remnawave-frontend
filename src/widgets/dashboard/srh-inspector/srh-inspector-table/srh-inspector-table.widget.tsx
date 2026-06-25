@@ -1,23 +1,23 @@
-/* eslint-disable camelcase */
+import { useSrhInspectorTableColumns } from '@features/dashboard/srh-inspector/srh-inspector-table/model/use-srh-inspector-table-columns'
 import {
     MantineReactTable,
     MRT_ColumnFilterFnsState,
     MRT_SortingState,
     useMantineReactTable
 } from '@kastov/mantine-react-table-open'
-import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-icons/tb'
 import { ActionIcon, ActionIconGroup, Tooltip } from '@mantine/core'
 import { useLayoutEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { TbExternalLink, TbRefresh, TbReportAnalytics, TbRestore } from 'react-icons/tb'
 
-import { useSrhInspectorTableColumns } from '@features/dashboard/srh-inspector/srh-inspector-table/model/use-srh-inspector-table-columns'
-import { useSrhInspectorTableStore } from '@entities/dashboard/srh-inspector/srh-inspector-table-store'
+import { useGetSubscriptionRequestHistory } from '@shared/api/hooks'
 import { DEFAULT_PAGINATION_STATE, useMrtTableBinding } from '@shared/lib/mrt-table-store'
 import { ResolveUserActionShared } from '@shared/ui/resolve-user-action-icon'
-import { useGetSubscriptionRequestHistory } from '@shared/api/hooks'
-import { preventBackScrollTables } from '@shared/utils/misc'
 import { DataTableShared } from '@shared/ui/table'
+import { preventBackScrollTables } from '@shared/utils/misc'
 import { sToMs } from '@shared/utils/time-utils'
+
+import { useSrhInspectorTableStore } from '@entities/dashboard/srh-inspector/srh-inspector-table-store'
 
 export function SrhInspectorTableWidget() {
     const { t } = useTranslation()

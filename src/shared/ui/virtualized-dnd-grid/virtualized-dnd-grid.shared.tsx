@@ -11,14 +11,14 @@ import {
     useSensor,
     useSensors
 } from '@dnd-kit/core'
-import { arrayMove, rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
 import { restrictToWindowEdges } from '@dnd-kit/modifiers'
+import { arrayMove, rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { Box } from '@mantine/core'
 import { ReactNode, useEffect, useState } from 'react'
 import { VirtuosoGrid } from 'react-virtuoso'
-import { Box } from '@mantine/core'
 
-import { VirtualizedGridComponents } from './virtualized-grid-components'
 import classes from './virtualized-dnd-grid.module.css'
+import { VirtualizedGridComponents } from './virtualized-grid-components'
 
 interface VirtualizedDndGridProps<T extends { uuid: string }> {
     enableDnd?: boolean

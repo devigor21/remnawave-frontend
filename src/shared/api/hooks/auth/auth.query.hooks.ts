@@ -1,8 +1,8 @@
+import { createQueryKeys } from '@lukemorales/query-key-factory'
 import {
     GetPasskeyAuthenticationOptionsCommand,
     GetStatusCommand
 } from '@remnawave/backend-contract'
-import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { keepPreviousData } from '@tanstack/react-query'
 
 import { createGetQueryHook, errorHandler } from '../../tsq-helpers'

@@ -8,6 +8,12 @@ import {
     TextInput,
     Tooltip
 } from '@mantine/core'
+import { useField } from '@mantine/form'
+import { modals } from '@mantine/modals'
+import { notifications } from '@mantine/notifications'
+import { CreateApiTokenCommand } from '@remnawave/backend-contract'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
     TbCheck,
     TbClearAll,
@@ -18,19 +24,14 @@ import {
     TbHexagon,
     TbWorld
 } from 'react-icons/tb'
-import { CreateApiTokenCommand } from '@remnawave/backend-contract'
-import { notifications } from '@mantine/notifications'
-import { useTranslation } from 'react-i18next'
-import { useField } from '@mantine/form'
-import { modals } from '@mantine/modals'
-import { useState } from 'react'
 
-import { QueryKeys, useCreateApiToken, useGetScopes } from '@shared/api/hooks'
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { ModalFooter } from '@shared/ui/modal-footer'
-import { sleep } from '@shared/utils/misc'
 import { queryClient } from '@shared/api'
+import { QueryKeys, useCreateApiToken, useGetScopes } from '@shared/api/hooks'
+import { ModalFooter } from '@shared/ui/modal-footer'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { sleep } from '@shared/utils/misc'
 
+import { ScopeResourceRow } from './scope-resource-row'
 import {
     buildScopes,
     expandScopesToKeys,
@@ -40,7 +41,6 @@ import {
     ScopeResource
 } from './scopes.utils'
 import { ViewApiTokenContentWidget } from './view-api-token-modal.widget'
-import { ScopeResourceRow } from './scope-resource-row'
 
 const SUBPAGE_PRESET_KEYS = [
     'subscription-page-configs:list',

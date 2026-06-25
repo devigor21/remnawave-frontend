@@ -1,3 +1,4 @@
+import { createQueryKeys } from '@lukemorales/query-key-factory'
 import {
     GetInfraBillingHistoryRecordsCommand,
     GetInfraBillingNodesCommand,
@@ -5,13 +6,12 @@ import {
     GetInfraProvidersCommand
 } from '@remnawave/backend-contract'
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
-import { createQueryKeys } from '@lukemorales/query-key-factory'
 
 import { sToMs } from '@shared/utils/time-utils'
 
-import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
-import { createUrl } from '../../helpers'
 import { instance } from '../../axios'
+import { createUrl } from '../../helpers'
+import { createGetQueryHook, errorHandler } from '../../tsq-helpers'
 
 export const infraBillingQueryKeys = createQueryKeys('infraBilling', {
     getInfraProviders: {

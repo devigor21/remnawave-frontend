@@ -10,22 +10,22 @@ import {
     Tooltip,
     Transition
 } from '@mantine/core'
-import { FindAllApiTokensCommand } from '@remnawave/backend-contract'
-import { PiBookOpenTextDuotone, PiEmpty } from 'react-icons/pi'
-import { TbCookie, TbRefresh } from 'react-icons/tb'
-import { useTranslation } from 'react-i18next'
-import { SiSwagger } from 'react-icons/si'
 import { modals } from '@mantine/modals'
+import { FindAllApiTokensCommand } from '@remnawave/backend-contract'
+import { useTranslation } from 'react-i18next'
+import { PiBookOpenTextDuotone, PiEmpty } from 'react-icons/pi'
+import { SiSwagger } from 'react-icons/si'
+import { TbCookie, TbRefresh } from 'react-icons/tb'
 import { Link } from 'react-router'
 
-import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-import { SettingsCardShared } from '@shared/ui/settings-card'
 import { useGetApiTokens } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
+import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
+import { SettingsCardShared } from '@shared/ui/settings-card'
 
-import { CreateApiTokenContentWidget } from './modals/create-api-token-modal.widget'
 import classes from './api-token-card.module.css'
 import { ApiTokenItem } from './api-token-item'
+import { CreateApiTokenContentWidget } from './modals/create-api-token-modal.widget'
 
 interface IProps {
     apiTokensData: FindAllApiTokensCommand.Response['response']

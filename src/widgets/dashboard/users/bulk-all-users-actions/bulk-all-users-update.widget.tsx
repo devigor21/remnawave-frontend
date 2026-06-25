@@ -1,16 +1,16 @@
+import { Button, Group, Stack } from '@mantine/core'
+import { useForm } from '@mantine/form'
+import { modals } from '@mantine/modals'
 import { BulkAllUpdateUsersCommand } from '@remnawave/backend-contract'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { Button, Group, Stack } from '@mantine/core'
-import { PiFloppyDiskDuotone } from 'react-icons/pi'
-import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
-import { useForm } from '@mantine/form'
 import { motion } from 'motion/react'
+import { useTranslation } from 'react-i18next'
+import { PiFloppyDiskDuotone } from 'react-icons/pi'
 
 import { useBulkAllUpdateUsers, useGetExternalSquads, useGetUserTags } from '@shared/api/hooks'
 import { BulkFormsUsersShared } from '@shared/ui/forms/users/bulk-forms-components'
-import { handleFormErrors } from '@shared/utils/misc'
 import { ModalFooter } from '@shared/ui/modal-footer'
+import { handleFormErrors } from '@shared/utils/misc'
 
 const MotionWrapper = motion.div
 const MotionStack = motion.create(Stack)

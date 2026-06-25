@@ -1,13 +1,13 @@
+import type { IProps } from './interfaces/props.interface'
+
 import { ActionIcon, Badge, Checkbox, Group, Text } from '@mantine/core'
+import { modals } from '@mantine/modals'
 import { GetConfigProfilesCommand } from '@remnawave/backend-contract'
 import { githubDarkTheme, JsonEditor } from 'json-edit-react'
 import { useTranslation } from 'react-i18next'
-import { modals } from '@mantine/modals'
 import { TbCode } from 'react-icons/tb'
 
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
-
-import type { IProps } from './interfaces/props.interface'
 
 import classes from './InboundCheckboxCard.module.css'
 
