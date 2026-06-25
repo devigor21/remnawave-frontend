@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "oxc", "react", "import"],
+  "env": { "browser": true, "es2024": true },
+  "categories": { "correctness": "error" },
+  "ignorePatterns": ["dist", "node_modules", "plop", "plopfile.js", "**/*.cjs"],
+  "rules": {
+    "typescript/no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "off",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }],
+    "typescript/no-empty-object-type": "off",
+    "typescript/no-unsafe-function-type": "error",
+    "typescript/no-wrapper-object-types": "error",
+    "no-empty-pattern": "warn"
+  }
+}
