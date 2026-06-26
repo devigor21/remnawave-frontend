@@ -40,7 +40,7 @@ export const LeaderboardItemCardShared = (props: IProps) => {
                 }}
             />
             <Group gap={10} justify="space-between" style={{ position: 'relative' }} wrap="nowrap">
-                <Group gap={10} wrap="nowrap">
+                <Group gap={10} style={{ minWidth: 0 }} wrap="nowrap">
                     <Box
                         h={8}
                         style={{
@@ -51,7 +51,7 @@ export const LeaderboardItemCardShared = (props: IProps) => {
                         w={8}
                     />
                     {countryFlag}
-                    <Text fw={600} size="sm" truncate>
+                    <Text fw={600} size="sm" style={{ minWidth: 0 }} truncate="end">
                         {name}
                     </Text>
                 </Group>

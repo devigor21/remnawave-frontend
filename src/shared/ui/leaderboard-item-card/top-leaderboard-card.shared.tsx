@@ -78,7 +78,8 @@ export function TopLeaderboardCardShared<T extends ITopLeaderboardItem>(props: I
                         {maxHeight ? (
                             <ScrollArea.Autosize
                                 mah={maxHeight}
-                                styles={{ scrollbar: { width: '10px' } }}
+                                scrollbars="y"
+                                styles={{ content: { minWidth: 0 }, scrollbar: { width: '10px' } }}
                                 type="hover"
                             >
                                 {content}
