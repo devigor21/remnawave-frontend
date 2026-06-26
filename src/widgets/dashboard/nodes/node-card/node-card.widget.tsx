@@ -67,7 +67,13 @@ const getProgressColor = (percentage: number, fallback: boolean) => {
 
 export const NodeCardWidget = memo((props: IProps) => {
     const { t } = useTranslation()
-    const { handleViewNode, node, isDragOverlay = false, isMobile } = props
+    const {
+        handleViewNode,
+        node,
+        isDragOverlay = false,
+        isMobile,
+        disableReordering = false
+    } = props
 
     const clipboard = useClipboard({ timeout: 500 })
 
@@ -184,15 +190,17 @@ export const NodeCardWidget = memo((props: IProps) => {
                 boxShadow
             }}
         >
-            <Box
-                {...(isDragOverlay ? {} : attributes)}
-                {...(isDragOverlay ? {} : listeners)}
-                className={clsx(classes.dragHandle, {
-                    [classes.dragHandleActive]: isDragging
-                })}
-            >
-                <PiDotsSixVertical color="white" size="24px" />
-            </Box>
+            {!disableReordering && (
+                <Box
+                    {...(isDragOverlay ? {} : attributes)}
+                    {...(isDragOverlay ? {} : listeners)}
+                    className={clsx(classes.dragHandle, {
+                        [classes.dragHandleActive]: isDragging
+                    })}
+                >
+                    <PiDotsSixVertical color="white" size="24px" />
+                </Box>
+            )}
 
             {!isMobile && (
                 <>

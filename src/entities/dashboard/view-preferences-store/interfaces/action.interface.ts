@@ -4,7 +4,9 @@ export interface IActions {
     actions: {
         resetState: () => void
         setConfigProfilesViewMode: (mode: CONFIG_PROFILES_VIEW_MODE) => void
+        setHostsActiveTag: (tag: null | string) => void
         setHostsViewMode: (mode: HOSTS_VIEW_MODE) => void
+        setNodesActiveTag: (tag: null | string) => void
         setNodesViewMode: (mode: NODES_VIEW_MODE) => void
     }
 }

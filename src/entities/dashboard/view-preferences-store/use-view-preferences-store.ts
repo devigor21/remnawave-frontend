@@ -11,8 +11,10 @@ import {
 
 const initialState: IState = {
     nodesViewMode: NODES_VIEW_MODE.CARDS,
+    nodesActiveTag: null,
     configProfilesViewMode: CONFIG_PROFILES_VIEW_MODE.PROFILES,
-    hostsViewMode: HOSTS_VIEW_MODE.CARDS
+    hostsViewMode: HOSTS_VIEW_MODE.CARDS,
+    hostsActiveTag: null
 }
 
 export const useViewPreferencesStore = create<IActions & IState>()(
@@ -22,8 +24,10 @@ export const useViewPreferencesStore = create<IActions & IState>()(
                 ...initialState,
                 actions: {
                     setNodesViewMode: (mode) => set({ nodesViewMode: mode }),
+                    setNodesActiveTag: (tag) => set({ nodesActiveTag: tag }),
                     setConfigProfilesViewMode: (mode) => set({ configProfilesViewMode: mode }),
                     setHostsViewMode: (mode) => set({ hostsViewMode: mode }),
+                    setHostsActiveTag: (tag) => set({ hostsActiveTag: tag }),
                     resetState: () => set({ ...initialState })
                 }
             }),
@@ -35,8 +39,10 @@ export const useViewPreferencesStore = create<IActions & IState>()(
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 nodesViewMode: state.nodesViewMode,
+                nodesActiveTag: state.nodesActiveTag,
                 configProfilesViewMode: state.configProfilesViewMode,
-                hostsViewMode: state.hostsViewMode
+                hostsViewMode: state.hostsViewMode,
+                hostsActiveTag: state.hostsActiveTag
             }),
             migrate: () => initialState
         }
@@ -44,8 +50,10 @@ export const useViewPreferencesStore = create<IActions & IState>()(
 )
 
 export const useNodesViewMode = () => useViewPreferencesStore((state) => state.nodesViewMode)
+export const useNodesActiveTag = () => useViewPreferencesStore((state) => state.nodesActiveTag)
 export const useConfigProfilesViewMode = () =>
     useViewPreferencesStore((state) => state.configProfilesViewMode)
 export const useViewPreferencesStoreActions = () =>
     useViewPreferencesStore((state) => state.actions)
 export const useHostsViewMode = () => useViewPreferencesStore((state) => state.hostsViewMode)
+export const useHostsActiveTag = () => useViewPreferencesStore((state) => state.hostsActiveTag)

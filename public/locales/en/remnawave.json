@@ -65,7 +65,9 @@
     "open": "Open",
     "view": "View",
     "clear": "Clear",
-    "color": "Color"
+    "color": "Color",
+    "all": "All",
+    "without-tags": "Without tags"
   },
   "bandwidth-metrics": {
     "current-year": "Current year",

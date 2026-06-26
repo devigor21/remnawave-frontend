@@ -55,6 +55,7 @@ export interface IProps {
     onSelect?: () => void
     openExternal?: boolean
     viewOnly?: boolean
+    disableReordering?: boolean
 }
 
 export function HostCardWidget(props: IProps) {
@@ -66,7 +67,8 @@ export function HostCardWidget(props: IProps) {
         onSelect,
         isDragOverlay = false,
         viewOnly = false,
-        openExternal = false
+        openExternal = false,
+        disableReordering = false
     } = props
 
     const { t } = useTranslation()
@@ -163,14 +165,16 @@ export function HostCardWidget(props: IProps) {
                                         input: { cursor: 'pointer' }
                                     }}
                                 />
-                                <Box
-                                    {...(isDragOverlay ? {} : attributes)}
-                                    {...(isDragOverlay ? {} : listeners)}
-                                    className={classes.mobileDragHandle}
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <RiDraggable size={px('1.2rem')} />
-                                </Box>
+                                {!disableReordering && (
+                                    <Box
+                                        {...(isDragOverlay ? {} : attributes)}
+                                        {...(isDragOverlay ? {} : listeners)}
+                                        className={classes.mobileDragHandle}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <RiDraggable size={px('1.2rem')} />
+                                    </Box>
+                                )}
                             </Group>
                         )}
 
@@ -325,13 +329,15 @@ export function HostCardWidget(props: IProps) {
                 {!viewOnly && (
                     <Group gap="xs" wrap="nowrap">
                         <Checkbox checked={isSelected} onChange={onSelect} size="md" />
-                        <Box
-                            {...(isDragOverlay ? {} : attributes)}
-                            {...(isDragOverlay ? {} : listeners)}
-                            className={classes.dragHandle}
-                        >
-                            <RiDraggable color="white" size="24px" />
-                        </Box>
+                        {!disableReordering && (
+                            <Box
+                                {...(isDragOverlay ? {} : attributes)}
+                                {...(isDragOverlay ? {} : listeners)}
+                                className={classes.dragHandle}
+                            >
+                                <RiDraggable color="white" size="24px" />
+                            </Box>
+                        )}
                     </Group>
                 )}
 

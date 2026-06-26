@@ -1,5 +1,4 @@
 import { Box, Center, Drawer, Group, Stack } from '@mantine/core'
-import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
     PiArrowsDownUpDuotone,
@@ -10,7 +9,7 @@ import {
     PiUserDuotone
 } from 'react-icons/pi'
 
-import { useEncryptSubscriptionLink, useGetUserByUuid } from '@shared/api/hooks'
+import { useGetUserByUuid } from '@shared/api/hooks'
 import { CopyableFieldShared } from '@shared/ui/copyable-field/copyable-field'
 import { LoaderModalShared } from '@shared/ui/loader-modal'
 import { BaseOverlayHeader } from '@shared/ui/overlays/base-overlay-header'
@@ -29,7 +28,6 @@ import { UserStatusBadge } from '../user-status-badge/user-status-badge.widget'
 
 export const DetailedUserInfoDrawerWidget = () => {
     const { t, i18n } = useTranslation()
-    const [encryptedSubscriptionLink, setEncryptedSubscriptionLink] = useState('')
 
     const actions = useUserModalStoreActions()
     const isDetailedUserInfoDrawerOpen = useUserModalStoreIsDetailedUserInfoDrawerOpen()
@@ -37,7 +35,6 @@ export const DetailedUserInfoDrawerWidget = () => {
 
     const cleanUpDrawer = async () => {
         actions.changeDetailedUserInfoDrawerState(false)
-        setEncryptedSubscriptionLink('')
     }
 
     const isQueryEnabled = !!selectedUser
@@ -50,21 +47,6 @@ export const DetailedUserInfoDrawerWidget = () => {
             enabled: isQueryEnabled
         }
     })
-
-    const { mutateAsync: encryptSubscriptionLink } = useEncryptSubscriptionLink()
-
-    useEffect(() => {
-        if (!user || !selectedUser) return
-        encryptSubscriptionLink({
-            variables: {
-                linkToEncrypt: user.subscriptionUrl
-            }
-        })
-            .then((result) => {
-                setEncryptedSubscriptionLink(result.encryptedLink)
-            })
-            .catch(() => {})
-    }, [selectedUser, user])
 
     return (
         <Drawer
@@ -219,10 +201,6 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.subscription-url')}
                                     value={user.subscriptionUrl}
-                                />
-                                <CopyableFieldShared
-                                    label="Happ Crypto Link"
-                                    value={encryptedSubscriptionLink}
                                 />
                                 <CopyableFieldShared
                                     label={t('detailed-user-info-drawer.widget.expires-at')}

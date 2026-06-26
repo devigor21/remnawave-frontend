@@ -2,6 +2,8 @@ import { CONFIG_PROFILES_VIEW_MODE, HOSTS_VIEW_MODE, NODES_VIEW_MODE } from './e
 
 export interface IState {
     configProfilesViewMode: CONFIG_PROFILES_VIEW_MODE
+    hostsActiveTag: null | string
     hostsViewMode: HOSTS_VIEW_MODE
+    nodesActiveTag: null | string
     nodesViewMode: NODES_VIEW_MODE
 }

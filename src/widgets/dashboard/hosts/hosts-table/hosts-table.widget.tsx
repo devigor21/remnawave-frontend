@@ -20,7 +20,13 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { useGetNodes } from '@shared/api/hooks'
 import { useIsMobile } from '@shared/hooks'
+import { NO_TAG, TagFilterBar } from '@shared/ui'
 import { EmptyPageLayout } from '@shared/ui/layouts/empty-page'
+
+import {
+    useHostsActiveTag,
+    useViewPreferencesStoreActions
+} from '@entities/dashboard/view-preferences-store'
 
 import classes from './hosts-table.module.css'
 import { IProps } from './interfaces'
@@ -35,7 +41,16 @@ export const HostsTableWidget = memo((props: IProps) => {
     const listRef = useRef<HTMLDivElement | null>(null)
     const isMobile = useIsMobile()
 
+    const activeTag = useHostsActiveTag()
+    const { setHostsActiveTag } = useViewPreferencesStoreActions()
+
     const { data: nodes } = useGetNodes()
+
+    const visibleState = useMemo(() => {
+        if (activeTag === null) return state
+        if (activeTag === NO_TAG) return state.filter((host) => (host.tags ?? []).length === 0)
+        return state.filter((host) => (host.tags ?? []).includes(activeTag))
+    }, [state, activeTag])
 
     useEffect(() => {
         if (listRef.current) {
@@ -44,14 +59,14 @@ export const HostsTableWidget = memo((props: IProps) => {
     }, [])
 
     const virtualizer = useWindowVirtualizer({
-        count: state.length,
+        count: visibleState.length,
         estimateSize: () => (isMobile ? 202 : 88),
         overscan: 7,
         scrollMargin,
-        getItemKey: (index) => state[index].uuid
+        getItemKey: (index) => visibleState[index].uuid
     })
 
-    const dataIds = useMemo(() => state.map((host) => host.uuid), [state])
+    const dataIds = useMemo(() => visibleState.map((host) => host.uuid), [visibleState])
 
     const nodesByUuid = useMemo(
         () => new Map((nodes ?? []).map((node) => [node.uuid, node] as const)),
@@ -85,7 +100,7 @@ export const HostsTableWidget = memo((props: IProps) => {
         (event: DragEndEvent) => {
             const { active, over } = event
 
-            if (!over || active.id === over.id) {
+            if (activeTag !== null || !over || active.id === over.id) {
                 setDraggedHost(null)
                 return
             }
@@ -100,7 +115,7 @@ export const HostsTableWidget = memo((props: IProps) => {
 
             setDraggedHost(null)
         },
-        [dataIds, state, handlers]
+        [dataIds, state, handlers, activeTag]
     )
 
     const handleDragCancel = useCallback(() => {
@@ -124,6 +139,8 @@ export const HostsTableWidget = memo((props: IProps) => {
         <Stack gap="md">
             {hosts.length === 0 && <EmptyPageLayout />}
 
+            <TagFilterBar activeTag={activeTag} items={hosts} onChange={setHostsActiveTag} />
+
             {hosts.length > 0 && (
                 <DndContext
                     collisionDetection={closestCenter}
@@ -145,7 +162,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                 <Container fluid>
                                     <Stack gap={0}>
                                         {virtualizer.getVirtualItems().map((virtualItem) => {
-                                            const item = state[virtualItem.index]
+                                            const item = visibleState[virtualItem.index]
                                             if (!item) return null
 
                                             return (
@@ -168,6 +185,7 @@ export const HostsTableWidget = memo((props: IProps) => {
                                                 >
                                                     <div className={classes.hostFadeIn}>
                                                         <HostCardWidget
+                                                            disableReordering={activeTag !== null}
                                                             configProfiles={configProfiles}
                                                             isSelected={selectedHosts.includes(
                                                                 item.uuid

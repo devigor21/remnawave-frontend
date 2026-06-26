@@ -34,6 +34,7 @@ import {
 import { cloneString } from '@shared/utils/misc/clone-string'
 
 import { MODALS, useModalsStoreOpenWithData } from '@entities/dashboard/modal-store'
+import { useHostsActiveTag } from '@entities/dashboard/view-preferences-store'
 
 import { IProps } from './interfaces/props.interface'
 
@@ -47,6 +48,7 @@ export const MultiSelectHostsFeature = (props: IProps) => {
     const hasSelection = selectedHosts.length > 0
 
     const { refetch: refetchHosts } = useGetHosts()
+    const activeTag = useHostsActiveTag()
 
     useEffect(() => {
         setSelectedHosts([])
@@ -229,55 +231,57 @@ export const MultiSelectHostsFeature = (props: IProps) => {
                                     </Group>
                                 </Group>
 
-                                <ActionIcon.Group style={{ width: '100%' }}>
-                                    <Tooltip label="Move to top" withArrow>
-                                        <ActionIcon
-                                            color="gray"
-                                            onClick={() => moveSelected('top')}
-                                            size="lg"
-                                            style={{ flex: 1 }}
-                                            variant="soft"
-                                        >
-                                            <TbArrowBarToUp size={20} />
-                                        </ActionIcon>
-                                    </Tooltip>
+                                {activeTag === null && (
+                                    <ActionIcon.Group style={{ width: '100%' }}>
+                                        <Tooltip label="Move to top" withArrow>
+                                            <ActionIcon
+                                                color="gray"
+                                                onClick={() => moveSelected('top')}
+                                                size="lg"
+                                                style={{ flex: 1 }}
+                                                variant="soft"
+                                            >
+                                                <TbArrowBarToUp size={20} />
+                                            </ActionIcon>
+                                        </Tooltip>
 
-                                    <Tooltip label="Move up" withArrow>
-                                        <ActionIcon
-                                            color="gray"
-                                            onClick={() => moveSelected('up')}
-                                            size="lg"
-                                            style={{ flex: 1 }}
-                                            variant="soft"
-                                        >
-                                            <TbArrowBigUp size={20} />
-                                        </ActionIcon>
-                                    </Tooltip>
+                                        <Tooltip label="Move up" withArrow>
+                                            <ActionIcon
+                                                color="gray"
+                                                onClick={() => moveSelected('up')}
+                                                size="lg"
+                                                style={{ flex: 1 }}
+                                                variant="soft"
+                                            >
+                                                <TbArrowBigUp size={20} />
+                                            </ActionIcon>
+                                        </Tooltip>
 
-                                    <Tooltip label="Move down" withArrow>
-                                        <ActionIcon
-                                            color="gray"
-                                            onClick={() => moveSelected('down')}
-                                            size="lg"
-                                            style={{ flex: 1 }}
-                                            variant="soft"
-                                        >
-                                            <TbArrowBigDown size={20} />
-                                        </ActionIcon>
-                                    </Tooltip>
+                                        <Tooltip label="Move down" withArrow>
+                                            <ActionIcon
+                                                color="gray"
+                                                onClick={() => moveSelected('down')}
+                                                size="lg"
+                                                style={{ flex: 1 }}
+                                                variant="soft"
+                                            >
+                                                <TbArrowBigDown size={20} />
+                                            </ActionIcon>
+                                        </Tooltip>
 
-                                    <Tooltip label="Move to bottom" withArrow>
-                                        <ActionIcon
-                                            color="gray"
-                                            onClick={() => moveSelected('bottom')}
-                                            size="lg"
-                                            style={{ flex: 1 }}
-                                            variant="soft"
-                                        >
-                                            <TbArrowBarToDown size={20} />
-                                        </ActionIcon>
-                                    </Tooltip>
-                                </ActionIcon.Group>
+                                        <Tooltip label="Move to bottom" withArrow>
+                                            <ActionIcon
+                                                color="gray"
+                                                onClick={() => moveSelected('bottom')}
+                                                size="lg"
+                                                style={{ flex: 1 }}
+                                                variant="soft"
+                                            >
+                                                <TbArrowBarToDown size={20} />
+                                            </ActionIcon>
+                                        </Tooltip>
+                                    </ActionIcon.Group>
+                                )}
 
                                 <Group grow justify="apart" preventGrowOverflow={false} wrap="wrap">
                                     <Button
