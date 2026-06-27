@@ -1,75 +1,38 @@
-.root {
-    width: 100%;
-}
-
-.label {
-    display: block;
-    margin-bottom: calc(var(--mantine-spacing-xs) / 2);
-    font-size: var(--mantine-font-size-sm);
-    font-weight: 500;
-    line-height: 1.2;
-}
-
-.field {
+.container {
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 6px;
     width: 100%;
-    min-height: var(--cf-height, 36px);
-    padding-inline: 10px 4px;
-    background-color: var(--mantine-color-default);
-    border: 1px solid var(--mantine-color-default-border);
-    border-radius: var(--mantine-radius-default);
-    color: var(--mantine-color-text);
+}
+
+.section {
+    z-index: 2;
+}
+
+.input {
     cursor: copy;
-}
-
-.field[data-size='xs'] {
-    --cf-height: 30px;
-}
-.field[data-size='sm'] {
-    --cf-height: 36px;
-}
-.field[data-size='md'] {
-    --cf-height: 42px;
-}
-.field[data-size='lg'] {
-    --cf-height: 50px;
-}
-.field[data-size='xl'] {
-    --cf-height: 60px;
-}
-
-.leftSection {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-}
-
-.value {
-    flex: 1;
-    min-width: 0;
     font-family: monospace;
-    font-size: var(--mantine-font-size-sm);
-    white-space: nowrap;
+    padding-right: 30px;
     overflow: hidden;
     text-overflow: clip;
+    white-space: nowrap;
 }
 
-.field::after {
+.inputWrapper {
+    position: relative;
+}
+
+.inputWrapper::after {
     content: '';
     position: absolute;
     top: 1px;
-    right: 34px;
+    right: 10px;
     bottom: 1px;
-    width: 40px;
-    background: linear-gradient(to right, transparent, var(--mantine-color-default) 80%);
+    width: 80px;
+    background: linear-gradient(to right, transparent, var(--mantine-color-default) 70%);
     pointer-events: none;
     z-index: 1;
 }
 
 .copyButton {
-    z-index: 2;
-    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
 }

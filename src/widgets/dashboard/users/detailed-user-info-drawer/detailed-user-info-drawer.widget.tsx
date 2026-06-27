@@ -197,9 +197,7 @@ export const DetailedUserInfoDrawerWidget = () => {
                                 <CopyableDataListItem
                                     label={t('detailed-user-info-drawer.widget.subscription-url')}
                                     monospace
-                                    value={
-                                        user.subscriptionUrl + '29182718972897189728172981728971'
-                                    }
+                                    value={user.subscriptionUrl}
                                 />
                                 <CopyableDataListItem
                                     label={t('detailed-user-info-drawer.widget.expires-at')}
