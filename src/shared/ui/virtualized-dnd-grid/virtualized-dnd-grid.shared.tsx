@@ -95,7 +95,7 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
         if (!item) return null
 
         return (
-            <div className={classes.itemWrapper} style={{ width: '100%' }}>
+            <div className={classes.itemWrapper} key={item.uuid}>
                 {renderItem(item, index)}
             </div>
         )
@@ -129,8 +129,8 @@ export function VirtualizedDndGrid<T extends { uuid: string }>(props: Virtualize
                         components={VirtualizedGridComponents}
                         itemContent={itemContent}
                         overscan={{
-                            main: 4,
-                            reverse: 4
+                            main: 10,
+                            reverse: 10
                         }}
                         totalCount={items.length}
                         useWindowScroll={useWindowScroll}

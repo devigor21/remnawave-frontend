@@ -66,6 +66,7 @@ export function App() {
                                 cssVariablesResolver={v8CssVariablesResolver}
                                 defaultColorScheme="dark"
                                 theme={theme}
+                                deduplicateInlineStyles
                             >
                                 <ModalsProvider>
                                     <Notifications position="top-right" />

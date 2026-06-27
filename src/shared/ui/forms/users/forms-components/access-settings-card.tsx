@@ -176,6 +176,7 @@ export const AccessSettingsCard = <T extends CreateUserCommand.Request | UpdateU
                                 label: externalSquad.name,
                                 value: externalSquad.uuid
                             }))}
+                            limit={100}
                             defaultValue={form.values.externalSquadUuid}
                             description={t(
                                 'access-settings-card.select-an-external-squad-to-apply-custom-settings-to-this-user'

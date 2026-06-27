@@ -329,6 +329,7 @@ export const useUserTableColumns = (
                 enableColumnFilterModes: false,
                 enableSorting: false,
                 mantineFilterSelectProps: {
+                    limit: 100,
                     data:
                         externalSquads?.externalSquads.map((squad) => ({
                             label: squad.name,
